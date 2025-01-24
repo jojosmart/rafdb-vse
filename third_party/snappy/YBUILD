@@ -1,0 +1,24 @@
+# Copyright 2012 Yunrang Inc. All Rights Reserved.
+# Author: dahaili@yunrang.com (Dahai Li)
+#
+# Description:
+#   snappy compression utility
+
+cc_library(name = 'snappy',
+           srcs = ['snappy-stubs-internal.cc',
+                   'snappy-c.cc',
+                   'snappy.cc',
+                   'snappy-sinksource.cc',
+                  ],
+           deps = [
+                  ],
+           )
+
+cc_test(name = 'snappy_test',
+        srcs = ['snappy_unittest.cc',
+                'snappy-test.cc',
+               ],
+        deps = [':snappy',
+               ],
+        copt = ['large_test'],
+        )

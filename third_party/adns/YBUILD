@@ -1,0 +1,21 @@
+# Copyright 2011 Yunrang Inc. All Rights Reserved.
+# Author: shunpingye@yunrang.com (Jing Qu)
+#
+# Description:
+#   adns library
+
+cc_library(name = 'adns',
+           srcs = ['check.c',
+                   'event.c',
+                   'general.c',
+                   'parse.c',
+                   'poll.c',
+                   'query.c',
+                   'reply.c',
+                   'setup.c',
+                   'transmit.c',
+                   'types.c',
+                  ],
+           deps = ['//base:base',
+                   ]
+           )

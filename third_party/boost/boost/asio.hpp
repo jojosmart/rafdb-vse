@@ -1,0 +1,112 @@
+//
+// asio.hpp
+// ~~~~~~~~
+//
+// Copyright (c) 2003-2012 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+//  See www.boost.org/libs/asio for documentation.
+//
+
+#ifndef BOOST_ASIO_HPP
+#define BOOST_ASIO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
+#include "third_party/boost/boost/asio/basic_datagram_socket.hpp"
+#include "third_party/boost/boost/asio/basic_deadline_timer.hpp"
+#include "third_party/boost/boost/asio/basic_io_object.hpp"
+#include "third_party/boost/boost/asio/basic_raw_socket.hpp"
+#include "third_party/boost/boost/asio/basic_seq_packet_socket.hpp"
+#include "third_party/boost/boost/asio/basic_serial_port.hpp"
+#include "third_party/boost/boost/asio/basic_signal_set.hpp"
+#include "third_party/boost/boost/asio/basic_socket_acceptor.hpp"
+#include "third_party/boost/boost/asio/basic_socket_iostream.hpp"
+#include "third_party/boost/boost/asio/basic_socket_streambuf.hpp"
+#include "third_party/boost/boost/asio/basic_stream_socket.hpp"
+#include "third_party/boost/boost/asio/basic_streambuf.hpp"
+#include "third_party/boost/boost/asio/basic_waitable_timer.hpp"
+#include "third_party/boost/boost/asio/buffer.hpp"
+#include "third_party/boost/boost/asio/buffered_read_stream_fwd.hpp"
+#include "third_party/boost/boost/asio/buffered_read_stream.hpp"
+#include "third_party/boost/boost/asio/buffered_stream_fwd.hpp"
+#include "third_party/boost/boost/asio/buffered_stream.hpp"
+#include "third_party/boost/boost/asio/buffered_write_stream_fwd.hpp"
+#include "third_party/boost/boost/asio/buffered_write_stream.hpp"
+#include "third_party/boost/boost/asio/buffers_iterator.hpp"
+#include "third_party/boost/boost/asio/completion_condition.hpp"
+#include "third_party/boost/boost/asio/connect.hpp"
+#include "third_party/boost/boost/asio/datagram_socket_service.hpp"
+#include "third_party/boost/boost/asio/deadline_timer_service.hpp"
+#include "third_party/boost/boost/asio/deadline_timer.hpp"
+#include "third_party/boost/boost/asio/error.hpp"
+#include "third_party/boost/boost/asio/handler_alloc_hook.hpp"
+#include "third_party/boost/boost/asio/handler_invoke_hook.hpp"
+#include "third_party/boost/boost/asio/io_service.hpp"
+#include "third_party/boost/boost/asio/ip/address.hpp"
+#include "third_party/boost/boost/asio/ip/address_v4.hpp"
+#include "third_party/boost/boost/asio/ip/address_v6.hpp"
+#include "third_party/boost/boost/asio/ip/basic_endpoint.hpp"
+#include "third_party/boost/boost/asio/ip/basic_resolver.hpp"
+#include "third_party/boost/boost/asio/ip/basic_resolver_entry.hpp"
+#include "third_party/boost/boost/asio/ip/basic_resolver_iterator.hpp"
+#include "third_party/boost/boost/asio/ip/basic_resolver_query.hpp"
+#include "third_party/boost/boost/asio/ip/host_name.hpp"
+#include "third_party/boost/boost/asio/ip/icmp.hpp"
+#include "third_party/boost/boost/asio/ip/multicast.hpp"
+#include "third_party/boost/boost/asio/ip/resolver_query_base.hpp"
+#include "third_party/boost/boost/asio/ip/resolver_service.hpp"
+#include "third_party/boost/boost/asio/ip/tcp.hpp"
+#include "third_party/boost/boost/asio/ip/udp.hpp"
+#include "third_party/boost/boost/asio/ip/unicast.hpp"
+#include "third_party/boost/boost/asio/ip/v6_only.hpp"
+#include "third_party/boost/boost/asio/is_read_buffered.hpp"
+#include "third_party/boost/boost/asio/is_write_buffered.hpp"
+#include "third_party/boost/boost/asio/local/basic_endpoint.hpp"
+#include "third_party/boost/boost/asio/local/connect_pair.hpp"
+#include "third_party/boost/boost/asio/local/datagram_protocol.hpp"
+#include "third_party/boost/boost/asio/local/stream_protocol.hpp"
+#include "third_party/boost/boost/asio/placeholders.hpp"
+#include "third_party/boost/boost/asio/posix/basic_descriptor.hpp"
+#include "third_party/boost/boost/asio/posix/basic_stream_descriptor.hpp"
+#include "third_party/boost/boost/asio/posix/descriptor_base.hpp"
+#include "third_party/boost/boost/asio/posix/stream_descriptor.hpp"
+#include "third_party/boost/boost/asio/posix/stream_descriptor_service.hpp"
+#include "third_party/boost/boost/asio/raw_socket_service.hpp"
+#include "third_party/boost/boost/asio/read.hpp"
+#include "third_party/boost/boost/asio/read_at.hpp"
+#include "third_party/boost/boost/asio/read_until.hpp"
+#include "third_party/boost/boost/asio/seq_packet_socket_service.hpp"
+#include "third_party/boost/boost/asio/serial_port.hpp"
+#include "third_party/boost/boost/asio/serial_port_base.hpp"
+#include "third_party/boost/boost/asio/serial_port_service.hpp"
+#include "third_party/boost/boost/asio/signal_set.hpp"
+#include "third_party/boost/boost/asio/signal_set_service.hpp"
+#include "third_party/boost/boost/asio/socket_acceptor_service.hpp"
+#include "third_party/boost/boost/asio/socket_base.hpp"
+#include "third_party/boost/boost/asio/strand.hpp"
+#include "third_party/boost/boost/asio/stream_socket_service.hpp"
+#include "third_party/boost/boost/asio/streambuf.hpp"
+#include "third_party/boost/boost/asio/time_traits.hpp"
+#include "third_party/boost/boost/asio/version.hpp"
+#include "third_party/boost/boost/asio/wait_traits.hpp"
+#include "third_party/boost/boost/asio/waitable_timer_service.hpp"
+#include "third_party/boost/boost/asio/windows/basic_handle.hpp"
+#include "third_party/boost/boost/asio/windows/basic_object_handle.hpp"
+#include "third_party/boost/boost/asio/windows/basic_random_access_handle.hpp"
+#include "third_party/boost/boost/asio/windows/basic_stream_handle.hpp"
+#include "third_party/boost/boost/asio/windows/object_handle.hpp"
+#include "third_party/boost/boost/asio/windows/object_handle_service.hpp"
+#include "third_party/boost/boost/asio/windows/overlapped_ptr.hpp"
+#include "third_party/boost/boost/asio/windows/random_access_handle.hpp"
+#include "third_party/boost/boost/asio/windows/random_access_handle_service.hpp"
+#include "third_party/boost/boost/asio/windows/stream_handle.hpp"
+#include "third_party/boost/boost/asio/windows/stream_handle_service.hpp"
+#include "third_party/boost/boost/asio/write.hpp"
+#include "third_party/boost/boost/asio/write_at.hpp"
+
+#endif // BOOST_ASIO_HPP

@@ -1,0 +1,9 @@
+# Copyright 2010, 2011 Yunrang Inc. All Rights Reserved.
+# Author: huiqiangyang@yunrang.com (Huiqiang Yang)
+
+cc_library(name = 'punycoder',
+           srcs = ['punycoder.cc'],
+           deps = ['//libs/third_party/icu:icuuc',
+                   '//libs/third_party/icu:icudata',
+                   ]
+           )

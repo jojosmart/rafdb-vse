@@ -1,0 +1,137 @@
+#  Copyright 2014 iminer. All Rights Reserved.
+# Author:Zhouxiaoliang
+#
+# Description:
+#   Basic code for the Yunrang wide usage.
+
+cc_library(name = 'base',
+           srcs = ['at_exit.cc',
+                   'affinity.cc',
+                   'atomicops_internals_x86_gcc.cc',
+                   'counter.cc',
+                   'debug_util.cc',
+                   'demangle.cc',
+                   'dmg_fp.cc',
+                   'dynamic_annotations.c',
+                   'env.cc',
+                   'flags.cc',
+                   'flags_reporting.cc',
+                   'hash.cc',
+                   'icu_utf.cc',
+                   'logging.cc',
+                   'net.cc',
+                   'prtime.cc',
+                   'safe_strerror_posix.cc',
+                   'string16.cc',
+                   'string_piece.cc',
+                   'string_split.cc',
+                   'string_util.cc',
+                   'symbolize.cc',
+                   'thread.cc',
+                   'thread_pool.cc',
+                   'time.cc',
+                   'utf.cc',
+                   'utf_string_conversion_utils.cc',
+                   'utf_string_conversions.cc',
+                   ],
+           deps = [],  # base should not depends on other components!
+           )
+
+cc_test(name = 'at_exit_unittest',
+        srcs = ['at_exit_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'atomic_unittest',
+        srcs = ['atomic_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'callback_unittest',
+        srcs = ['callback_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'concurrent_queue_test',
+        srcs = ['concurrent_queue_test.cc',],
+        deps = [':base',]
+       )
+
+cc_test(name = 'counter_test',
+        srcs = ['counter_test.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'mutex_test',
+        srcs = ['mutex_test.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'string_util_unittest',
+        srcs = ['string_util_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'string_split_unittest',
+        srcs = ['string_split_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'singleton_unittest',
+        srcs = ['singleton_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'shared_ptr_unittest',
+        srcs = ['shared_ptr_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'scoped_ptr_unittest',
+        srcs = ['scoped_ptr_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'time_unittest',
+        srcs = ['time_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'hash_unittest',
+        srcs = ['hash_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'varint_unittest',
+        srcs = ['varint_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_test(name = 'thread_pool_unittest',
+        srcs = ['thread_pool_unittest.cc', ],
+        deps = [':base', ]
+        )
+
+cc_binary(name = 'varint_benchmark',
+          srcs = ['varint_benchmark.cc', ],
+          deps = [':base', ]
+          )
+
+cc_binary(name = 'bloom_filter_unittest',
+          srcs = ['bloom_filter_unittest.cc',
+                  'bloom_filter.cc',],
+          deps = [':base', ]
+          )
+
+#cc_binary(name = 'hash_conflict_test',
+#          srcs = ['hash_conflict_test.cc', ],
+#          deps = [':base',
+#                  '//file:simple_line_reader',
+#                  ]
+#          )
+
+cc_benchmark(name = 'logging_benchmark',
+             srcs = ['logging_benchmark.cc', ],
+             deps = ['//base:base',
+                     ]
+             )

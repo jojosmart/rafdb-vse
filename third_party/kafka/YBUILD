@@ -1,0 +1,43 @@
+# Copyright 2012 Yunrang Inc. All Rights Reserved.
+# Author: dahaili@yunrang.com (Dahai Li)
+#
+# Description:
+#   snappy compression utility
+
+cc_library(name = 'kafka',
+           srcs = [
+                   'ApiConstants.cc',
+                   'Broker.cc',
+                   'Client.cc',
+                   'Connection.cc',
+                   'FetchPartition.cc',
+                   'FetchRequest.cc',
+                   'FetchResponse.cc',
+                   'FetchResponsePartition.cc',
+                   'Message.cc',
+                   'MessageSet.cc',
+                   'MetadataRequest.cc',
+                   'MetadataResponse.cc',
+                   'OffsetPartition.cc',
+                   'OffsetRequest.cc',
+                   'OffsetResponse.cc',
+                   'OffsetResponsePartition.cc',
+                   'Packet.cc',
+                   'PartitionMetadata.cc',
+                   'ProduceMessageSet.cc',
+                   'ProduceRequest.cc',
+                   'ProduceResponse.cc',
+                   'ProduceResponsePartition.cc',
+                   'Request.cc',
+                   'RequestOrResponse.cc',
+                   'Response.cc',
+                   'TopicMetadata.cc',
+                   'Util.cc',
+                  ],
+           deps = [
+                    '//libs/third_party/zlib:zlib',
+                    '//third_party/snappy:snappy',
+                  ],
+           )
+
+

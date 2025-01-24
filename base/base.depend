@@ -1,0 +1,768 @@
+# depslib dependency file v1.0
+1348900485 source:/home/wy/code/goso/coding/base/affinity.cc
+	"base/affinity.h"
+	<sys/sysinfo.h>
+	<sched.h>
+	<string>
+	<vector>
+	"base/flags.h"
+	"base/string_util.h"
+
+1347616567 /home/wy/code/goso/coding/base/affinity.h
+
+1347616567 /home/wy/code/goso/coding/base/flags.h
+	<string>
+	<vector>
+	"base/basictypes.h"
+	<stdint.h>
+	<sys/types.h>
+	<inttypes.h>
+
+1347616567 /home/wy/code/goso/coding/base/basictypes.h
+	<assert.h>
+	<limits.h>
+	<stddef.h>
+	<stdint.h>
+	<string.h>
+	"base/port.h"
+
+1347616567 /home/wy/code/goso/coding/base/port.h
+	<stdarg.h>
+
+1347616567 /home/wy/code/goso/coding/base/string_util.h
+	<stdarg.h>
+	<string>
+	<vector>
+	"base/basictypes.h"
+	"base/logging.h"
+	"base/port.h"
+	"base/string16.h"
+	"base/string_piece.h"
+	"base/utf.h"
+
+1347616567 /home/wy/code/goso/coding/base/logging.h
+	<string>
+	<cstring>
+	<sstream>
+	"base/basictypes.h"
+	"base/flags.h"
+
+1347616567 /home/wy/code/goso/coding/base/string16.h
+	<stdio.h>
+	<string>
+	"base/basictypes.h"
+	"base/port.h"
+
+1347616567 /home/wy/code/goso/coding/base/string_piece.h
+	<algorithm>
+	<iosfwd>
+	<string>
+	"base/basictypes.h"
+
+1347616567 /home/wy/code/goso/coding/base/utf.h
+	<stdint.h>
+
+1347616567 source:/home/wy/code/goso/coding/base/at_exit.cc
+	"base/at_exit.h"
+	"base/logging.h"
+
+1347616567 /home/wy/code/goso/coding/base/at_exit.h
+	<pthread.h>
+	<stack>
+	"base/basictypes.h"
+	"base/mutex.h"
+
+1347616567 /home/wy/code/goso/coding/base/mutex.h
+	<dirent.h>
+	<errno.h>
+	<pthread.h>
+	<semaphore.h>
+	<stdlib.h>
+	<stdint.h>
+	<sys/mman.h>
+	<sys/time.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<unistd.h>
+	"base/basictypes.h"
+	"base/dynamic_annotations.h"
+	"base/logging.h"
+	"base/time.h"
+
+1347616567 /home/wy/code/goso/coding/base/dynamic_annotations.h
+
+1347616567 /home/wy/code/goso/coding/base/time.h
+	<time.h>
+	<sys/time.h>
+	<string>
+	"base/basictypes.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/at_exit_unittest.cc
+	"base/at_exit.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/gtest.h
+	<limits>
+	<vector>
+	"testing/gtest/include/gtest/benchmark.h"
+	"testing/gtest/include/gtest/internal/gtest-internal.h"
+	"testing/gtest/include/gtest/internal/gtest-string.h"
+	"testing/gtest/include/gtest/gtest-death-test.h"
+	"testing/gtest/include/gtest/gtest-message.h"
+	"testing/gtest/include/gtest/gtest-param-test.h"
+	"testing/gtest/include/gtest/gtest_prod.h"
+	"testing/gtest/include/gtest/gtest-test-part.h"
+	"testing/gtest/include/gtest/gtest-typed-test.h"
+	"testing/gtest/include/gtest/gtest_pred_impl.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/benchmark.h
+	<base/basictypes.h>
+	<ext/hash_set>
+	<ext/hash_map>
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	<stdarg.h>
+	<sys/time.h>
+	<time.h>
+	<vector>
+	<string>
+	<algorithm>
+	<iosfwd>
+	<map>
+	<stack>
+	<utility>
+	<set>
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/internal/gtest-internal.h
+	"testing/gtest/include/gtest/internal/gtest-port.h"
+	<stdlib.h>
+	<sys/types.h>
+	<sys/wait.h>
+	<unistd.h>
+	<ctype.h>
+	<string.h>
+	<iomanip>
+	<limits>
+	<set>
+	"testing/gtest/include/gtest/internal/gtest-string.h"
+	"testing/gtest/include/gtest/internal/gtest-filepath.h"
+	"testing/gtest/include/gtest/internal/gtest-type-util.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/internal/gtest-port.h
+	<ctype.h>
+	<stddef.h>
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<iostream>
+	<sstream>
+	<string>
+	"base/flags.h"
+	<unistd.h>
+	<strings.h>
+	<direct.h>
+	<io.h>
+	<regex.h>
+	<typeinfo>
+	<pthread.h>
+	<time.h>
+	"testing/gtest/include/gtest/internal/gtest-tuple.h"
+	<tuple>
+	<tr1/tuple>
+	<tr1/tuple>
+	<tuple>
+	<vector>
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/internal/gtest-tuple.h
+	<utility>
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/internal/gtest-string.h
+	<mem.h>
+	<string.h>
+	"testing/gtest/include/gtest/internal/gtest-port.h"
+	<string>
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/internal/gtest-filepath.h
+	"testing/gtest/include/gtest/internal/gtest-string.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/internal/gtest-type-util.h
+	"testing/gtest/include/gtest/internal/gtest-port.h"
+	"testing/gtest/include/gtest/internal/gtest-string.h"
+	<cxxabi.h>
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/gtest-death-test.h
+	"testing/gtest/include/gtest/internal/gtest-death-test-internal.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/internal/gtest-death-test-internal.h
+	"testing/gtest/include/gtest/internal/gtest-internal.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/gtest-message.h
+	<limits>
+	"testing/gtest/include/gtest/internal/gtest-string.h"
+	"testing/gtest/include/gtest/internal/gtest-internal.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/gtest-param-test.h
+	"testing/gtest/include/gtest/internal/gtest-port.h"
+	<utility>
+	"testing/gtest/include/gtest/internal/gtest-internal.h"
+	"testing/gtest/include/gtest/internal/gtest-param-util.h"
+	"testing/gtest/include/gtest/internal/gtest-param-util-generated.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/internal/gtest-param-util.h
+	<iterator>
+	<utility>
+	<vector>
+	"testing/gtest/include/gtest/internal/gtest-internal.h"
+	"testing/gtest/include/gtest/internal/gtest-linked_ptr.h"
+	"testing/gtest/include/gtest/internal/gtest-port.h"
+	"testing/gtest/include/gtest/gtest-printers.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/internal/gtest-linked_ptr.h
+	<stdlib.h>
+	<assert.h>
+	"testing/gtest/include/gtest/internal/gtest-port.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/gtest-printers.h
+	<ostream>
+	<sstream>
+	<string>
+	<utility>
+	<vector>
+	"testing/gtest/include/gtest/internal/gtest-port.h"
+	"testing/gtest/include/gtest/internal/gtest-internal.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/internal/gtest-param-util-generated.h
+	"testing/gtest/include/gtest/internal/gtest-param-util.h"
+	"testing/gtest/include/gtest/internal/gtest-port.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/gtest_prod.h
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/gtest-test-part.h
+	<iosfwd>
+	<vector>
+	"testing/gtest/include/gtest/internal/gtest-internal.h"
+	"testing/gtest/include/gtest/internal/gtest-string.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/gtest-typed-test.h
+	"testing/gtest/include/gtest/internal/gtest-port.h"
+	"testing/gtest/include/gtest/internal/gtest-type-util.h"
+
+1347614218 /home/wy/code/goso/coding/testing/gtest/include/gtest/gtest_pred_impl.h
+
+1347616567 source:/home/wy/code/goso/coding/base/atomic_unittest.cc
+	"base/atomic.h"
+	"base/thread_pool.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 /home/wy/code/goso/coding/base/atomic.h
+	"base/basictypes.h"
+	"base/port.h"
+
+1347616567 /home/wy/code/goso/coding/base/thread_pool.h
+	<pthread.h>
+	<semaphore.h>
+	<stdlib.h>
+	<sys/time.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<queue>
+	<vector>
+	"base/basictypes.h"
+	"base/callback.h"
+	"base/dynamic_annotations.h"
+	"base/mutex.h"
+
+1347616567 /home/wy/code/goso/coding/base/callback.h
+	"base/callback_spec.h"
+
+1347616567 /home/wy/code/goso/coding/base/callback_spec.h
+	"base/basictypes.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/atomicops_internals_x86_gcc.cc
+	<string.h>
+	"base/atomicops.h"
+	"base/basictypes.h"
+
+1347616567 /home/wy/code/goso/coding/base/atomicops.h
+	"base/basictypes.h"
+	"base/port.h"
+	"base/atomicops_internals_x86_gcc.h"
+
+1347616567 /home/wy/code/goso/coding/base/atomicops_internals_x86_gcc.h
+
+1347616567 source:/home/wy/code/goso/coding/base/bloom_filter.cc
+	"base/bloom_filter.h"
+
+1347616567 /home/wy/code/goso/coding/base/bloom_filter.h
+	<math.h>
+	<sys/types.h>
+	<climits>
+	"base/basictypes.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/bloom_filter_unittest.cc
+	"base/yr.h"
+	"base/logging.h"
+	"base/bloom_filter.h"
+
+1347616567 /home/wy/code/goso/coding/base/yr.h
+	"base/basictypes.h"
+	"base/flags.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/callback_unittest.cc
+	"base/callback.h"
+	"base/yr.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/concurrent_queue_test.cc
+	"base/concurrent_queue.h"
+	<unistd.h>
+	<vector>
+	"base/logging.h"
+	"base/thread.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 /home/wy/code/goso/coding/base/concurrent_queue.h
+	<queue>
+	"base/basictypes.h"
+	"base/mutex.h"
+
+1347616567 /home/wy/code/goso/coding/base/thread.h
+	<pthread.h>
+	"base/basictypes.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/counter.cc
+	"base/counter.h"
+	"base/string_util.h"
+	"base/yr.h"
+
+1347616567 /home/wy/code/goso/coding/base/counter.h
+	<string>
+	<vector>
+	<utility>
+	"base/atomic.h"
+	"base/basictypes.h"
+	"base/flags.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/counter_test.cc
+	"base/counter.h"
+	"base/thread_pool.h"
+	"base/time.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/debug_util.cc
+	"base/debug_util.h"
+	<errno.h>
+	<execinfo.h>
+	<fcntl.h>
+	<stdio.h>
+	<stdlib.h>
+	<sys/stat.h>
+	<sys/sysctl.h>
+	<sys/types.h>
+	<unistd.h>
+	<iostream>
+	<string>
+	"base/basictypes.h"
+	"base/eintr_wrapper.h"
+	"base/logging.h"
+	"base/safe_strerror_posix.h"
+	"base/scoped_ptr.h"
+	"base/string_piece.h"
+	"base/string_util.h"
+	"base/symbolize.h"
+	"base/time.h"
+
+1347616567 /home/wy/code/goso/coding/base/debug_util.h
+	<iosfwd>
+	<vector>
+	"base/basictypes.h"
+
+1347616567 /home/wy/code/goso/coding/base/eintr_wrapper.h
+	<errno.h>
+
+1347616567 /home/wy/code/goso/coding/base/safe_strerror_posix.h
+	<string>
+
+1347616567 /home/wy/code/goso/coding/base/scoped_ptr.h
+	<algorithm>
+	<assert.h>
+	<stdlib.h>
+	<cstddef>
+	"base/basictypes.h"
+
+1347616567 /home/wy/code/goso/coding/base/symbolize.h
+	"base/logging.h"
+	<elf.h>
+	<link.h>
+
+1347616567 source:/home/wy/code/goso/coding/base/demangle.cc
+	<stdio.h>
+	"base/demangle.h"
+
+1347616567 /home/wy/code/goso/coding/base/demangle.h
+
+1347616567 source:/home/wy/code/goso/coding/base/dmg_fp.cc
+	"dmg_fp.h"
+	"stdio.h"
+	"stdlib.h"
+	"string.h"
+	"locale.h"
+	<fenv.h>
+	"errno.h"
+	"float.h"
+	"math.h"
+
+1347616567 /home/wy/code/goso/coding/base/dmg_fp.h
+
+1347616567 source:/home/wy/code/goso/coding/base/dynamic_annotations.c
+	<stdlib.h>
+	<string.h>
+	"base/dynamic_annotations.h"
+	"base/valgrind.h"
+
+1347616567 /home/wy/code/goso/coding/base/valgrind.h
+	<stdarg.h>
+
+1347616567 source:/home/wy/code/goso/coding/base/env.cc
+	"base/env.h"
+	<map>
+	"base/logging.h"
+	"base/yr.h"
+
+1347616567 /home/wy/code/goso/coding/base/env.h
+	<string>
+	<utility>
+	<vector>
+	"base/flags.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/flags.cc
+	<assert.h>
+	<ctype.h>
+	<errno.h>
+	<fnmatch.h>
+	<inttypes.h>
+	<stdarg.h>
+	<stdio.h>
+	<string.h>
+	<algorithm>
+	<iostream>
+	<map>
+	<string>
+	<utility>
+	<vector>
+	"base/flags.h"
+	"base/mutex.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/flags_reporting.cc
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	<assert.h>
+	<string>
+	<vector>
+	"base/env.h"
+	"base/flags.h"
+	"base/string_util.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/hash.cc
+	"base/hash.h"
+	"base/logging.h"
+	"base/string_util.h"
+
+1347616567 /home/wy/code/goso/coding/base/hash.h
+	<string>
+	"base/basictypes.h"
+	"base/string_piece.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/hash_conflict_test.cc
+	<string>
+	"base/yr.h"
+	"base/callback.h"
+	"base/hash.h"
+	"base/hash_tables.h"
+	"file/simple_line_reader.h"
+
+1347616567 /home/wy/code/goso/coding/base/hash_tables.h
+	<ext/hash_map>
+	<ext/hash_set>
+	<string>
+	"base/port.h"
+	"base/string16.h"
+
+1347614219 /home/wy/code/goso/coding/file/simple_line_reader.h
+	<stdio.h>
+	<string>
+	<vector>
+	"base/basictypes.h"
+	"base/callback.h"
+	"base/scoped_ptr.h"
+	"util/encode/encoderbase.h"
+
+1347616614 /home/wy/code/goso/coding/util/encode/encoderbase.h
+	<string>
+	"util/registerer/registerer.h"
+
+1347616586 /home/wy/code/goso/coding/util/registerer/registerer.h
+	<map>
+	<string>
+	"base/logging.h"
+	"base/singleton.h"
+
+1347616567 /home/wy/code/goso/coding/base/singleton.h
+	<sched.h>
+	"base/at_exit.h"
+	"base/atomicops.h"
+	"base/dynamic_annotations.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/hash_unittest.cc
+	<algorithm>
+	<iostream>
+	<fstream>
+	<string>
+	"base/hash.h"
+	"testing/gtest/include/gtest/gtest.h"
+	"base/logging.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/icu_utf.cc
+	"base/icu_utf.h"
+
+1347616567 /home/wy/code/goso/coding/base/icu_utf.h
+	"base/basictypes.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/logging.cc
+	"base/logging.h"
+	<sys/syscall.h>
+	<time.h>
+	<errno.h>
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<unistd.h>
+	<pthread.h>
+	<ctime>
+	<iomanip>
+	<cstring>
+	<algorithm>
+	"base/debug_util.h"
+	"base/eintr_wrapper.h"
+	"base/mutex.h"
+	"base/safe_strerror_posix.h"
+	"base/string_piece.h"
+	"base/string_util.h"
+	"base/utf_string_conversions.h"
+
+1347616567 /home/wy/code/goso/coding/base/utf_string_conversions.h
+	<string>
+	"base/string16.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/logging_benchmark.cc
+	"base/yr.h"
+	"base/logging.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/mutex_test.cc
+	"base/mutex.h"
+	"base/thread_pool.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/net.cc
+	"base/net.h"
+	<sys/un.h>
+	<arpa/inet.h>
+	<netinet/in.h>
+	<netinet/tcp.h>
+	<unistd.h>
+	<fcntl.h>
+	<netdb.h>
+	<errno.h>
+	<stdlib.h>
+	"base/yr.h"
+	"base/logging.h"
+	"base/time.h"
+
+1347616567 /home/wy/code/goso/coding/base/net.h
+	<sys/socket.h>
+
+1347616567 source:/home/wy/code/goso/coding/base/prtime.cc
+	"base/prtime.h"
+	<errno.h>
+	<time.h>
+
+1347616567 /home/wy/code/goso/coding/base/prtime.h
+	"base/logging.h"
+	"base/prtypes.h"
+
+1347616567 /home/wy/code/goso/coding/base/prtypes.h
+	"base/prcpucfg_linux.h"
+	<stddef.h>
+	"base/basictypes.h"
+
+1347616567 /home/wy/code/goso/coding/base/prcpucfg_linux.h
+
+1347616567 source:/home/wy/code/goso/coding/base/safe_strerror_posix.cc
+	"base/safe_strerror_posix.h"
+	<errno.h>
+	<stdio.h>
+	<string.h>
+
+1347616567 source:/home/wy/code/goso/coding/base/scoped_ptr_unittest.cc
+	"base/basictypes.h"
+	"base/scoped_ptr.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/shared_ptr_unittest.cc
+	"base/shared_ptr.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 /home/wy/code/goso/coding/base/shared_ptr.h
+	<algorithm>
+	"base/atomic.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/singleton_unittest.cc
+	"base/at_exit.h"
+	"base/singleton.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/string16.cc
+	"base/string16.h"
+	"base/string_util.h"
+	"base/utf_string_conversions.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/string_piece.cc
+	<algorithm>
+	<iostream>
+	"base/string_piece.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/string_split.cc
+	"base/string_split.h"
+	"base/string_util.h"
+
+1347616567 /home/wy/code/goso/coding/base/string_split.h
+	<string>
+	<utility>
+	<vector>
+
+1347616567 source:/home/wy/code/goso/coding/base/string_split_unittest.cc
+	"base/string_split.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/string_util.cc
+	"base/string_util.h"
+	<ctype.h>
+	<errno.h>
+	<math.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<wchar.h>
+	<wctype.h>
+	<endian.h>
+	<algorithm>
+	<vector>
+	"base/basictypes.h"
+	"base/dmg_fp.h"
+	"base/icu_utf.h"
+	"base/logging.h"
+	"base/port.h"
+	"base/singleton.h"
+	"base/utf_string_conversion_utils.h"
+
+1347616567 /home/wy/code/goso/coding/base/utf_string_conversion_utils.h
+	"base/port.h"
+	"base/string16.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/string_util_unittest.cc
+	<math.h>
+	<stdarg.h>
+	<limits>
+	<sstream>
+	<map>
+	"base/basictypes.h"
+	"base/hash_tables.h"
+	"base/string_util.h"
+	"base/utf_string_conversions.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/symbolize.cc
+	"base/symbolize.h"
+	<dlfcn.h>
+	<elf.h>
+	<errno.h>
+	<fcntl.h>
+	<limits.h>
+	<link.h>
+	<stdint.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<string.h>
+	<sys/stat.h>
+	<sys/types.h>
+	<unistd.h>
+	<limits>
+	"base/demangle.h"
+	"base/logging.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/thread.cc
+	"base/thread.h"
+	"base/logging.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/thread_pool.cc
+	"base/thread_pool.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/thread_pool_unittest.cc
+	"base/string_util.h"
+	"base/thread.h"
+	"base/thread_pool.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/time.cc
+	"base/time.h"
+	<errno.h>
+	<limits>
+	"base/logging.h"
+	"base/prtime.h"
+	"base/string_util.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/time_unittest.cc
+	<time.h>
+	"base/time.h"
+	"testing/gtest/include/gtest/gtest.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/utf.cc
+	"base/utf.h"
+	<stdarg.h>
+	<string.h>
+
+1347616567 source:/home/wy/code/goso/coding/base/utf_string_conversion_utils.cc
+	"base/utf_string_conversion_utils.h"
+	"base/icu_utf.h"
+	"base/port.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/utf_string_conversions.cc
+	"base/utf_string_conversions.h"
+	"base/port.h"
+	"base/string_piece.h"
+	"base/utf_string_conversion_utils.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/varint_benchmark.cc
+	<stdio.h>
+	"base/yr.h"
+	"base/varint.h"
+	"base/time.h"
+
+1347616567 /home/wy/code/goso/coding/base/varint.h
+	"base/basictypes.h"
+	"base/logging.h"
+
+1347616567 source:/home/wy/code/goso/coding/base/varint_unittest.cc
+	"base/varint.h"
+	"testing/gtest/include/gtest/gtest.h"
+

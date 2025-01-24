@@ -1,0 +1,23 @@
+cc_library(name = 'http_upload',
+           srcs = [
+                   'http_upload.cc',
+                  ],
+           deps = [
+                  '//libs/third_party/curl:curl',
+                  '//libs/third_party/openssl:ssl',
+                  '//libs/third_party/openssl:crypto',
+                  '//libs/third_party/zlib:zlib',
+                  ]
+           )
+cc_library(name = 'file_id',
+           srcs = [
+                   'file_id.cc',
+                  ],
+           deps = []
+          )
+cc_library(name = 'guid_creator',
+           srcs = [
+                   'guid_creator.cc',
+                  ],
+           deps = []
+          )

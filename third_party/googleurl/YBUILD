@@ -1,0 +1,45 @@
+# Copyright 2010 Yunrang Inc. All Rights Reserved.
+# Author: quj@yunrang.com (Jing Qu)
+#
+# Description:
+#   google url library
+
+cc_library(name = 'gurl',
+           srcs = ['gurl.cc',
+                   'url_canon_etc.cc',
+                   'url_canon_fileurl.cc',
+                   'url_canon_host.cc',
+                   'url_canon_icu.cc',
+                   'url_canon_internal.cc',
+                   'url_canon_ip.cc',
+                   'url_canon_mailtourl.cc',
+                   'url_canon_path.cc',
+                   'url_canon_pathurl.cc',
+                   'url_canon_query.cc',
+                   'url_canon_relative.cc',
+                   'url_canon_stdurl.cc',
+                   'url_parse.cc',
+                   'url_parse_file.cc',
+                   'url_util.cc',
+                  ],
+           deps = ['//base:base',
+                   '//libs/third_party/icu:icuuc',
+                   '//libs/third_party/icu:icudata'
+                   ]
+           )
+
+cc_test(name = 'gurl_unittest',
+        srcs = ['gurl_unittest.cc', ],
+        deps = [':gurl',
+                '//libs/third_party/icu:icuuc',
+                '//libs/third_party/icu:icudata'
+               ],
+        )
+
+cc_test(name = 'url_parse_unittest',
+        srcs = ['url_parse_unittest.cc', ],
+        deps = [':gurl',
+                '//libs/third_party/icu:icuuc',
+                '//libs/third_party/icu:icudata'
+               ],
+        )

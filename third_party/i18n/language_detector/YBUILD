@@ -1,0 +1,15 @@
+# Defines a public c++ library
+# A public c++ library is composed of header files and do not really
+# do things. It only define the interfaces. However, the public library
+# should declare which libraries will implement itself, this is done by
+# 'implements' section.
+
+cc_library(name = 'textcat',
+           srcs = ['common.c',
+                   'wg_mempool.c',
+                   'textcat.c',
+                   'fingerprint.c',
+                   ],
+    )
+
+
