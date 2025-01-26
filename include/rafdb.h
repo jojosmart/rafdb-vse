@@ -93,6 +93,7 @@ namespace rafdb {
             int self_id_;
             std::string ip_;
             int port_;
+            std::string cluster_ip_list_;
 
             DISALLOW_COPY_AND_ASSIGN(RafDb);
     };

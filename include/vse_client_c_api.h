@@ -8,15 +8,15 @@ extern "C"{
 #endif
 
 /*
-	数据记录绑定字段说明：
+    数据记录绑定字段说明：
   字段定义： uuid(hex), pts(i64), utc-ts(i64), frameUri(s128), imgUri(s128)
   格式要求：uuid指定值需为标准uuid-hex-string；frameUri与imgUri可以为任意合理字符串，长度不得超过127字节。
 */
 
 
 typedef struct BufferArray{
-	size_t nct;
-	VseBuffer buffers[0];
+    size_t nct;
+    VseBuffer buffers[0];
 }BufferArray;
 
 
@@ -24,35 +24,35 @@ typedef struct BufferArray{
   通用图搜库数据记录
 */
 typedef struct DataRecord{
-	int64_t idx;    //record-index
-	float sim;      //feature compare similarity
-	BufferArray* p_params;
+    int64_t idx;    //record-index
+    float sim;      //feature compare similarity
+    BufferArray* p_params;
 }DataRecord;
 
 
 /*
-	释放SDK分配的BufferArray
+    释放SDK分配的BufferArray
 */
 VSE_API void bufferarray_free(BufferArray* pBufferArray);
 
 
 typedef struct BufferDataCbReceiver{
-	//接收buffer个数的回调函数，可以为nullptr
-	void(*getBufferCount)(uint32_t ,BufferDataCbReceiver*);	
-	//(多次调用)接收一个个buffer数据的回调函数，不可为nullptr
-	void(*getBufferData)(uint32_t, const char*, uint32_t,BufferDataCbReceiver*);
+    //接收buffer个数的回调函数，可以为nullptr
+    void(*getBufferCount)(uint32_t ,BufferDataCbReceiver*);    
+    //(多次调用)接收一个个buffer数据的回调函数，不可为nullptr
+    void(*getBufferData)(uint32_t, const char*, uint32_t,BufferDataCbReceiver*);
 }BufferDataCbReceiver;
 
 
 typedef struct DataRecordCbr{
-	int64_t idx;    //record-index
-	float sim;      //feature compare similarity
-	BufferDataCbReceiver* params_cbr;
+    int64_t idx;    //record-index
+    float sim;      //feature compare similarity
+    BufferDataCbReceiver* params_cbr;
 }DataRecordCbr;
 
 
 /*
-	Vse向量搜索引擎访问API类
+    Vse向量搜索引擎访问API类
 */
 struct VseClient;
 
@@ -121,7 +121,7 @@ VSE_API int64_t client_get_db_record_count(VseClient* ph, const char* dbname, Er
 * @param fields 绑定参数的字段名列表，格式为： 列名称1,列名称2,... 注意列名称必须是create_db_v2传入的列名的子集
 * @param values 基于前面fields指定列名称的顺序一一对应的值列表，格式为: 值1,值2, ... 注意，字符串值需要在外侧添加引号（支持单引号或者双引号，但必须配对），数值类型不加引号
 * @return 图像索引uid值(>=0，库表级全局唯一)
-		备注：
+        备注：
             a) push_record_v2执行时，传入的fields与values必须在数量与数据类型上匹配，否则会报错。
             b) fields指定字段顺序，不一定严格遵循建库时传入的字段名顺序，可以打乱。
             c) fields与values可以是建库时指定字段的子集，即可以不传全部字段的数据。在此情况下，忽略的字段数据默认填0，即数值数据为0，字符串为空串。
@@ -154,12 +154,12 @@ VSE_API int64_t client_push_record_v2(VseClient* ph, const char* dbname, VseBuff
 * @param pRecs 检索返回记录数据存储数组。需要预分配。
 * @param max_rec  最大返回结果数（一般为pRecs数组上限）
 * @return 查询结果数(<=max_rec)
-	成功检索将基于相似度排序、通过min_sim和max_rec双重限定后截断的结果返回。返回结果填充入pRecs里对应的成员中。每条记录有：
-			:记录uid：同push_record返回值,delete_record参数值。为系统内分配的记录唯一id
+    成功检索将基于相似度排序、通过min_sim和max_rec双重限定后截断的结果返回。返回结果填充入pRecs里对应的成员中。每条记录有：
+            :记录uid：同push_record返回值,delete_record参数值。为系统内分配的记录唯一id
             :相似度值：值域为[0,1.0]的相似度得分值。对于完全相同的向量相似度为1，完全不相同的向量相似度为0
             :参数列表：格式为list[str]的返回字段数据。与fields参数指定的字段一一对应。
-	
-	备注: where_stmt条件语句的支持能力有：
+    
+    备注: where_stmt条件语句的支持能力有：
           - 支持逻辑运算符（not，and，or）与括号嵌套（任意层）
           - 支持x种比较运算符：
             - 基础比较运算：>, <, =, !=, >=, <=
@@ -172,16 +172,16 @@ VSE_API int64_t client_push_record_v2(VseClient* ph, const char* dbname, VseBuff
 * 
 */
 VSE_API int client_retrieve_records_v2(VseClient* ph, const char* dbname, VseBuffer* feat, const char* fields, const char* wherestmt, float min_sim,
-	DataRecord* pRecs, uint32_t max_rec, ErrInfo* pei);
+    DataRecord* pRecs, uint32_t max_rec, ErrInfo* pei);
 
 VSE_API int client_retrieve_records_cbr_v2(VseClient* ph, const char* dbname, VseBuffer* feat, const char* fields, const char* wherestmt, float min_sim,
-	DataRecordCbr* pRecs, uint32_t max_rec, ErrInfo* pei);
+    DataRecordCbr* pRecs, uint32_t max_rec, ErrInfo* pei);
 
 
 /**
 * select方式查询图像
 * @param dbname 数据库名
-* @param where_stmt where语句	
+* @param where_stmt where语句    
 * @param pRecs 检索返回记录数据存储数组。需要预分配。
 * @param max_rec  最大返回结果数（一般为pRecs数组上限）
 * @return 查询结果数(<=max_rec)
@@ -220,9 +220,9 @@ VSE_API int client_enum_db_columns(VseClient* ph, const char* dbname, ErrInfo* p
 
 使用说明：
 -- 对于VseClient >>
-	操作流程：实例声明 -> 初始化（set_net_addr） 
-		-> [建库（create_db）//（如果库已经创建，建议调用一次访问API打开，如get_db_rec_ct）] -> 访问（增/删/改/查，API调用可并行）-> 删库（delete_db。注意删库前需保证没有对当前库未完成的访问操作）
-		-> 实例析构
-	并行性：对于VseClient实例，除了初始化方法set_net_addr为非线程安全函数，其余所有库操作函数均为线程安全，支持多线程并行调用。每个函数本身为阻塞执行（发出命令数据等待返回）。
+    操作流程：实例声明 -> 初始化（set_net_addr） 
+        -> [建库（create_db）//（如果库已经创建，建议调用一次访问API打开，如get_db_rec_ct）] -> 访问（增/删/改/查，API调用可并行）-> 删库（delete_db。注意删库前需保证没有对当前库未完成的访问操作）
+        -> 实例析构
+    并行性：对于VseClient实例，除了初始化方法set_net_addr为非线程安全函数，其余所有库操作函数均为线程安全，支持多线程并行调用。每个函数本身为阻塞执行（发出命令数据等待返回）。
 
 */

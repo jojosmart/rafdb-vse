@@ -14,26 +14,21 @@ namespace rafdb {
 class RafdbServiceIf {
  public:
   virtual ~RafdbServiceIf() {}
-  virtual bool Set(const std::string& dbname, const std::string& key, const std::string& value) = 0;
-  virtual bool MPSet(const std::string& dbname, const std::vector<Pair> & pairs) = 0;
-  virtual void Get(std::string& _return, const std::string& dbname, const std::string& key) = 0;
-  virtual void MGet(std::vector<std::string> & _return, const std::string& dbname, const std::vector<std::string> & keys) = 0;
-  virtual bool Delete(const std::string& dbname, const std::string& key) = 0;
-  virtual bool MDelete(const std::string& dbname, const std::vector<std::string> & keys) = 0;
-  virtual int32_t OpenIterator(const std::string& dbname) = 0;
-  virtual bool CloseIterator(const int32_t itID) = 0;
-  virtual bool SeekToFirst(const int32_t itID) = 0;
-  virtual bool SeekToLast(const int32_t itID) = 0;
-  virtual bool Valid(const int32_t itID) = 0;
-  virtual bool Seek(const int32_t itID, const std::string& target) = 0;
-  virtual void NextKeys(std::vector<std::string> & _return, const int32_t itID, const int32_t number) = 0;
-  virtual void NextValues(std::vector<std::string> & _return, const int32_t itID, const int32_t number) = 0;
-  virtual void NextPairs(std::vector<Pair> & _return, const int32_t itID, const int32_t number) = 0;
-  virtual bool DeleteDatabase(const std::string& dbname) = 0;
-  virtual bool LSet(const std::string& dbname, const std::string& key, const std::string& value) = 0;
+  virtual void VseClientVersion(std::string& _return) = 0;
+  virtual void ClientEnumAllDbs(ResDbnameList& _return) = 0;
+  virtual void ClientCreateDbV2(ErrInfoThr& _return, const std::string& dbname, const std::string& fields) = 0;
+  virtual void ClientDeleteDb(ErrInfoThr& _return, const std::string& dbname) = 0;
+  virtual void ClientGetDbRecordCount(ResIntInfo& _return, const std::string& dbname) = 0;
+  virtual void ClientPushRecordV2(ResIntInfo& _return, const std::string& dbname, const std::string& fields, const std::string& values) = 0;
+  virtual void ClientRetrieveRecordsV2(RetriveRecords& _return, const std::string& dbname, const std::string& fields, const std::string& wherestmt, const double min_sim, const int64_t max_rec) = 0;
+  virtual void ClientDeleteRecord(ErrInfoThr& _return, const std::string& dbname, const int64_t index) = 0;
+  virtual void ClientDeleteRecordWs(ErrInfoThr& _return, const std::string& dbname, const std::string& wherestmt) = 0;
+  virtual void ClientDbScanRepair(ResIntInfo& _return, const std::string& dbname) = 0;
+  virtual void ClientEnumDbColumns(ResIntInfo& _return, const std::string& dbname) = 0;
   virtual bool IsHealthy() = 0;
   virtual bool IsLeader() = 0;
   virtual int32_t GetLeaderId() = 0;
+  virtual void GetCluserIPList(std::string& _return) = 0;
   virtual void SendVote(const rafdb::Message& message) = 0;
   virtual void ReplyVote(const rafdb::Message& message) = 0;
   virtual void SendHeartBeat(const rafdb::Message& message) = 0;
@@ -45,68 +40,38 @@ class RafdbServiceIf {
 class RafdbServiceNull : virtual public RafdbServiceIf {
  public:
   virtual ~RafdbServiceNull() {}
-  bool Set(const std::string& /* dbname */, const std::string& /* key */, const std::string& /* value */) {
-    bool _return = false;
-    return _return;
-  }
-  bool MPSet(const std::string& /* dbname */, const std::vector<Pair> & /* pairs */) {
-    bool _return = false;
-    return _return;
-  }
-  void Get(std::string& /* _return */, const std::string& /* dbname */, const std::string& /* key */) {
+  void VseClientVersion(std::string& /* _return */) {
     return;
   }
-  void MGet(std::vector<std::string> & /* _return */, const std::string& /* dbname */, const std::vector<std::string> & /* keys */) {
+  void ClientEnumAllDbs(ResDbnameList& /* _return */) {
     return;
   }
-  bool Delete(const std::string& /* dbname */, const std::string& /* key */) {
-    bool _return = false;
-    return _return;
-  }
-  bool MDelete(const std::string& /* dbname */, const std::vector<std::string> & /* keys */) {
-    bool _return = false;
-    return _return;
-  }
-  int32_t OpenIterator(const std::string& /* dbname */) {
-    int32_t _return = 0;
-    return _return;
-  }
-  bool CloseIterator(const int32_t /* itID */) {
-    bool _return = false;
-    return _return;
-  }
-  bool SeekToFirst(const int32_t /* itID */) {
-    bool _return = false;
-    return _return;
-  }
-  bool SeekToLast(const int32_t /* itID */) {
-    bool _return = false;
-    return _return;
-  }
-  bool Valid(const int32_t /* itID */) {
-    bool _return = false;
-    return _return;
-  }
-  bool Seek(const int32_t /* itID */, const std::string& /* target */) {
-    bool _return = false;
-    return _return;
-  }
-  void NextKeys(std::vector<std::string> & /* _return */, const int32_t /* itID */, const int32_t /* number */) {
+  void ClientCreateDbV2(ErrInfoThr& /* _return */, const std::string& /* dbname */, const std::string& /* fields */) {
     return;
   }
-  void NextValues(std::vector<std::string> & /* _return */, const int32_t /* itID */, const int32_t /* number */) {
+  void ClientDeleteDb(ErrInfoThr& /* _return */, const std::string& /* dbname */) {
     return;
   }
-  void NextPairs(std::vector<Pair> & /* _return */, const int32_t /* itID */, const int32_t /* number */) {
+  void ClientGetDbRecordCount(ResIntInfo& /* _return */, const std::string& /* dbname */) {
     return;
   }
-  bool DeleteDatabase(const std::string& /* dbname */) {
-    bool _return = false;
-    return _return;
+  void ClientPushRecordV2(ResIntInfo& /* _return */, const std::string& /* dbname */, const std::string& /* fields */, const std::string& /* values */) {
+    return;
   }
-  bool LSet(const std::string& /* dbname */, const std::string& /* key */, const std::string& /* value */) {
-    bool _return = false;
-    return _return;
+  void ClientRetrieveRecordsV2(RetriveRecords& /* _return */, const std::string& /* dbname */, const std::string& /* fields */, const std::string& /* wherestmt */, const double /* min_sim */, const int64_t /* max_rec */) {
+    return;
+  }
+  void ClientDeleteRecord(ErrInfoThr& /* _return */, const std::string& /* dbname */, const int64_t /* index */) {
+    return;
+  }
+  void ClientDeleteRecordWs(ErrInfoThr& /* _return */, const std::string& /* dbname */, const std::string& /* wherestmt */) {
+    return;
+  }
+  void ClientDbScanRepair(ResIntInfo& /* _return */, const std::string& /* dbname */) {
+    return;
+  }
+  void ClientEnumDbColumns(ResIntInfo& /* _return */, const std::string& /* dbname */) {
+    return;
   }
   bool IsHealthy() {
     bool _return = false;
@@ -119,6 +84,9 @@ class RafdbServiceNull : virtual public RafdbServiceIf {
   int32_t GetLeaderId() {
     int32_t _return = 0;
     return _return;
+  }
+  void GetCluserIPList(std::string& /* _return */) {
+    return;
   }
   void SendVote(const rafdb::Message& /* message */) {
     return;
@@ -140,42 +108,25 @@ class RafdbServiceNull : virtual public RafdbServiceIf {
   }
 };
 
-typedef struct _RafdbService_Set_args__isset {
-  _RafdbService_Set_args__isset() : dbname(false), key(false), value(false) {}
-  bool dbname;
-  bool key;
-  bool value;
-} _RafdbService_Set_args__isset;
 
-class RafdbService_Set_args {
+class RafdbService_VseClientVersion_args {
  public:
 
-  RafdbService_Set_args() : dbname(""), key(""), value("") {
+  RafdbService_VseClientVersion_args() {
   }
 
-  virtual ~RafdbService_Set_args() throw() {}
+  virtual ~RafdbService_VseClientVersion_args() throw() {}
 
-  std::string dbname;
-  std::string key;
-  std::string value;
 
-  _RafdbService_Set_args__isset __isset;
-
-  bool operator == (const RafdbService_Set_args & rhs) const
+  bool operator == (const RafdbService_VseClientVersion_args & /* rhs */) const
   {
-    if (!(dbname == rhs.dbname))
-      return false;
-    if (!(key == rhs.key))
-      return false;
-    if (!(value == rhs.value))
-      return false;
     return true;
   }
-  bool operator != (const RafdbService_Set_args &rhs) const {
+  bool operator != (const RafdbService_VseClientVersion_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_Set_args & ) const;
+  bool operator < (const RafdbService_VseClientVersion_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -183,315 +134,89 @@ class RafdbService_Set_args {
 };
 
 
-class RafdbService_Set_pargs {
+class RafdbService_VseClientVersion_pargs {
  public:
 
 
-  virtual ~RafdbService_Set_pargs() throw() {}
+  virtual ~RafdbService_VseClientVersion_pargs() throw() {}
 
-  const std::string* dbname;
-  const std::string* key;
-  const std::string* value;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _RafdbService_Set_result__isset {
-  _RafdbService_Set_result__isset() : success(false) {}
+typedef struct _RafdbService_VseClientVersion_result__isset {
+  _RafdbService_VseClientVersion_result__isset() : success(false) {}
   bool success;
-} _RafdbService_Set_result__isset;
+} _RafdbService_VseClientVersion_result__isset;
 
-class RafdbService_Set_result {
+class RafdbService_VseClientVersion_result {
  public:
 
-  RafdbService_Set_result() : success(0) {
+  RafdbService_VseClientVersion_result() : success("") {
   }
 
-  virtual ~RafdbService_Set_result() throw() {}
-
-  bool success;
-
-  _RafdbService_Set_result__isset __isset;
-
-  bool operator == (const RafdbService_Set_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_Set_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_Set_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_Set_presult__isset {
-  _RafdbService_Set_presult__isset() : success(false) {}
-  bool success;
-} _RafdbService_Set_presult__isset;
-
-class RafdbService_Set_presult {
- public:
-
-
-  virtual ~RafdbService_Set_presult() throw() {}
-
-  bool* success;
-
-  _RafdbService_Set_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RafdbService_MPSet_args__isset {
-  _RafdbService_MPSet_args__isset() : dbname(false), pairs(false) {}
-  bool dbname;
-  bool pairs;
-} _RafdbService_MPSet_args__isset;
-
-class RafdbService_MPSet_args {
- public:
-
-  RafdbService_MPSet_args() : dbname("") {
-  }
-
-  virtual ~RafdbService_MPSet_args() throw() {}
-
-  std::string dbname;
-  std::vector<Pair>  pairs;
-
-  _RafdbService_MPSet_args__isset __isset;
-
-  bool operator == (const RafdbService_MPSet_args & rhs) const
-  {
-    if (!(dbname == rhs.dbname))
-      return false;
-    if (!(pairs == rhs.pairs))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_MPSet_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_MPSet_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RafdbService_MPSet_pargs {
- public:
-
-
-  virtual ~RafdbService_MPSet_pargs() throw() {}
-
-  const std::string* dbname;
-  const std::vector<Pair> * pairs;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_MPSet_result__isset {
-  _RafdbService_MPSet_result__isset() : success(false) {}
-  bool success;
-} _RafdbService_MPSet_result__isset;
-
-class RafdbService_MPSet_result {
- public:
-
-  RafdbService_MPSet_result() : success(0) {
-  }
-
-  virtual ~RafdbService_MPSet_result() throw() {}
-
-  bool success;
-
-  _RafdbService_MPSet_result__isset __isset;
-
-  bool operator == (const RafdbService_MPSet_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_MPSet_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_MPSet_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_MPSet_presult__isset {
-  _RafdbService_MPSet_presult__isset() : success(false) {}
-  bool success;
-} _RafdbService_MPSet_presult__isset;
-
-class RafdbService_MPSet_presult {
- public:
-
-
-  virtual ~RafdbService_MPSet_presult() throw() {}
-
-  bool* success;
-
-  _RafdbService_MPSet_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RafdbService_Get_args__isset {
-  _RafdbService_Get_args__isset() : dbname(false), key(false) {}
-  bool dbname;
-  bool key;
-} _RafdbService_Get_args__isset;
-
-class RafdbService_Get_args {
- public:
-
-  RafdbService_Get_args() : dbname(""), key("") {
-  }
-
-  virtual ~RafdbService_Get_args() throw() {}
-
-  std::string dbname;
-  std::string key;
-
-  _RafdbService_Get_args__isset __isset;
-
-  bool operator == (const RafdbService_Get_args & rhs) const
-  {
-    if (!(dbname == rhs.dbname))
-      return false;
-    if (!(key == rhs.key))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_Get_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_Get_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RafdbService_Get_pargs {
- public:
-
-
-  virtual ~RafdbService_Get_pargs() throw() {}
-
-  const std::string* dbname;
-  const std::string* key;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_Get_result__isset {
-  _RafdbService_Get_result__isset() : success(false) {}
-  bool success;
-} _RafdbService_Get_result__isset;
-
-class RafdbService_Get_result {
- public:
-
-  RafdbService_Get_result() : success("") {
-  }
-
-  virtual ~RafdbService_Get_result() throw() {}
+  virtual ~RafdbService_VseClientVersion_result() throw() {}
 
   std::string success;
 
-  _RafdbService_Get_result__isset __isset;
+  _RafdbService_VseClientVersion_result__isset __isset;
 
-  bool operator == (const RafdbService_Get_result & rhs) const
+  bool operator == (const RafdbService_VseClientVersion_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const RafdbService_Get_result &rhs) const {
+  bool operator != (const RafdbService_VseClientVersion_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_Get_result & ) const;
+  bool operator < (const RafdbService_VseClientVersion_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _RafdbService_Get_presult__isset {
-  _RafdbService_Get_presult__isset() : success(false) {}
+typedef struct _RafdbService_VseClientVersion_presult__isset {
+  _RafdbService_VseClientVersion_presult__isset() : success(false) {}
   bool success;
-} _RafdbService_Get_presult__isset;
+} _RafdbService_VseClientVersion_presult__isset;
 
-class RafdbService_Get_presult {
+class RafdbService_VseClientVersion_presult {
  public:
 
 
-  virtual ~RafdbService_Get_presult() throw() {}
+  virtual ~RafdbService_VseClientVersion_presult() throw() {}
 
   std::string* success;
 
-  _RafdbService_Get_presult__isset __isset;
+  _RafdbService_VseClientVersion_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _RafdbService_MGet_args__isset {
-  _RafdbService_MGet_args__isset() : dbname(false), keys(false) {}
-  bool dbname;
-  bool keys;
-} _RafdbService_MGet_args__isset;
 
-class RafdbService_MGet_args {
+class RafdbService_ClientEnumAllDbs_args {
  public:
 
-  RafdbService_MGet_args() : dbname("") {
+  RafdbService_ClientEnumAllDbs_args() {
   }
 
-  virtual ~RafdbService_MGet_args() throw() {}
+  virtual ~RafdbService_ClientEnumAllDbs_args() throw() {}
 
-  std::string dbname;
-  std::vector<std::string>  keys;
 
-  _RafdbService_MGet_args__isset __isset;
-
-  bool operator == (const RafdbService_MGet_args & rhs) const
+  bool operator == (const RafdbService_ClientEnumAllDbs_args & /* rhs */) const
   {
-    if (!(dbname == rhs.dbname))
-      return false;
-    if (!(keys == rhs.keys))
-      return false;
     return true;
   }
-  bool operator != (const RafdbService_MGet_args &rhs) const {
+  bool operator != (const RafdbService_ClientEnumAllDbs_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_MGet_args & ) const;
+  bool operator < (const RafdbService_ClientEnumAllDbs_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -499,104 +224,102 @@ class RafdbService_MGet_args {
 };
 
 
-class RafdbService_MGet_pargs {
+class RafdbService_ClientEnumAllDbs_pargs {
  public:
 
 
-  virtual ~RafdbService_MGet_pargs() throw() {}
+  virtual ~RafdbService_ClientEnumAllDbs_pargs() throw() {}
 
-  const std::string* dbname;
-  const std::vector<std::string> * keys;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _RafdbService_MGet_result__isset {
-  _RafdbService_MGet_result__isset() : success(false) {}
+typedef struct _RafdbService_ClientEnumAllDbs_result__isset {
+  _RafdbService_ClientEnumAllDbs_result__isset() : success(false) {}
   bool success;
-} _RafdbService_MGet_result__isset;
+} _RafdbService_ClientEnumAllDbs_result__isset;
 
-class RafdbService_MGet_result {
+class RafdbService_ClientEnumAllDbs_result {
  public:
 
-  RafdbService_MGet_result() {
+  RafdbService_ClientEnumAllDbs_result() {
   }
 
-  virtual ~RafdbService_MGet_result() throw() {}
+  virtual ~RafdbService_ClientEnumAllDbs_result() throw() {}
 
-  std::vector<std::string>  success;
+  ResDbnameList success;
 
-  _RafdbService_MGet_result__isset __isset;
+  _RafdbService_ClientEnumAllDbs_result__isset __isset;
 
-  bool operator == (const RafdbService_MGet_result & rhs) const
+  bool operator == (const RafdbService_ClientEnumAllDbs_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const RafdbService_MGet_result &rhs) const {
+  bool operator != (const RafdbService_ClientEnumAllDbs_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_MGet_result & ) const;
+  bool operator < (const RafdbService_ClientEnumAllDbs_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _RafdbService_MGet_presult__isset {
-  _RafdbService_MGet_presult__isset() : success(false) {}
+typedef struct _RafdbService_ClientEnumAllDbs_presult__isset {
+  _RafdbService_ClientEnumAllDbs_presult__isset() : success(false) {}
   bool success;
-} _RafdbService_MGet_presult__isset;
+} _RafdbService_ClientEnumAllDbs_presult__isset;
 
-class RafdbService_MGet_presult {
+class RafdbService_ClientEnumAllDbs_presult {
  public:
 
 
-  virtual ~RafdbService_MGet_presult() throw() {}
+  virtual ~RafdbService_ClientEnumAllDbs_presult() throw() {}
 
-  std::vector<std::string> * success;
+  ResDbnameList* success;
 
-  _RafdbService_MGet_presult__isset __isset;
+  _RafdbService_ClientEnumAllDbs_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _RafdbService_Delete_args__isset {
-  _RafdbService_Delete_args__isset() : dbname(false), key(false) {}
+typedef struct _RafdbService_ClientCreateDbV2_args__isset {
+  _RafdbService_ClientCreateDbV2_args__isset() : dbname(false), fields(false) {}
   bool dbname;
-  bool key;
-} _RafdbService_Delete_args__isset;
+  bool fields;
+} _RafdbService_ClientCreateDbV2_args__isset;
 
-class RafdbService_Delete_args {
+class RafdbService_ClientCreateDbV2_args {
  public:
 
-  RafdbService_Delete_args() : dbname(""), key("") {
+  RafdbService_ClientCreateDbV2_args() : dbname(""), fields("") {
   }
 
-  virtual ~RafdbService_Delete_args() throw() {}
+  virtual ~RafdbService_ClientCreateDbV2_args() throw() {}
 
   std::string dbname;
-  std::string key;
+  std::string fields;
 
-  _RafdbService_Delete_args__isset __isset;
+  _RafdbService_ClientCreateDbV2_args__isset __isset;
 
-  bool operator == (const RafdbService_Delete_args & rhs) const
+  bool operator == (const RafdbService_ClientCreateDbV2_args & rhs) const
   {
     if (!(dbname == rhs.dbname))
       return false;
-    if (!(key == rhs.key))
+    if (!(fields == rhs.fields))
       return false;
     return true;
   }
-  bool operator != (const RafdbService_Delete_args &rhs) const {
+  bool operator != (const RafdbService_ClientCreateDbV2_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_Delete_args & ) const;
+  bool operator < (const RafdbService_ClientCreateDbV2_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -604,205 +327,100 @@ class RafdbService_Delete_args {
 };
 
 
-class RafdbService_Delete_pargs {
+class RafdbService_ClientCreateDbV2_pargs {
  public:
 
 
-  virtual ~RafdbService_Delete_pargs() throw() {}
+  virtual ~RafdbService_ClientCreateDbV2_pargs() throw() {}
 
   const std::string* dbname;
-  const std::string* key;
+  const std::string* fields;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _RafdbService_Delete_result__isset {
-  _RafdbService_Delete_result__isset() : success(false) {}
+typedef struct _RafdbService_ClientCreateDbV2_result__isset {
+  _RafdbService_ClientCreateDbV2_result__isset() : success(false) {}
   bool success;
-} _RafdbService_Delete_result__isset;
+} _RafdbService_ClientCreateDbV2_result__isset;
 
-class RafdbService_Delete_result {
+class RafdbService_ClientCreateDbV2_result {
  public:
 
-  RafdbService_Delete_result() : success(0) {
+  RafdbService_ClientCreateDbV2_result() {
   }
 
-  virtual ~RafdbService_Delete_result() throw() {}
+  virtual ~RafdbService_ClientCreateDbV2_result() throw() {}
 
-  bool success;
+  ErrInfoThr success;
 
-  _RafdbService_Delete_result__isset __isset;
+  _RafdbService_ClientCreateDbV2_result__isset __isset;
 
-  bool operator == (const RafdbService_Delete_result & rhs) const
+  bool operator == (const RafdbService_ClientCreateDbV2_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const RafdbService_Delete_result &rhs) const {
+  bool operator != (const RafdbService_ClientCreateDbV2_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_Delete_result & ) const;
+  bool operator < (const RafdbService_ClientCreateDbV2_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _RafdbService_Delete_presult__isset {
-  _RafdbService_Delete_presult__isset() : success(false) {}
+typedef struct _RafdbService_ClientCreateDbV2_presult__isset {
+  _RafdbService_ClientCreateDbV2_presult__isset() : success(false) {}
   bool success;
-} _RafdbService_Delete_presult__isset;
+} _RafdbService_ClientCreateDbV2_presult__isset;
 
-class RafdbService_Delete_presult {
+class RafdbService_ClientCreateDbV2_presult {
  public:
 
 
-  virtual ~RafdbService_Delete_presult() throw() {}
+  virtual ~RafdbService_ClientCreateDbV2_presult() throw() {}
 
-  bool* success;
+  ErrInfoThr* success;
 
-  _RafdbService_Delete_presult__isset __isset;
+  _RafdbService_ClientCreateDbV2_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _RafdbService_MDelete_args__isset {
-  _RafdbService_MDelete_args__isset() : dbname(false), keys(false) {}
+typedef struct _RafdbService_ClientDeleteDb_args__isset {
+  _RafdbService_ClientDeleteDb_args__isset() : dbname(false) {}
   bool dbname;
-  bool keys;
-} _RafdbService_MDelete_args__isset;
+} _RafdbService_ClientDeleteDb_args__isset;
 
-class RafdbService_MDelete_args {
+class RafdbService_ClientDeleteDb_args {
  public:
 
-  RafdbService_MDelete_args() : dbname("") {
+  RafdbService_ClientDeleteDb_args() : dbname("") {
   }
 
-  virtual ~RafdbService_MDelete_args() throw() {}
-
-  std::string dbname;
-  std::vector<std::string>  keys;
-
-  _RafdbService_MDelete_args__isset __isset;
-
-  bool operator == (const RafdbService_MDelete_args & rhs) const
-  {
-    if (!(dbname == rhs.dbname))
-      return false;
-    if (!(keys == rhs.keys))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_MDelete_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_MDelete_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RafdbService_MDelete_pargs {
- public:
-
-
-  virtual ~RafdbService_MDelete_pargs() throw() {}
-
-  const std::string* dbname;
-  const std::vector<std::string> * keys;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_MDelete_result__isset {
-  _RafdbService_MDelete_result__isset() : success(false) {}
-  bool success;
-} _RafdbService_MDelete_result__isset;
-
-class RafdbService_MDelete_result {
- public:
-
-  RafdbService_MDelete_result() : success(0) {
-  }
-
-  virtual ~RafdbService_MDelete_result() throw() {}
-
-  bool success;
-
-  _RafdbService_MDelete_result__isset __isset;
-
-  bool operator == (const RafdbService_MDelete_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_MDelete_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_MDelete_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_MDelete_presult__isset {
-  _RafdbService_MDelete_presult__isset() : success(false) {}
-  bool success;
-} _RafdbService_MDelete_presult__isset;
-
-class RafdbService_MDelete_presult {
- public:
-
-
-  virtual ~RafdbService_MDelete_presult() throw() {}
-
-  bool* success;
-
-  _RafdbService_MDelete_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RafdbService_OpenIterator_args__isset {
-  _RafdbService_OpenIterator_args__isset() : dbname(false) {}
-  bool dbname;
-} _RafdbService_OpenIterator_args__isset;
-
-class RafdbService_OpenIterator_args {
- public:
-
-  RafdbService_OpenIterator_args() : dbname("") {
-  }
-
-  virtual ~RafdbService_OpenIterator_args() throw() {}
+  virtual ~RafdbService_ClientDeleteDb_args() throw() {}
 
   std::string dbname;
 
-  _RafdbService_OpenIterator_args__isset __isset;
+  _RafdbService_ClientDeleteDb_args__isset __isset;
 
-  bool operator == (const RafdbService_OpenIterator_args & rhs) const
+  bool operator == (const RafdbService_ClientDeleteDb_args & rhs) const
   {
     if (!(dbname == rhs.dbname))
       return false;
     return true;
   }
-  bool operator != (const RafdbService_OpenIterator_args &rhs) const {
+  bool operator != (const RafdbService_ClientDeleteDb_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_OpenIterator_args & ) const;
+  bool operator < (const RafdbService_ClientDeleteDb_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -810,11 +428,11 @@ class RafdbService_OpenIterator_args {
 };
 
 
-class RafdbService_OpenIterator_pargs {
+class RafdbService_ClientDeleteDb_pargs {
  public:
 
 
-  virtual ~RafdbService_OpenIterator_pargs() throw() {}
+  virtual ~RafdbService_ClientDeleteDb_pargs() throw() {}
 
   const std::string* dbname;
 
@@ -822,907 +440,87 @@ class RafdbService_OpenIterator_pargs {
 
 };
 
-typedef struct _RafdbService_OpenIterator_result__isset {
-  _RafdbService_OpenIterator_result__isset() : success(false) {}
+typedef struct _RafdbService_ClientDeleteDb_result__isset {
+  _RafdbService_ClientDeleteDb_result__isset() : success(false) {}
   bool success;
-} _RafdbService_OpenIterator_result__isset;
+} _RafdbService_ClientDeleteDb_result__isset;
 
-class RafdbService_OpenIterator_result {
+class RafdbService_ClientDeleteDb_result {
  public:
 
-  RafdbService_OpenIterator_result() : success(0) {
+  RafdbService_ClientDeleteDb_result() {
   }
 
-  virtual ~RafdbService_OpenIterator_result() throw() {}
+  virtual ~RafdbService_ClientDeleteDb_result() throw() {}
 
-  int32_t success;
+  ErrInfoThr success;
 
-  _RafdbService_OpenIterator_result__isset __isset;
+  _RafdbService_ClientDeleteDb_result__isset __isset;
 
-  bool operator == (const RafdbService_OpenIterator_result & rhs) const
+  bool operator == (const RafdbService_ClientDeleteDb_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const RafdbService_OpenIterator_result &rhs) const {
+  bool operator != (const RafdbService_ClientDeleteDb_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_OpenIterator_result & ) const;
+  bool operator < (const RafdbService_ClientDeleteDb_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _RafdbService_OpenIterator_presult__isset {
-  _RafdbService_OpenIterator_presult__isset() : success(false) {}
+typedef struct _RafdbService_ClientDeleteDb_presult__isset {
+  _RafdbService_ClientDeleteDb_presult__isset() : success(false) {}
   bool success;
-} _RafdbService_OpenIterator_presult__isset;
+} _RafdbService_ClientDeleteDb_presult__isset;
 
-class RafdbService_OpenIterator_presult {
+class RafdbService_ClientDeleteDb_presult {
  public:
 
 
-  virtual ~RafdbService_OpenIterator_presult() throw() {}
+  virtual ~RafdbService_ClientDeleteDb_presult() throw() {}
 
-  int32_t* success;
+  ErrInfoThr* success;
 
-  _RafdbService_OpenIterator_presult__isset __isset;
+  _RafdbService_ClientDeleteDb_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _RafdbService_CloseIterator_args__isset {
-  _RafdbService_CloseIterator_args__isset() : itID(false) {}
-  bool itID;
-} _RafdbService_CloseIterator_args__isset;
-
-class RafdbService_CloseIterator_args {
- public:
-
-  RafdbService_CloseIterator_args() : itID(0) {
-  }
-
-  virtual ~RafdbService_CloseIterator_args() throw() {}
-
-  int32_t itID;
-
-  _RafdbService_CloseIterator_args__isset __isset;
-
-  bool operator == (const RafdbService_CloseIterator_args & rhs) const
-  {
-    if (!(itID == rhs.itID))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_CloseIterator_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_CloseIterator_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RafdbService_CloseIterator_pargs {
- public:
-
-
-  virtual ~RafdbService_CloseIterator_pargs() throw() {}
-
-  const int32_t* itID;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_CloseIterator_result__isset {
-  _RafdbService_CloseIterator_result__isset() : success(false) {}
-  bool success;
-} _RafdbService_CloseIterator_result__isset;
-
-class RafdbService_CloseIterator_result {
- public:
-
-  RafdbService_CloseIterator_result() : success(0) {
-  }
-
-  virtual ~RafdbService_CloseIterator_result() throw() {}
-
-  bool success;
-
-  _RafdbService_CloseIterator_result__isset __isset;
-
-  bool operator == (const RafdbService_CloseIterator_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_CloseIterator_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_CloseIterator_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_CloseIterator_presult__isset {
-  _RafdbService_CloseIterator_presult__isset() : success(false) {}
-  bool success;
-} _RafdbService_CloseIterator_presult__isset;
-
-class RafdbService_CloseIterator_presult {
- public:
-
-
-  virtual ~RafdbService_CloseIterator_presult() throw() {}
-
-  bool* success;
-
-  _RafdbService_CloseIterator_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RafdbService_SeekToFirst_args__isset {
-  _RafdbService_SeekToFirst_args__isset() : itID(false) {}
-  bool itID;
-} _RafdbService_SeekToFirst_args__isset;
-
-class RafdbService_SeekToFirst_args {
- public:
-
-  RafdbService_SeekToFirst_args() : itID(0) {
-  }
-
-  virtual ~RafdbService_SeekToFirst_args() throw() {}
-
-  int32_t itID;
-
-  _RafdbService_SeekToFirst_args__isset __isset;
-
-  bool operator == (const RafdbService_SeekToFirst_args & rhs) const
-  {
-    if (!(itID == rhs.itID))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_SeekToFirst_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_SeekToFirst_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RafdbService_SeekToFirst_pargs {
- public:
-
-
-  virtual ~RafdbService_SeekToFirst_pargs() throw() {}
-
-  const int32_t* itID;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_SeekToFirst_result__isset {
-  _RafdbService_SeekToFirst_result__isset() : success(false) {}
-  bool success;
-} _RafdbService_SeekToFirst_result__isset;
-
-class RafdbService_SeekToFirst_result {
- public:
-
-  RafdbService_SeekToFirst_result() : success(0) {
-  }
-
-  virtual ~RafdbService_SeekToFirst_result() throw() {}
-
-  bool success;
-
-  _RafdbService_SeekToFirst_result__isset __isset;
-
-  bool operator == (const RafdbService_SeekToFirst_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_SeekToFirst_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_SeekToFirst_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_SeekToFirst_presult__isset {
-  _RafdbService_SeekToFirst_presult__isset() : success(false) {}
-  bool success;
-} _RafdbService_SeekToFirst_presult__isset;
-
-class RafdbService_SeekToFirst_presult {
- public:
-
-
-  virtual ~RafdbService_SeekToFirst_presult() throw() {}
-
-  bool* success;
-
-  _RafdbService_SeekToFirst_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RafdbService_SeekToLast_args__isset {
-  _RafdbService_SeekToLast_args__isset() : itID(false) {}
-  bool itID;
-} _RafdbService_SeekToLast_args__isset;
-
-class RafdbService_SeekToLast_args {
- public:
-
-  RafdbService_SeekToLast_args() : itID(0) {
-  }
-
-  virtual ~RafdbService_SeekToLast_args() throw() {}
-
-  int32_t itID;
-
-  _RafdbService_SeekToLast_args__isset __isset;
-
-  bool operator == (const RafdbService_SeekToLast_args & rhs) const
-  {
-    if (!(itID == rhs.itID))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_SeekToLast_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_SeekToLast_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RafdbService_SeekToLast_pargs {
- public:
-
-
-  virtual ~RafdbService_SeekToLast_pargs() throw() {}
-
-  const int32_t* itID;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_SeekToLast_result__isset {
-  _RafdbService_SeekToLast_result__isset() : success(false) {}
-  bool success;
-} _RafdbService_SeekToLast_result__isset;
-
-class RafdbService_SeekToLast_result {
- public:
-
-  RafdbService_SeekToLast_result() : success(0) {
-  }
-
-  virtual ~RafdbService_SeekToLast_result() throw() {}
-
-  bool success;
-
-  _RafdbService_SeekToLast_result__isset __isset;
-
-  bool operator == (const RafdbService_SeekToLast_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_SeekToLast_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_SeekToLast_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_SeekToLast_presult__isset {
-  _RafdbService_SeekToLast_presult__isset() : success(false) {}
-  bool success;
-} _RafdbService_SeekToLast_presult__isset;
-
-class RafdbService_SeekToLast_presult {
- public:
-
-
-  virtual ~RafdbService_SeekToLast_presult() throw() {}
-
-  bool* success;
-
-  _RafdbService_SeekToLast_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RafdbService_Valid_args__isset {
-  _RafdbService_Valid_args__isset() : itID(false) {}
-  bool itID;
-} _RafdbService_Valid_args__isset;
-
-class RafdbService_Valid_args {
- public:
-
-  RafdbService_Valid_args() : itID(0) {
-  }
-
-  virtual ~RafdbService_Valid_args() throw() {}
-
-  int32_t itID;
-
-  _RafdbService_Valid_args__isset __isset;
-
-  bool operator == (const RafdbService_Valid_args & rhs) const
-  {
-    if (!(itID == rhs.itID))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_Valid_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_Valid_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RafdbService_Valid_pargs {
- public:
-
-
-  virtual ~RafdbService_Valid_pargs() throw() {}
-
-  const int32_t* itID;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_Valid_result__isset {
-  _RafdbService_Valid_result__isset() : success(false) {}
-  bool success;
-} _RafdbService_Valid_result__isset;
-
-class RafdbService_Valid_result {
- public:
-
-  RafdbService_Valid_result() : success(0) {
-  }
-
-  virtual ~RafdbService_Valid_result() throw() {}
-
-  bool success;
-
-  _RafdbService_Valid_result__isset __isset;
-
-  bool operator == (const RafdbService_Valid_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_Valid_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_Valid_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_Valid_presult__isset {
-  _RafdbService_Valid_presult__isset() : success(false) {}
-  bool success;
-} _RafdbService_Valid_presult__isset;
-
-class RafdbService_Valid_presult {
- public:
-
-
-  virtual ~RafdbService_Valid_presult() throw() {}
-
-  bool* success;
-
-  _RafdbService_Valid_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RafdbService_Seek_args__isset {
-  _RafdbService_Seek_args__isset() : itID(false), target(false) {}
-  bool itID;
-  bool target;
-} _RafdbService_Seek_args__isset;
-
-class RafdbService_Seek_args {
- public:
-
-  RafdbService_Seek_args() : itID(0), target("") {
-  }
-
-  virtual ~RafdbService_Seek_args() throw() {}
-
-  int32_t itID;
-  std::string target;
-
-  _RafdbService_Seek_args__isset __isset;
-
-  bool operator == (const RafdbService_Seek_args & rhs) const
-  {
-    if (!(itID == rhs.itID))
-      return false;
-    if (!(target == rhs.target))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_Seek_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_Seek_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RafdbService_Seek_pargs {
- public:
-
-
-  virtual ~RafdbService_Seek_pargs() throw() {}
-
-  const int32_t* itID;
-  const std::string* target;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_Seek_result__isset {
-  _RafdbService_Seek_result__isset() : success(false) {}
-  bool success;
-} _RafdbService_Seek_result__isset;
-
-class RafdbService_Seek_result {
- public:
-
-  RafdbService_Seek_result() : success(0) {
-  }
-
-  virtual ~RafdbService_Seek_result() throw() {}
-
-  bool success;
-
-  _RafdbService_Seek_result__isset __isset;
-
-  bool operator == (const RafdbService_Seek_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_Seek_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_Seek_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_Seek_presult__isset {
-  _RafdbService_Seek_presult__isset() : success(false) {}
-  bool success;
-} _RafdbService_Seek_presult__isset;
-
-class RafdbService_Seek_presult {
- public:
-
-
-  virtual ~RafdbService_Seek_presult() throw() {}
-
-  bool* success;
-
-  _RafdbService_Seek_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RafdbService_NextKeys_args__isset {
-  _RafdbService_NextKeys_args__isset() : itID(false), number(false) {}
-  bool itID;
-  bool number;
-} _RafdbService_NextKeys_args__isset;
-
-class RafdbService_NextKeys_args {
- public:
-
-  RafdbService_NextKeys_args() : itID(0), number(0) {
-  }
-
-  virtual ~RafdbService_NextKeys_args() throw() {}
-
-  int32_t itID;
-  int32_t number;
-
-  _RafdbService_NextKeys_args__isset __isset;
-
-  bool operator == (const RafdbService_NextKeys_args & rhs) const
-  {
-    if (!(itID == rhs.itID))
-      return false;
-    if (!(number == rhs.number))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_NextKeys_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_NextKeys_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RafdbService_NextKeys_pargs {
- public:
-
-
-  virtual ~RafdbService_NextKeys_pargs() throw() {}
-
-  const int32_t* itID;
-  const int32_t* number;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_NextKeys_result__isset {
-  _RafdbService_NextKeys_result__isset() : success(false) {}
-  bool success;
-} _RafdbService_NextKeys_result__isset;
-
-class RafdbService_NextKeys_result {
- public:
-
-  RafdbService_NextKeys_result() {
-  }
-
-  virtual ~RafdbService_NextKeys_result() throw() {}
-
-  std::vector<std::string>  success;
-
-  _RafdbService_NextKeys_result__isset __isset;
-
-  bool operator == (const RafdbService_NextKeys_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_NextKeys_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_NextKeys_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_NextKeys_presult__isset {
-  _RafdbService_NextKeys_presult__isset() : success(false) {}
-  bool success;
-} _RafdbService_NextKeys_presult__isset;
-
-class RafdbService_NextKeys_presult {
- public:
-
-
-  virtual ~RafdbService_NextKeys_presult() throw() {}
-
-  std::vector<std::string> * success;
-
-  _RafdbService_NextKeys_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RafdbService_NextValues_args__isset {
-  _RafdbService_NextValues_args__isset() : itID(false), number(false) {}
-  bool itID;
-  bool number;
-} _RafdbService_NextValues_args__isset;
-
-class RafdbService_NextValues_args {
- public:
-
-  RafdbService_NextValues_args() : itID(0), number(0) {
-  }
-
-  virtual ~RafdbService_NextValues_args() throw() {}
-
-  int32_t itID;
-  int32_t number;
-
-  _RafdbService_NextValues_args__isset __isset;
-
-  bool operator == (const RafdbService_NextValues_args & rhs) const
-  {
-    if (!(itID == rhs.itID))
-      return false;
-    if (!(number == rhs.number))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_NextValues_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_NextValues_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RafdbService_NextValues_pargs {
- public:
-
-
-  virtual ~RafdbService_NextValues_pargs() throw() {}
-
-  const int32_t* itID;
-  const int32_t* number;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_NextValues_result__isset {
-  _RafdbService_NextValues_result__isset() : success(false) {}
-  bool success;
-} _RafdbService_NextValues_result__isset;
-
-class RafdbService_NextValues_result {
- public:
-
-  RafdbService_NextValues_result() {
-  }
-
-  virtual ~RafdbService_NextValues_result() throw() {}
-
-  std::vector<std::string>  success;
-
-  _RafdbService_NextValues_result__isset __isset;
-
-  bool operator == (const RafdbService_NextValues_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_NextValues_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_NextValues_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_NextValues_presult__isset {
-  _RafdbService_NextValues_presult__isset() : success(false) {}
-  bool success;
-} _RafdbService_NextValues_presult__isset;
-
-class RafdbService_NextValues_presult {
- public:
-
-
-  virtual ~RafdbService_NextValues_presult() throw() {}
-
-  std::vector<std::string> * success;
-
-  _RafdbService_NextValues_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RafdbService_NextPairs_args__isset {
-  _RafdbService_NextPairs_args__isset() : itID(false), number(false) {}
-  bool itID;
-  bool number;
-} _RafdbService_NextPairs_args__isset;
-
-class RafdbService_NextPairs_args {
- public:
-
-  RafdbService_NextPairs_args() : itID(0), number(0) {
-  }
-
-  virtual ~RafdbService_NextPairs_args() throw() {}
-
-  int32_t itID;
-  int32_t number;
-
-  _RafdbService_NextPairs_args__isset __isset;
-
-  bool operator == (const RafdbService_NextPairs_args & rhs) const
-  {
-    if (!(itID == rhs.itID))
-      return false;
-    if (!(number == rhs.number))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_NextPairs_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_NextPairs_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RafdbService_NextPairs_pargs {
- public:
-
-
-  virtual ~RafdbService_NextPairs_pargs() throw() {}
-
-  const int32_t* itID;
-  const int32_t* number;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_NextPairs_result__isset {
-  _RafdbService_NextPairs_result__isset() : success(false) {}
-  bool success;
-} _RafdbService_NextPairs_result__isset;
-
-class RafdbService_NextPairs_result {
- public:
-
-  RafdbService_NextPairs_result() {
-  }
-
-  virtual ~RafdbService_NextPairs_result() throw() {}
-
-  std::vector<Pair>  success;
-
-  _RafdbService_NextPairs_result__isset __isset;
-
-  bool operator == (const RafdbService_NextPairs_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RafdbService_NextPairs_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RafdbService_NextPairs_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RafdbService_NextPairs_presult__isset {
-  _RafdbService_NextPairs_presult__isset() : success(false) {}
-  bool success;
-} _RafdbService_NextPairs_presult__isset;
-
-class RafdbService_NextPairs_presult {
- public:
-
-
-  virtual ~RafdbService_NextPairs_presult() throw() {}
-
-  std::vector<Pair> * success;
-
-  _RafdbService_NextPairs_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RafdbService_DeleteDatabase_args__isset {
-  _RafdbService_DeleteDatabase_args__isset() : dbname(false) {}
+typedef struct _RafdbService_ClientGetDbRecordCount_args__isset {
+  _RafdbService_ClientGetDbRecordCount_args__isset() : dbname(false) {}
   bool dbname;
-} _RafdbService_DeleteDatabase_args__isset;
+} _RafdbService_ClientGetDbRecordCount_args__isset;
 
-class RafdbService_DeleteDatabase_args {
+class RafdbService_ClientGetDbRecordCount_args {
  public:
 
-  RafdbService_DeleteDatabase_args() : dbname("") {
+  RafdbService_ClientGetDbRecordCount_args() : dbname("") {
   }
 
-  virtual ~RafdbService_DeleteDatabase_args() throw() {}
+  virtual ~RafdbService_ClientGetDbRecordCount_args() throw() {}
 
   std::string dbname;
 
-  _RafdbService_DeleteDatabase_args__isset __isset;
+  _RafdbService_ClientGetDbRecordCount_args__isset __isset;
 
-  bool operator == (const RafdbService_DeleteDatabase_args & rhs) const
+  bool operator == (const RafdbService_ClientGetDbRecordCount_args & rhs) const
   {
     if (!(dbname == rhs.dbname))
       return false;
     return true;
   }
-  bool operator != (const RafdbService_DeleteDatabase_args &rhs) const {
+  bool operator != (const RafdbService_ClientGetDbRecordCount_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_DeleteDatabase_args & ) const;
+  bool operator < (const RafdbService_ClientGetDbRecordCount_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -1730,11 +528,11 @@ class RafdbService_DeleteDatabase_args {
 };
 
 
-class RafdbService_DeleteDatabase_pargs {
+class RafdbService_ClientGetDbRecordCount_pargs {
  public:
 
 
-  virtual ~RafdbService_DeleteDatabase_pargs() throw() {}
+  virtual ~RafdbService_ClientGetDbRecordCount_pargs() throw() {}
 
   const std::string* dbname;
 
@@ -1742,95 +540,95 @@ class RafdbService_DeleteDatabase_pargs {
 
 };
 
-typedef struct _RafdbService_DeleteDatabase_result__isset {
-  _RafdbService_DeleteDatabase_result__isset() : success(false) {}
+typedef struct _RafdbService_ClientGetDbRecordCount_result__isset {
+  _RafdbService_ClientGetDbRecordCount_result__isset() : success(false) {}
   bool success;
-} _RafdbService_DeleteDatabase_result__isset;
+} _RafdbService_ClientGetDbRecordCount_result__isset;
 
-class RafdbService_DeleteDatabase_result {
+class RafdbService_ClientGetDbRecordCount_result {
  public:
 
-  RafdbService_DeleteDatabase_result() : success(0) {
+  RafdbService_ClientGetDbRecordCount_result() {
   }
 
-  virtual ~RafdbService_DeleteDatabase_result() throw() {}
+  virtual ~RafdbService_ClientGetDbRecordCount_result() throw() {}
 
-  bool success;
+  ResIntInfo success;
 
-  _RafdbService_DeleteDatabase_result__isset __isset;
+  _RafdbService_ClientGetDbRecordCount_result__isset __isset;
 
-  bool operator == (const RafdbService_DeleteDatabase_result & rhs) const
+  bool operator == (const RafdbService_ClientGetDbRecordCount_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const RafdbService_DeleteDatabase_result &rhs) const {
+  bool operator != (const RafdbService_ClientGetDbRecordCount_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_DeleteDatabase_result & ) const;
+  bool operator < (const RafdbService_ClientGetDbRecordCount_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _RafdbService_DeleteDatabase_presult__isset {
-  _RafdbService_DeleteDatabase_presult__isset() : success(false) {}
+typedef struct _RafdbService_ClientGetDbRecordCount_presult__isset {
+  _RafdbService_ClientGetDbRecordCount_presult__isset() : success(false) {}
   bool success;
-} _RafdbService_DeleteDatabase_presult__isset;
+} _RafdbService_ClientGetDbRecordCount_presult__isset;
 
-class RafdbService_DeleteDatabase_presult {
+class RafdbService_ClientGetDbRecordCount_presult {
  public:
 
 
-  virtual ~RafdbService_DeleteDatabase_presult() throw() {}
+  virtual ~RafdbService_ClientGetDbRecordCount_presult() throw() {}
 
-  bool* success;
+  ResIntInfo* success;
 
-  _RafdbService_DeleteDatabase_presult__isset __isset;
+  _RafdbService_ClientGetDbRecordCount_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
 };
 
-typedef struct _RafdbService_LSet_args__isset {
-  _RafdbService_LSet_args__isset() : dbname(false), key(false), value(false) {}
+typedef struct _RafdbService_ClientPushRecordV2_args__isset {
+  _RafdbService_ClientPushRecordV2_args__isset() : dbname(false), fields(false), values(false) {}
   bool dbname;
-  bool key;
-  bool value;
-} _RafdbService_LSet_args__isset;
+  bool fields;
+  bool values;
+} _RafdbService_ClientPushRecordV2_args__isset;
 
-class RafdbService_LSet_args {
+class RafdbService_ClientPushRecordV2_args {
  public:
 
-  RafdbService_LSet_args() : dbname(""), key(""), value("") {
+  RafdbService_ClientPushRecordV2_args() : dbname(""), fields(""), values("") {
   }
 
-  virtual ~RafdbService_LSet_args() throw() {}
+  virtual ~RafdbService_ClientPushRecordV2_args() throw() {}
 
   std::string dbname;
-  std::string key;
-  std::string value;
+  std::string fields;
+  std::string values;
 
-  _RafdbService_LSet_args__isset __isset;
+  _RafdbService_ClientPushRecordV2_args__isset __isset;
 
-  bool operator == (const RafdbService_LSet_args & rhs) const
+  bool operator == (const RafdbService_ClientPushRecordV2_args & rhs) const
   {
     if (!(dbname == rhs.dbname))
       return false;
-    if (!(key == rhs.key))
+    if (!(fields == rhs.fields))
       return false;
-    if (!(value == rhs.value))
+    if (!(values == rhs.values))
       return false;
     return true;
   }
-  bool operator != (const RafdbService_LSet_args &rhs) const {
+  bool operator != (const RafdbService_ClientPushRecordV2_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_LSet_args & ) const;
+  bool operator < (const RafdbService_ClientPushRecordV2_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -1838,68 +636,598 @@ class RafdbService_LSet_args {
 };
 
 
-class RafdbService_LSet_pargs {
+class RafdbService_ClientPushRecordV2_pargs {
  public:
 
 
-  virtual ~RafdbService_LSet_pargs() throw() {}
+  virtual ~RafdbService_ClientPushRecordV2_pargs() throw() {}
 
   const std::string* dbname;
-  const std::string* key;
-  const std::string* value;
+  const std::string* fields;
+  const std::string* values;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _RafdbService_LSet_result__isset {
-  _RafdbService_LSet_result__isset() : success(false) {}
+typedef struct _RafdbService_ClientPushRecordV2_result__isset {
+  _RafdbService_ClientPushRecordV2_result__isset() : success(false) {}
   bool success;
-} _RafdbService_LSet_result__isset;
+} _RafdbService_ClientPushRecordV2_result__isset;
 
-class RafdbService_LSet_result {
+class RafdbService_ClientPushRecordV2_result {
  public:
 
-  RafdbService_LSet_result() : success(0) {
+  RafdbService_ClientPushRecordV2_result() {
   }
 
-  virtual ~RafdbService_LSet_result() throw() {}
+  virtual ~RafdbService_ClientPushRecordV2_result() throw() {}
 
-  bool success;
+  ResIntInfo success;
 
-  _RafdbService_LSet_result__isset __isset;
+  _RafdbService_ClientPushRecordV2_result__isset __isset;
 
-  bool operator == (const RafdbService_LSet_result & rhs) const
+  bool operator == (const RafdbService_ClientPushRecordV2_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
     return true;
   }
-  bool operator != (const RafdbService_LSet_result &rhs) const {
+  bool operator != (const RafdbService_ClientPushRecordV2_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const RafdbService_LSet_result & ) const;
+  bool operator < (const RafdbService_ClientPushRecordV2_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _RafdbService_LSet_presult__isset {
-  _RafdbService_LSet_presult__isset() : success(false) {}
+typedef struct _RafdbService_ClientPushRecordV2_presult__isset {
+  _RafdbService_ClientPushRecordV2_presult__isset() : success(false) {}
   bool success;
-} _RafdbService_LSet_presult__isset;
+} _RafdbService_ClientPushRecordV2_presult__isset;
 
-class RafdbService_LSet_presult {
+class RafdbService_ClientPushRecordV2_presult {
  public:
 
 
-  virtual ~RafdbService_LSet_presult() throw() {}
+  virtual ~RafdbService_ClientPushRecordV2_presult() throw() {}
 
-  bool* success;
+  ResIntInfo* success;
 
-  _RafdbService_LSet_presult__isset __isset;
+  _RafdbService_ClientPushRecordV2_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RafdbService_ClientRetrieveRecordsV2_args__isset {
+  _RafdbService_ClientRetrieveRecordsV2_args__isset() : dbname(false), fields(false), wherestmt(false), min_sim(false), max_rec(false) {}
+  bool dbname;
+  bool fields;
+  bool wherestmt;
+  bool min_sim;
+  bool max_rec;
+} _RafdbService_ClientRetrieveRecordsV2_args__isset;
+
+class RafdbService_ClientRetrieveRecordsV2_args {
+ public:
+
+  RafdbService_ClientRetrieveRecordsV2_args() : dbname(""), fields(""), wherestmt(""), min_sim(0), max_rec(0) {
+  }
+
+  virtual ~RafdbService_ClientRetrieveRecordsV2_args() throw() {}
+
+  std::string dbname;
+  std::string fields;
+  std::string wherestmt;
+  double min_sim;
+  int64_t max_rec;
+
+  _RafdbService_ClientRetrieveRecordsV2_args__isset __isset;
+
+  bool operator == (const RafdbService_ClientRetrieveRecordsV2_args & rhs) const
+  {
+    if (!(dbname == rhs.dbname))
+      return false;
+    if (!(fields == rhs.fields))
+      return false;
+    if (!(wherestmt == rhs.wherestmt))
+      return false;
+    if (!(min_sim == rhs.min_sim))
+      return false;
+    if (!(max_rec == rhs.max_rec))
+      return false;
+    return true;
+  }
+  bool operator != (const RafdbService_ClientRetrieveRecordsV2_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_ClientRetrieveRecordsV2_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RafdbService_ClientRetrieveRecordsV2_pargs {
+ public:
+
+
+  virtual ~RafdbService_ClientRetrieveRecordsV2_pargs() throw() {}
+
+  const std::string* dbname;
+  const std::string* fields;
+  const std::string* wherestmt;
+  const double* min_sim;
+  const int64_t* max_rec;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_ClientRetrieveRecordsV2_result__isset {
+  _RafdbService_ClientRetrieveRecordsV2_result__isset() : success(false) {}
+  bool success;
+} _RafdbService_ClientRetrieveRecordsV2_result__isset;
+
+class RafdbService_ClientRetrieveRecordsV2_result {
+ public:
+
+  RafdbService_ClientRetrieveRecordsV2_result() {
+  }
+
+  virtual ~RafdbService_ClientRetrieveRecordsV2_result() throw() {}
+
+  RetriveRecords success;
+
+  _RafdbService_ClientRetrieveRecordsV2_result__isset __isset;
+
+  bool operator == (const RafdbService_ClientRetrieveRecordsV2_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RafdbService_ClientRetrieveRecordsV2_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_ClientRetrieveRecordsV2_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_ClientRetrieveRecordsV2_presult__isset {
+  _RafdbService_ClientRetrieveRecordsV2_presult__isset() : success(false) {}
+  bool success;
+} _RafdbService_ClientRetrieveRecordsV2_presult__isset;
+
+class RafdbService_ClientRetrieveRecordsV2_presult {
+ public:
+
+
+  virtual ~RafdbService_ClientRetrieveRecordsV2_presult() throw() {}
+
+  RetriveRecords* success;
+
+  _RafdbService_ClientRetrieveRecordsV2_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RafdbService_ClientDeleteRecord_args__isset {
+  _RafdbService_ClientDeleteRecord_args__isset() : dbname(false), index(false) {}
+  bool dbname;
+  bool index;
+} _RafdbService_ClientDeleteRecord_args__isset;
+
+class RafdbService_ClientDeleteRecord_args {
+ public:
+
+  RafdbService_ClientDeleteRecord_args() : dbname(""), index(0) {
+  }
+
+  virtual ~RafdbService_ClientDeleteRecord_args() throw() {}
+
+  std::string dbname;
+  int64_t index;
+
+  _RafdbService_ClientDeleteRecord_args__isset __isset;
+
+  bool operator == (const RafdbService_ClientDeleteRecord_args & rhs) const
+  {
+    if (!(dbname == rhs.dbname))
+      return false;
+    if (!(index == rhs.index))
+      return false;
+    return true;
+  }
+  bool operator != (const RafdbService_ClientDeleteRecord_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_ClientDeleteRecord_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RafdbService_ClientDeleteRecord_pargs {
+ public:
+
+
+  virtual ~RafdbService_ClientDeleteRecord_pargs() throw() {}
+
+  const std::string* dbname;
+  const int64_t* index;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_ClientDeleteRecord_result__isset {
+  _RafdbService_ClientDeleteRecord_result__isset() : success(false) {}
+  bool success;
+} _RafdbService_ClientDeleteRecord_result__isset;
+
+class RafdbService_ClientDeleteRecord_result {
+ public:
+
+  RafdbService_ClientDeleteRecord_result() {
+  }
+
+  virtual ~RafdbService_ClientDeleteRecord_result() throw() {}
+
+  ErrInfoThr success;
+
+  _RafdbService_ClientDeleteRecord_result__isset __isset;
+
+  bool operator == (const RafdbService_ClientDeleteRecord_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RafdbService_ClientDeleteRecord_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_ClientDeleteRecord_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_ClientDeleteRecord_presult__isset {
+  _RafdbService_ClientDeleteRecord_presult__isset() : success(false) {}
+  bool success;
+} _RafdbService_ClientDeleteRecord_presult__isset;
+
+class RafdbService_ClientDeleteRecord_presult {
+ public:
+
+
+  virtual ~RafdbService_ClientDeleteRecord_presult() throw() {}
+
+  ErrInfoThr* success;
+
+  _RafdbService_ClientDeleteRecord_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RafdbService_ClientDeleteRecordWs_args__isset {
+  _RafdbService_ClientDeleteRecordWs_args__isset() : dbname(false), wherestmt(false) {}
+  bool dbname;
+  bool wherestmt;
+} _RafdbService_ClientDeleteRecordWs_args__isset;
+
+class RafdbService_ClientDeleteRecordWs_args {
+ public:
+
+  RafdbService_ClientDeleteRecordWs_args() : dbname(""), wherestmt("") {
+  }
+
+  virtual ~RafdbService_ClientDeleteRecordWs_args() throw() {}
+
+  std::string dbname;
+  std::string wherestmt;
+
+  _RafdbService_ClientDeleteRecordWs_args__isset __isset;
+
+  bool operator == (const RafdbService_ClientDeleteRecordWs_args & rhs) const
+  {
+    if (!(dbname == rhs.dbname))
+      return false;
+    if (!(wherestmt == rhs.wherestmt))
+      return false;
+    return true;
+  }
+  bool operator != (const RafdbService_ClientDeleteRecordWs_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_ClientDeleteRecordWs_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RafdbService_ClientDeleteRecordWs_pargs {
+ public:
+
+
+  virtual ~RafdbService_ClientDeleteRecordWs_pargs() throw() {}
+
+  const std::string* dbname;
+  const std::string* wherestmt;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_ClientDeleteRecordWs_result__isset {
+  _RafdbService_ClientDeleteRecordWs_result__isset() : success(false) {}
+  bool success;
+} _RafdbService_ClientDeleteRecordWs_result__isset;
+
+class RafdbService_ClientDeleteRecordWs_result {
+ public:
+
+  RafdbService_ClientDeleteRecordWs_result() {
+  }
+
+  virtual ~RafdbService_ClientDeleteRecordWs_result() throw() {}
+
+  ErrInfoThr success;
+
+  _RafdbService_ClientDeleteRecordWs_result__isset __isset;
+
+  bool operator == (const RafdbService_ClientDeleteRecordWs_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RafdbService_ClientDeleteRecordWs_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_ClientDeleteRecordWs_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_ClientDeleteRecordWs_presult__isset {
+  _RafdbService_ClientDeleteRecordWs_presult__isset() : success(false) {}
+  bool success;
+} _RafdbService_ClientDeleteRecordWs_presult__isset;
+
+class RafdbService_ClientDeleteRecordWs_presult {
+ public:
+
+
+  virtual ~RafdbService_ClientDeleteRecordWs_presult() throw() {}
+
+  ErrInfoThr* success;
+
+  _RafdbService_ClientDeleteRecordWs_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RafdbService_ClientDbScanRepair_args__isset {
+  _RafdbService_ClientDbScanRepair_args__isset() : dbname(false) {}
+  bool dbname;
+} _RafdbService_ClientDbScanRepair_args__isset;
+
+class RafdbService_ClientDbScanRepair_args {
+ public:
+
+  RafdbService_ClientDbScanRepair_args() : dbname("") {
+  }
+
+  virtual ~RafdbService_ClientDbScanRepair_args() throw() {}
+
+  std::string dbname;
+
+  _RafdbService_ClientDbScanRepair_args__isset __isset;
+
+  bool operator == (const RafdbService_ClientDbScanRepair_args & rhs) const
+  {
+    if (!(dbname == rhs.dbname))
+      return false;
+    return true;
+  }
+  bool operator != (const RafdbService_ClientDbScanRepair_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_ClientDbScanRepair_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RafdbService_ClientDbScanRepair_pargs {
+ public:
+
+
+  virtual ~RafdbService_ClientDbScanRepair_pargs() throw() {}
+
+  const std::string* dbname;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_ClientDbScanRepair_result__isset {
+  _RafdbService_ClientDbScanRepair_result__isset() : success(false) {}
+  bool success;
+} _RafdbService_ClientDbScanRepair_result__isset;
+
+class RafdbService_ClientDbScanRepair_result {
+ public:
+
+  RafdbService_ClientDbScanRepair_result() {
+  }
+
+  virtual ~RafdbService_ClientDbScanRepair_result() throw() {}
+
+  ResIntInfo success;
+
+  _RafdbService_ClientDbScanRepair_result__isset __isset;
+
+  bool operator == (const RafdbService_ClientDbScanRepair_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RafdbService_ClientDbScanRepair_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_ClientDbScanRepair_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_ClientDbScanRepair_presult__isset {
+  _RafdbService_ClientDbScanRepair_presult__isset() : success(false) {}
+  bool success;
+} _RafdbService_ClientDbScanRepair_presult__isset;
+
+class RafdbService_ClientDbScanRepair_presult {
+ public:
+
+
+  virtual ~RafdbService_ClientDbScanRepair_presult() throw() {}
+
+  ResIntInfo* success;
+
+  _RafdbService_ClientDbScanRepair_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RafdbService_ClientEnumDbColumns_args__isset {
+  _RafdbService_ClientEnumDbColumns_args__isset() : dbname(false) {}
+  bool dbname;
+} _RafdbService_ClientEnumDbColumns_args__isset;
+
+class RafdbService_ClientEnumDbColumns_args {
+ public:
+
+  RafdbService_ClientEnumDbColumns_args() : dbname("") {
+  }
+
+  virtual ~RafdbService_ClientEnumDbColumns_args() throw() {}
+
+  std::string dbname;
+
+  _RafdbService_ClientEnumDbColumns_args__isset __isset;
+
+  bool operator == (const RafdbService_ClientEnumDbColumns_args & rhs) const
+  {
+    if (!(dbname == rhs.dbname))
+      return false;
+    return true;
+  }
+  bool operator != (const RafdbService_ClientEnumDbColumns_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_ClientEnumDbColumns_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RafdbService_ClientEnumDbColumns_pargs {
+ public:
+
+
+  virtual ~RafdbService_ClientEnumDbColumns_pargs() throw() {}
+
+  const std::string* dbname;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_ClientEnumDbColumns_result__isset {
+  _RafdbService_ClientEnumDbColumns_result__isset() : success(false) {}
+  bool success;
+} _RafdbService_ClientEnumDbColumns_result__isset;
+
+class RafdbService_ClientEnumDbColumns_result {
+ public:
+
+  RafdbService_ClientEnumDbColumns_result() {
+  }
+
+  virtual ~RafdbService_ClientEnumDbColumns_result() throw() {}
+
+  ResIntInfo success;
+
+  _RafdbService_ClientEnumDbColumns_result__isset __isset;
+
+  bool operator == (const RafdbService_ClientEnumDbColumns_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RafdbService_ClientEnumDbColumns_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_ClientEnumDbColumns_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_ClientEnumDbColumns_presult__isset {
+  _RafdbService_ClientEnumDbColumns_presult__isset() : success(false) {}
+  bool success;
+} _RafdbService_ClientEnumDbColumns_presult__isset;
+
+class RafdbService_ClientEnumDbColumns_presult {
+ public:
+
+
+  virtual ~RafdbService_ClientEnumDbColumns_presult() throw() {}
+
+  ResIntInfo* success;
+
+  _RafdbService_ClientEnumDbColumns_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -2170,6 +1498,96 @@ class RafdbService_GetLeaderId_presult {
   int32_t* success;
 
   _RafdbService_GetLeaderId_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+
+class RafdbService_GetCluserIPList_args {
+ public:
+
+  RafdbService_GetCluserIPList_args() {
+  }
+
+  virtual ~RafdbService_GetCluserIPList_args() throw() {}
+
+
+  bool operator == (const RafdbService_GetCluserIPList_args & /* rhs */) const
+  {
+    return true;
+  }
+  bool operator != (const RafdbService_GetCluserIPList_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_GetCluserIPList_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RafdbService_GetCluserIPList_pargs {
+ public:
+
+
+  virtual ~RafdbService_GetCluserIPList_pargs() throw() {}
+
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_GetCluserIPList_result__isset {
+  _RafdbService_GetCluserIPList_result__isset() : success(false) {}
+  bool success;
+} _RafdbService_GetCluserIPList_result__isset;
+
+class RafdbService_GetCluserIPList_result {
+ public:
+
+  RafdbService_GetCluserIPList_result() : success("") {
+  }
+
+  virtual ~RafdbService_GetCluserIPList_result() throw() {}
+
+  std::string success;
+
+  _RafdbService_GetCluserIPList_result__isset __isset;
+
+  bool operator == (const RafdbService_GetCluserIPList_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RafdbService_GetCluserIPList_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RafdbService_GetCluserIPList_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RafdbService_GetCluserIPList_presult__isset {
+  _RafdbService_GetCluserIPList_presult__isset() : success(false) {}
+  bool success;
+} _RafdbService_GetCluserIPList_presult__isset;
+
+class RafdbService_GetCluserIPList_presult {
+ public:
+
+
+  virtual ~RafdbService_GetCluserIPList_presult() throw() {}
+
+  std::string* success;
+
+  _RafdbService_GetCluserIPList_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -2477,57 +1895,39 @@ class RafdbServiceClient : virtual public RafdbServiceIf {
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> getOutputProtocol() {
     return poprot_;
   }
-  bool Set(const std::string& dbname, const std::string& key, const std::string& value);
-  void send_Set(const std::string& dbname, const std::string& key, const std::string& value);
-  bool recv_Set();
-  bool MPSet(const std::string& dbname, const std::vector<Pair> & pairs);
-  void send_MPSet(const std::string& dbname, const std::vector<Pair> & pairs);
-  bool recv_MPSet();
-  void Get(std::string& _return, const std::string& dbname, const std::string& key);
-  void send_Get(const std::string& dbname, const std::string& key);
-  void recv_Get(std::string& _return);
-  void MGet(std::vector<std::string> & _return, const std::string& dbname, const std::vector<std::string> & keys);
-  void send_MGet(const std::string& dbname, const std::vector<std::string> & keys);
-  void recv_MGet(std::vector<std::string> & _return);
-  bool Delete(const std::string& dbname, const std::string& key);
-  void send_Delete(const std::string& dbname, const std::string& key);
-  bool recv_Delete();
-  bool MDelete(const std::string& dbname, const std::vector<std::string> & keys);
-  void send_MDelete(const std::string& dbname, const std::vector<std::string> & keys);
-  bool recv_MDelete();
-  int32_t OpenIterator(const std::string& dbname);
-  void send_OpenIterator(const std::string& dbname);
-  int32_t recv_OpenIterator();
-  bool CloseIterator(const int32_t itID);
-  void send_CloseIterator(const int32_t itID);
-  bool recv_CloseIterator();
-  bool SeekToFirst(const int32_t itID);
-  void send_SeekToFirst(const int32_t itID);
-  bool recv_SeekToFirst();
-  bool SeekToLast(const int32_t itID);
-  void send_SeekToLast(const int32_t itID);
-  bool recv_SeekToLast();
-  bool Valid(const int32_t itID);
-  void send_Valid(const int32_t itID);
-  bool recv_Valid();
-  bool Seek(const int32_t itID, const std::string& target);
-  void send_Seek(const int32_t itID, const std::string& target);
-  bool recv_Seek();
-  void NextKeys(std::vector<std::string> & _return, const int32_t itID, const int32_t number);
-  void send_NextKeys(const int32_t itID, const int32_t number);
-  void recv_NextKeys(std::vector<std::string> & _return);
-  void NextValues(std::vector<std::string> & _return, const int32_t itID, const int32_t number);
-  void send_NextValues(const int32_t itID, const int32_t number);
-  void recv_NextValues(std::vector<std::string> & _return);
-  void NextPairs(std::vector<Pair> & _return, const int32_t itID, const int32_t number);
-  void send_NextPairs(const int32_t itID, const int32_t number);
-  void recv_NextPairs(std::vector<Pair> & _return);
-  bool DeleteDatabase(const std::string& dbname);
-  void send_DeleteDatabase(const std::string& dbname);
-  bool recv_DeleteDatabase();
-  bool LSet(const std::string& dbname, const std::string& key, const std::string& value);
-  void send_LSet(const std::string& dbname, const std::string& key, const std::string& value);
-  bool recv_LSet();
+  void VseClientVersion(std::string& _return);
+  void send_VseClientVersion();
+  void recv_VseClientVersion(std::string& _return);
+  void ClientEnumAllDbs(ResDbnameList& _return);
+  void send_ClientEnumAllDbs();
+  void recv_ClientEnumAllDbs(ResDbnameList& _return);
+  void ClientCreateDbV2(ErrInfoThr& _return, const std::string& dbname, const std::string& fields);
+  void send_ClientCreateDbV2(const std::string& dbname, const std::string& fields);
+  void recv_ClientCreateDbV2(ErrInfoThr& _return);
+  void ClientDeleteDb(ErrInfoThr& _return, const std::string& dbname);
+  void send_ClientDeleteDb(const std::string& dbname);
+  void recv_ClientDeleteDb(ErrInfoThr& _return);
+  void ClientGetDbRecordCount(ResIntInfo& _return, const std::string& dbname);
+  void send_ClientGetDbRecordCount(const std::string& dbname);
+  void recv_ClientGetDbRecordCount(ResIntInfo& _return);
+  void ClientPushRecordV2(ResIntInfo& _return, const std::string& dbname, const std::string& fields, const std::string& values);
+  void send_ClientPushRecordV2(const std::string& dbname, const std::string& fields, const std::string& values);
+  void recv_ClientPushRecordV2(ResIntInfo& _return);
+  void ClientRetrieveRecordsV2(RetriveRecords& _return, const std::string& dbname, const std::string& fields, const std::string& wherestmt, const double min_sim, const int64_t max_rec);
+  void send_ClientRetrieveRecordsV2(const std::string& dbname, const std::string& fields, const std::string& wherestmt, const double min_sim, const int64_t max_rec);
+  void recv_ClientRetrieveRecordsV2(RetriveRecords& _return);
+  void ClientDeleteRecord(ErrInfoThr& _return, const std::string& dbname, const int64_t index);
+  void send_ClientDeleteRecord(const std::string& dbname, const int64_t index);
+  void recv_ClientDeleteRecord(ErrInfoThr& _return);
+  void ClientDeleteRecordWs(ErrInfoThr& _return, const std::string& dbname, const std::string& wherestmt);
+  void send_ClientDeleteRecordWs(const std::string& dbname, const std::string& wherestmt);
+  void recv_ClientDeleteRecordWs(ErrInfoThr& _return);
+  void ClientDbScanRepair(ResIntInfo& _return, const std::string& dbname);
+  void send_ClientDbScanRepair(const std::string& dbname);
+  void recv_ClientDbScanRepair(ResIntInfo& _return);
+  void ClientEnumDbColumns(ResIntInfo& _return, const std::string& dbname);
+  void send_ClientEnumDbColumns(const std::string& dbname);
+  void recv_ClientEnumDbColumns(ResIntInfo& _return);
   bool IsHealthy();
   void send_IsHealthy();
   bool recv_IsHealthy();
@@ -2537,6 +1937,9 @@ class RafdbServiceClient : virtual public RafdbServiceIf {
   int32_t GetLeaderId();
   void send_GetLeaderId();
   int32_t recv_GetLeaderId();
+  void GetCluserIPList(std::string& _return);
+  void send_GetCluserIPList();
+  void recv_GetCluserIPList(std::string& _return);
   void SendVote(const rafdb::Message& message);
   void send_SendVote(const rafdb::Message& message);
   void ReplyVote(const rafdb::Message& message);
@@ -2562,26 +1965,21 @@ class RafdbServiceProcessor : virtual public ::apache::thrift::TProcessor {
   virtual bool process_fn(::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, std::string& fname, int32_t seqid);
  private:
   std::map<std::string, void (RafdbServiceProcessor::*)(int32_t, ::apache::thrift::protocol::TProtocol*, ::apache::thrift::protocol::TProtocol*)> processMap_;
-  void process_Set(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_MPSet(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_Get(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_MGet(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_Delete(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_MDelete(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_OpenIterator(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_CloseIterator(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_SeekToFirst(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_SeekToLast(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_Valid(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_Seek(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_NextKeys(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_NextValues(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_NextPairs(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_DeleteDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_LSet(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_VseClientVersion(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_ClientEnumAllDbs(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_ClientCreateDbV2(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_ClientDeleteDb(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_ClientGetDbRecordCount(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_ClientPushRecordV2(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_ClientRetrieveRecordsV2(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_ClientDeleteRecord(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_ClientDeleteRecordWs(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_ClientDbScanRepair(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_ClientEnumDbColumns(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_IsHealthy(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_IsLeader(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_GetLeaderId(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_GetCluserIPList(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_SendVote(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_ReplyVote(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_SendHeartBeat(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
@@ -2591,26 +1989,21 @@ class RafdbServiceProcessor : virtual public ::apache::thrift::TProcessor {
  public:
   RafdbServiceProcessor(boost::shared_ptr<RafdbServiceIf> iface) :
     iface_(iface) {
-    processMap_["Set"] = &RafdbServiceProcessor::process_Set;
-    processMap_["MPSet"] = &RafdbServiceProcessor::process_MPSet;
-    processMap_["Get"] = &RafdbServiceProcessor::process_Get;
-    processMap_["MGet"] = &RafdbServiceProcessor::process_MGet;
-    processMap_["Delete"] = &RafdbServiceProcessor::process_Delete;
-    processMap_["MDelete"] = &RafdbServiceProcessor::process_MDelete;
-    processMap_["OpenIterator"] = &RafdbServiceProcessor::process_OpenIterator;
-    processMap_["CloseIterator"] = &RafdbServiceProcessor::process_CloseIterator;
-    processMap_["SeekToFirst"] = &RafdbServiceProcessor::process_SeekToFirst;
-    processMap_["SeekToLast"] = &RafdbServiceProcessor::process_SeekToLast;
-    processMap_["Valid"] = &RafdbServiceProcessor::process_Valid;
-    processMap_["Seek"] = &RafdbServiceProcessor::process_Seek;
-    processMap_["NextKeys"] = &RafdbServiceProcessor::process_NextKeys;
-    processMap_["NextValues"] = &RafdbServiceProcessor::process_NextValues;
-    processMap_["NextPairs"] = &RafdbServiceProcessor::process_NextPairs;
-    processMap_["DeleteDatabase"] = &RafdbServiceProcessor::process_DeleteDatabase;
-    processMap_["LSet"] = &RafdbServiceProcessor::process_LSet;
+    processMap_["VseClientVersion"] = &RafdbServiceProcessor::process_VseClientVersion;
+    processMap_["ClientEnumAllDbs"] = &RafdbServiceProcessor::process_ClientEnumAllDbs;
+    processMap_["ClientCreateDbV2"] = &RafdbServiceProcessor::process_ClientCreateDbV2;
+    processMap_["ClientDeleteDb"] = &RafdbServiceProcessor::process_ClientDeleteDb;
+    processMap_["ClientGetDbRecordCount"] = &RafdbServiceProcessor::process_ClientGetDbRecordCount;
+    processMap_["ClientPushRecordV2"] = &RafdbServiceProcessor::process_ClientPushRecordV2;
+    processMap_["ClientRetrieveRecordsV2"] = &RafdbServiceProcessor::process_ClientRetrieveRecordsV2;
+    processMap_["ClientDeleteRecord"] = &RafdbServiceProcessor::process_ClientDeleteRecord;
+    processMap_["ClientDeleteRecordWs"] = &RafdbServiceProcessor::process_ClientDeleteRecordWs;
+    processMap_["ClientDbScanRepair"] = &RafdbServiceProcessor::process_ClientDbScanRepair;
+    processMap_["ClientEnumDbColumns"] = &RafdbServiceProcessor::process_ClientEnumDbColumns;
     processMap_["IsHealthy"] = &RafdbServiceProcessor::process_IsHealthy;
     processMap_["IsLeader"] = &RafdbServiceProcessor::process_IsLeader;
     processMap_["GetLeaderId"] = &RafdbServiceProcessor::process_GetLeaderId;
+    processMap_["GetCluserIPList"] = &RafdbServiceProcessor::process_GetCluserIPList;
     processMap_["SendVote"] = &RafdbServiceProcessor::process_SendVote;
     processMap_["ReplyVote"] = &RafdbServiceProcessor::process_ReplyVote;
     processMap_["SendHeartBeat"] = &RafdbServiceProcessor::process_SendHeartBeat;
@@ -2635,194 +2028,134 @@ class RafdbServiceMultiface : virtual public RafdbServiceIf {
     ifaces_.push_back(iface);
   }
  public:
-  bool Set(const std::string& dbname, const std::string& key, const std::string& value) {
+  void VseClientVersion(std::string& _return) {
     uint32_t sz = ifaces_.size();
     for (uint32_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
-        return ifaces_[i]->Set(dbname, key, value);
-      } else {
-        ifaces_[i]->Set(dbname, key, value);
-      }
-    }
-  }
-
-  bool MPSet(const std::string& dbname, const std::vector<Pair> & pairs) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        return ifaces_[i]->MPSet(dbname, pairs);
-      } else {
-        ifaces_[i]->MPSet(dbname, pairs);
-      }
-    }
-  }
-
-  void Get(std::string& _return, const std::string& dbname, const std::string& key) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        ifaces_[i]->Get(_return, dbname, key);
+        ifaces_[i]->VseClientVersion(_return);
         return;
       } else {
-        ifaces_[i]->Get(_return, dbname, key);
+        ifaces_[i]->VseClientVersion(_return);
       }
     }
   }
 
-  void MGet(std::vector<std::string> & _return, const std::string& dbname, const std::vector<std::string> & keys) {
+  void ClientEnumAllDbs(ResDbnameList& _return) {
     uint32_t sz = ifaces_.size();
     for (uint32_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
-        ifaces_[i]->MGet(_return, dbname, keys);
+        ifaces_[i]->ClientEnumAllDbs(_return);
         return;
       } else {
-        ifaces_[i]->MGet(_return, dbname, keys);
+        ifaces_[i]->ClientEnumAllDbs(_return);
       }
     }
   }
 
-  bool Delete(const std::string& dbname, const std::string& key) {
+  void ClientCreateDbV2(ErrInfoThr& _return, const std::string& dbname, const std::string& fields) {
     uint32_t sz = ifaces_.size();
     for (uint32_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
-        return ifaces_[i]->Delete(dbname, key);
-      } else {
-        ifaces_[i]->Delete(dbname, key);
-      }
-    }
-  }
-
-  bool MDelete(const std::string& dbname, const std::vector<std::string> & keys) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        return ifaces_[i]->MDelete(dbname, keys);
-      } else {
-        ifaces_[i]->MDelete(dbname, keys);
-      }
-    }
-  }
-
-  int32_t OpenIterator(const std::string& dbname) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        return ifaces_[i]->OpenIterator(dbname);
-      } else {
-        ifaces_[i]->OpenIterator(dbname);
-      }
-    }
-  }
-
-  bool CloseIterator(const int32_t itID) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        return ifaces_[i]->CloseIterator(itID);
-      } else {
-        ifaces_[i]->CloseIterator(itID);
-      }
-    }
-  }
-
-  bool SeekToFirst(const int32_t itID) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        return ifaces_[i]->SeekToFirst(itID);
-      } else {
-        ifaces_[i]->SeekToFirst(itID);
-      }
-    }
-  }
-
-  bool SeekToLast(const int32_t itID) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        return ifaces_[i]->SeekToLast(itID);
-      } else {
-        ifaces_[i]->SeekToLast(itID);
-      }
-    }
-  }
-
-  bool Valid(const int32_t itID) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        return ifaces_[i]->Valid(itID);
-      } else {
-        ifaces_[i]->Valid(itID);
-      }
-    }
-  }
-
-  bool Seek(const int32_t itID, const std::string& target) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        return ifaces_[i]->Seek(itID, target);
-      } else {
-        ifaces_[i]->Seek(itID, target);
-      }
-    }
-  }
-
-  void NextKeys(std::vector<std::string> & _return, const int32_t itID, const int32_t number) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        ifaces_[i]->NextKeys(_return, itID, number);
+        ifaces_[i]->ClientCreateDbV2(_return, dbname, fields);
         return;
       } else {
-        ifaces_[i]->NextKeys(_return, itID, number);
+        ifaces_[i]->ClientCreateDbV2(_return, dbname, fields);
       }
     }
   }
 
-  void NextValues(std::vector<std::string> & _return, const int32_t itID, const int32_t number) {
+  void ClientDeleteDb(ErrInfoThr& _return, const std::string& dbname) {
     uint32_t sz = ifaces_.size();
     for (uint32_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
-        ifaces_[i]->NextValues(_return, itID, number);
+        ifaces_[i]->ClientDeleteDb(_return, dbname);
         return;
       } else {
-        ifaces_[i]->NextValues(_return, itID, number);
+        ifaces_[i]->ClientDeleteDb(_return, dbname);
       }
     }
   }
 
-  void NextPairs(std::vector<Pair> & _return, const int32_t itID, const int32_t number) {
+  void ClientGetDbRecordCount(ResIntInfo& _return, const std::string& dbname) {
     uint32_t sz = ifaces_.size();
     for (uint32_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
-        ifaces_[i]->NextPairs(_return, itID, number);
+        ifaces_[i]->ClientGetDbRecordCount(_return, dbname);
         return;
       } else {
-        ifaces_[i]->NextPairs(_return, itID, number);
+        ifaces_[i]->ClientGetDbRecordCount(_return, dbname);
       }
     }
   }
 
-  bool DeleteDatabase(const std::string& dbname) {
+  void ClientPushRecordV2(ResIntInfo& _return, const std::string& dbname, const std::string& fields, const std::string& values) {
     uint32_t sz = ifaces_.size();
     for (uint32_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
-        return ifaces_[i]->DeleteDatabase(dbname);
+        ifaces_[i]->ClientPushRecordV2(_return, dbname, fields, values);
+        return;
       } else {
-        ifaces_[i]->DeleteDatabase(dbname);
+        ifaces_[i]->ClientPushRecordV2(_return, dbname, fields, values);
       }
     }
   }
 
-  bool LSet(const std::string& dbname, const std::string& key, const std::string& value) {
+  void ClientRetrieveRecordsV2(RetriveRecords& _return, const std::string& dbname, const std::string& fields, const std::string& wherestmt, const double min_sim, const int64_t max_rec) {
     uint32_t sz = ifaces_.size();
     for (uint32_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
-        return ifaces_[i]->LSet(dbname, key, value);
+        ifaces_[i]->ClientRetrieveRecordsV2(_return, dbname, fields, wherestmt, min_sim, max_rec);
+        return;
       } else {
-        ifaces_[i]->LSet(dbname, key, value);
+        ifaces_[i]->ClientRetrieveRecordsV2(_return, dbname, fields, wherestmt, min_sim, max_rec);
+      }
+    }
+  }
+
+  void ClientDeleteRecord(ErrInfoThr& _return, const std::string& dbname, const int64_t index) {
+    uint32_t sz = ifaces_.size();
+    for (uint32_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        ifaces_[i]->ClientDeleteRecord(_return, dbname, index);
+        return;
+      } else {
+        ifaces_[i]->ClientDeleteRecord(_return, dbname, index);
+      }
+    }
+  }
+
+  void ClientDeleteRecordWs(ErrInfoThr& _return, const std::string& dbname, const std::string& wherestmt) {
+    uint32_t sz = ifaces_.size();
+    for (uint32_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        ifaces_[i]->ClientDeleteRecordWs(_return, dbname, wherestmt);
+        return;
+      } else {
+        ifaces_[i]->ClientDeleteRecordWs(_return, dbname, wherestmt);
+      }
+    }
+  }
+
+  void ClientDbScanRepair(ResIntInfo& _return, const std::string& dbname) {
+    uint32_t sz = ifaces_.size();
+    for (uint32_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        ifaces_[i]->ClientDbScanRepair(_return, dbname);
+        return;
+      } else {
+        ifaces_[i]->ClientDbScanRepair(_return, dbname);
+      }
+    }
+  }
+
+  void ClientEnumDbColumns(ResIntInfo& _return, const std::string& dbname) {
+    uint32_t sz = ifaces_.size();
+    for (uint32_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        ifaces_[i]->ClientEnumDbColumns(_return, dbname);
+        return;
+      } else {
+        ifaces_[i]->ClientEnumDbColumns(_return, dbname);
       }
     }
   }
@@ -2856,6 +2189,18 @@ class RafdbServiceMultiface : virtual public RafdbServiceIf {
         return ifaces_[i]->GetLeaderId();
       } else {
         ifaces_[i]->GetLeaderId();
+      }
+    }
+  }
+
+  void GetCluserIPList(std::string& _return) {
+    uint32_t sz = ifaces_.size();
+    for (uint32_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        ifaces_[i]->GetCluserIPList(_return);
+        return;
+      } else {
+        ifaces_[i]->GetCluserIPList(_return);
       }
     }
   }

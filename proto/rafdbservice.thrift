@@ -2,33 +2,68 @@ include "accord.thrift"
 
 namespace cpp rafdb
 
-struct Pair {
-    1:string key,
-    2:string value
+
+struct VseBufferThr {
+    1:string data,
+    //size不包含\0
+    2:i64 size
+}
+
+struct ErrInfoThr {
+    1:i32 code,
+    2:string errmsg
+}
+
+struct BufferArrayThr {
+    1:i32 nct,
+    2:list<VseBufferThr> buffers
+}
+
+
+//通用图搜库数据记录
+struct DataRecordThr {
+    1:i64 idx,    //record-index
+    2:double sim,      //feature compare similarity
+    3:list<BufferArrayThr> p_params
+}
+
+struct ResDbnameList {
+    1:list<BufferArrayThr> result,
+    2:ErrInfoThr error_info
+}
+
+struct ResIntInfo {
+    1:i64 result,
+    2:ErrInfoThr error_info
+}
+
+struct RetriveRecords {
+    1:i64 count,
+    2:list<DataRecordThr> data_records,
+    3:ErrInfoThr error_info
 }
 
 service RafdbService {
-    bool Set(1:string dbname, 2:string key, 3:string value),
-    bool MPSet(1:string dbname, 3:list<Pair> pairs),
-    string Get(1:string dbname, 3:string key),
-    list<string> MGet(1:string dbname, 2:list<string> keys),
-    bool Delete(1:string dbname, 2:string key),
-    bool MDelete(1:string dbname, 2:list<string> keys),
+//db interface
+    string VseClientVersion();//获取VseClient组件版本号
+    ResDbnameList ClientEnumAllDbs();//返回all数据库名列表
+    ErrInfoThr ClientCreateDbV2(1:string dbname, 2:string fields);
+    ErrInfoThr ClientDeleteDb(1:string dbname);
+    ResIntInfo ClientGetDbRecordCount(1:string dbname);
+    ResIntInfo ClientPushRecordV2(1:string dbname, 2:string fields, 3:string values);
+    RetriveRecords ClientRetrieveRecordsV2(1:string dbname, 2:string fields, 3:string wherestmt, 4:double min_sim, 5:i64 max_rec);
+    ErrInfoThr ClientDeleteRecord(1:string dbname, 2:i64 index);
+    ErrInfoThr ClientDeleteRecordWs(1:string dbname, 2:string wherestmt);
+    ResIntInfo ClientDbScanRepair(1:string dbname);
+    ResIntInfo ClientEnumDbColumns(1:string dbname);
 
-    i32 OpenIterator(1:string dbname), //return id > 0
-    bool CloseIterator(1:i32 itID),
-    bool SeekToFirst(1:i32 itID),
-    bool SeekToLast(1:i32 itID),
-    bool Valid(1:i32 itID),
-    bool Seek(1:i32 itID, 2:string target),
-    list<string> NextKeys(1:i32 itID, 2:i32 number),
-    list<string> NextValues(1:i32 itID, 2:i32 number),
-    list<Pair> NextPairs(1:i32 itID, 2:i32 number),
-    bool DeleteDatabase(1:string dbname),
-    bool LSet(1:string dbname, 2:string key, 3:string value);
+
     bool IsHealthy();
     bool IsLeader();
-    i32 GetLeaderId(); //for client
+    i32 GetLeaderId(); //for user
+    string GetCluserIPList(); //for user,192.168.14.146:10020:1,192.168.14.146:10021:2,192.168.14.146:10022:3
+
+//raft interface
     oneway void SendVote(1: accord.Message message);
     oneway void ReplyVote(1:  accord.Message message);
     oneway void SendHeartBeat(1:  accord.Message message);

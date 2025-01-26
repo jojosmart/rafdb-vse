@@ -22,89 +22,59 @@ class RafdbServiceHandler : virtual public RafdbServiceIf {
     // Your initialization goes here
   }
 
-  bool Set(const std::string& dbname, const std::string& key, const std::string& value) {
+  void VseClientVersion(std::string& _return) {
     // Your implementation goes here
-    printf("Set\n");
+    printf("VseClientVersion\n");
   }
 
-  bool MPSet(const std::string& dbname, const std::vector<Pair> & pairs) {
+  void ClientEnumAllDbs(ResDbnameList& _return) {
     // Your implementation goes here
-    printf("MPSet\n");
+    printf("ClientEnumAllDbs\n");
   }
 
-  void Get(std::string& _return, const std::string& dbname, const std::string& key) {
+  void ClientCreateDbV2(ErrInfoThr& _return, const std::string& dbname, const std::string& fields) {
     // Your implementation goes here
-    printf("Get\n");
+    printf("ClientCreateDbV2\n");
   }
 
-  void MGet(std::vector<std::string> & _return, const std::string& dbname, const std::vector<std::string> & keys) {
+  void ClientDeleteDb(ErrInfoThr& _return, const std::string& dbname) {
     // Your implementation goes here
-    printf("MGet\n");
+    printf("ClientDeleteDb\n");
   }
 
-  bool Delete(const std::string& dbname, const std::string& key) {
+  void ClientGetDbRecordCount(ResIntInfo& _return, const std::string& dbname) {
     // Your implementation goes here
-    printf("Delete\n");
+    printf("ClientGetDbRecordCount\n");
   }
 
-  bool MDelete(const std::string& dbname, const std::vector<std::string> & keys) {
+  void ClientPushRecordV2(ResIntInfo& _return, const std::string& dbname, const std::string& fields, const std::string& values) {
     // Your implementation goes here
-    printf("MDelete\n");
+    printf("ClientPushRecordV2\n");
   }
 
-  int32_t OpenIterator(const std::string& dbname) {
+  void ClientRetrieveRecordsV2(RetriveRecords& _return, const std::string& dbname, const std::string& fields, const std::string& wherestmt, const double min_sim, const int64_t max_rec) {
     // Your implementation goes here
-    printf("OpenIterator\n");
+    printf("ClientRetrieveRecordsV2\n");
   }
 
-  bool CloseIterator(const int32_t itID) {
+  void ClientDeleteRecord(ErrInfoThr& _return, const std::string& dbname, const int64_t index) {
     // Your implementation goes here
-    printf("CloseIterator\n");
+    printf("ClientDeleteRecord\n");
   }
 
-  bool SeekToFirst(const int32_t itID) {
+  void ClientDeleteRecordWs(ErrInfoThr& _return, const std::string& dbname, const std::string& wherestmt) {
     // Your implementation goes here
-    printf("SeekToFirst\n");
+    printf("ClientDeleteRecordWs\n");
   }
 
-  bool SeekToLast(const int32_t itID) {
+  void ClientDbScanRepair(ResIntInfo& _return, const std::string& dbname) {
     // Your implementation goes here
-    printf("SeekToLast\n");
+    printf("ClientDbScanRepair\n");
   }
 
-  bool Valid(const int32_t itID) {
+  void ClientEnumDbColumns(ResIntInfo& _return, const std::string& dbname) {
     // Your implementation goes here
-    printf("Valid\n");
-  }
-
-  bool Seek(const int32_t itID, const std::string& target) {
-    // Your implementation goes here
-    printf("Seek\n");
-  }
-
-  void NextKeys(std::vector<std::string> & _return, const int32_t itID, const int32_t number) {
-    // Your implementation goes here
-    printf("NextKeys\n");
-  }
-
-  void NextValues(std::vector<std::string> & _return, const int32_t itID, const int32_t number) {
-    // Your implementation goes here
-    printf("NextValues\n");
-  }
-
-  void NextPairs(std::vector<Pair> & _return, const int32_t itID, const int32_t number) {
-    // Your implementation goes here
-    printf("NextPairs\n");
-  }
-
-  bool DeleteDatabase(const std::string& dbname) {
-    // Your implementation goes here
-    printf("DeleteDatabase\n");
-  }
-
-  bool LSet(const std::string& dbname, const std::string& key, const std::string& value) {
-    // Your implementation goes here
-    printf("LSet\n");
+    printf("ClientEnumDbColumns\n");
   }
 
   bool IsHealthy() {
@@ -120,6 +90,11 @@ class RafdbServiceHandler : virtual public RafdbServiceIf {
   int32_t GetLeaderId() {
     // Your implementation goes here
     printf("GetLeaderId\n");
+  }
+
+  void GetCluserIPList(std::string& _return) {
+    // Your implementation goes here
+    printf("GetCluserIPList\n");
   }
 
   void SendVote(const rafdb::Message& message) {

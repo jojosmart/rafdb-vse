@@ -25,7 +25,7 @@ typedef struct VseBuffer{
 
 typedef struct ErrInfo{
     int code;
-	char errmsg[256 - 4];
+    char errmsg[256 - 4];
 }ErrInfo;
 
  //sdk网络错误

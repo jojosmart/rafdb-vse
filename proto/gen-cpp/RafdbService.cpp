@@ -7,7 +7,7 @@
 
 namespace rafdb {
 
-uint32_t RafdbService_Set_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_VseClientVersion_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -27,30 +27,6 @@ uint32_t RafdbService_Set_args::read(::apache::thrift::protocol::TProtocol* ipro
     }
     switch (fid)
     {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->dbname);
-          this->__isset.dbname = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->key);
-          this->__isset.key = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 3:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->value);
-          this->__isset.value = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
       default:
         xfer += iprot->skip(ftype);
         break;
@@ -63,413 +39,23 @@ uint32_t RafdbService_Set_args::read(::apache::thrift::protocol::TProtocol* ipro
   return xfer;
 }
 
-uint32_t RafdbService_Set_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_VseClientVersion_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_Set_args");
-  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString(this->dbname);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("key", ::apache::thrift::protocol::T_STRING, 2);
-  xfer += oprot->writeString(this->key);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("value", ::apache::thrift::protocol::T_STRING, 3);
-  xfer += oprot->writeString(this->value);
-  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeStructBegin("RafdbService_VseClientVersion_args");
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
 }
 
-uint32_t RafdbService_Set_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_VseClientVersion_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_Set_pargs");
-  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString((*(this->dbname)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("key", ::apache::thrift::protocol::T_STRING, 2);
-  xfer += oprot->writeString((*(this->key)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("value", ::apache::thrift::protocol::T_STRING, 3);
-  xfer += oprot->writeString((*(this->value)));
-  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeStructBegin("RafdbService_VseClientVersion_pargs");
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
 }
 
-uint32_t RafdbService_Set_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_Set_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RafdbService_Set_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
-    xfer += oprot->writeBool(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_Set_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_MPSet_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->dbname);
-          this->__isset.dbname = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 3:
-        if (ftype == ::apache::thrift::protocol::T_LIST) {
-          {
-            this->pairs.clear();
-            uint32_t _size0;
-            ::apache::thrift::protocol::TType _etype3;
-            iprot->readListBegin(_etype3, _size0);
-            this->pairs.resize(_size0);
-            uint32_t _i4;
-            for (_i4 = 0; _i4 < _size0; ++_i4)
-            {
-              xfer += this->pairs[_i4].read(iprot);
-            }
-            iprot->readListEnd();
-          }
-          this->__isset.pairs = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_MPSet_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_MPSet_args");
-  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString(this->dbname);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("pairs", ::apache::thrift::protocol::T_LIST, 3);
-  {
-    xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, this->pairs.size());
-    std::vector<Pair> ::const_iterator _iter5;
-    for (_iter5 = this->pairs.begin(); _iter5 != this->pairs.end(); ++_iter5)
-    {
-      xfer += (*_iter5).write(oprot);
-    }
-    xfer += oprot->writeListEnd();
-  }
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_MPSet_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_MPSet_pargs");
-  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString((*(this->dbname)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("pairs", ::apache::thrift::protocol::T_LIST, 3);
-  {
-    xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, (*(this->pairs)).size());
-    std::vector<Pair> ::const_iterator _iter6;
-    for (_iter6 = (*(this->pairs)).begin(); _iter6 != (*(this->pairs)).end(); ++_iter6)
-    {
-      xfer += (*_iter6).write(oprot);
-    }
-    xfer += oprot->writeListEnd();
-  }
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_MPSet_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_MPSet_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RafdbService_MPSet_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
-    xfer += oprot->writeBool(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_MPSet_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_Get_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->dbname);
-          this->__isset.dbname = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 3:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->key);
-          this->__isset.key = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_Get_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_Get_args");
-  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString(this->dbname);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("key", ::apache::thrift::protocol::T_STRING, 3);
-  xfer += oprot->writeString(this->key);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_Get_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_Get_pargs");
-  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString((*(this->dbname)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("key", ::apache::thrift::protocol::T_STRING, 3);
-  xfer += oprot->writeString((*(this->key)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_Get_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_VseClientVersion_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -509,11 +95,11 @@ uint32_t RafdbService_Get_result::read(::apache::thrift::protocol::TProtocol* ip
   return xfer;
 }
 
-uint32_t RafdbService_Get_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_VseClientVersion_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("RafdbService_Get_result");
+  xfer += oprot->writeStructBegin("RafdbService_VseClientVersion_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRING, 0);
@@ -525,7 +111,7 @@ uint32_t RafdbService_Get_result::write(::apache::thrift::protocol::TProtocol* o
   return xfer;
 }
 
-uint32_t RafdbService_Get_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_VseClientVersion_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -565,7 +151,7 @@ uint32_t RafdbService_Get_presult::read(::apache::thrift::protocol::TProtocol* i
   return xfer;
 }
 
-uint32_t RafdbService_MGet_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientEnumAllDbs_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -585,34 +171,6 @@ uint32_t RafdbService_MGet_args::read(::apache::thrift::protocol::TProtocol* ipr
     }
     switch (fid)
     {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->dbname);
-          this->__isset.dbname = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_LIST) {
-          {
-            this->keys.clear();
-            uint32_t _size7;
-            ::apache::thrift::protocol::TType _etype10;
-            iprot->readListBegin(_etype10, _size7);
-            this->keys.resize(_size7);
-            uint32_t _i11;
-            for (_i11 = 0; _i11 < _size7; ++_i11)
-            {
-              xfer += iprot->readString(this->keys[_i11]);
-            }
-            iprot->readListEnd();
-          }
-          this->__isset.keys = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
       default:
         xfer += iprot->skip(ftype);
         break;
@@ -625,51 +183,23 @@ uint32_t RafdbService_MGet_args::read(::apache::thrift::protocol::TProtocol* ipr
   return xfer;
 }
 
-uint32_t RafdbService_MGet_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientEnumAllDbs_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_MGet_args");
-  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString(this->dbname);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("keys", ::apache::thrift::protocol::T_LIST, 2);
-  {
-    xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, this->keys.size());
-    std::vector<std::string> ::const_iterator _iter12;
-    for (_iter12 = this->keys.begin(); _iter12 != this->keys.end(); ++_iter12)
-    {
-      xfer += oprot->writeString((*_iter12));
-    }
-    xfer += oprot->writeListEnd();
-  }
-  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeStructBegin("RafdbService_ClientEnumAllDbs_args");
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
 }
 
-uint32_t RafdbService_MGet_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientEnumAllDbs_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_MGet_pargs");
-  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString((*(this->dbname)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("keys", ::apache::thrift::protocol::T_LIST, 2);
-  {
-    xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, (*(this->keys)).size());
-    std::vector<std::string> ::const_iterator _iter13;
-    for (_iter13 = (*(this->keys)).begin(); _iter13 != (*(this->keys)).end(); ++_iter13)
-    {
-      xfer += oprot->writeString((*_iter13));
-    }
-    xfer += oprot->writeListEnd();
-  }
-  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeStructBegin("RafdbService_ClientEnumAllDbs_pargs");
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
 }
 
-uint32_t RafdbService_MGet_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientEnumAllDbs_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -690,20 +220,8 @@ uint32_t RafdbService_MGet_result::read(::apache::thrift::protocol::TProtocol* i
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_LIST) {
-          {
-            this->success.clear();
-            uint32_t _size14;
-            ::apache::thrift::protocol::TType _etype17;
-            iprot->readListBegin(_etype17, _size14);
-            this->success.resize(_size14);
-            uint32_t _i18;
-            for (_i18 = 0; _i18 < _size14; ++_i18)
-            {
-              xfer += iprot->readString(this->success[_i18]);
-            }
-            iprot->readListEnd();
-          }
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->success.read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -721,23 +239,15 @@ uint32_t RafdbService_MGet_result::read(::apache::thrift::protocol::TProtocol* i
   return xfer;
 }
 
-uint32_t RafdbService_MGet_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientEnumAllDbs_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("RafdbService_MGet_result");
+  xfer += oprot->writeStructBegin("RafdbService_ClientEnumAllDbs_result");
 
   if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_LIST, 0);
-    {
-      xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, this->success.size());
-      std::vector<std::string> ::const_iterator _iter19;
-      for (_iter19 = this->success.begin(); _iter19 != this->success.end(); ++_iter19)
-      {
-        xfer += oprot->writeString((*_iter19));
-      }
-      xfer += oprot->writeListEnd();
-    }
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
+    xfer += this->success.write(oprot);
     xfer += oprot->writeFieldEnd();
   }
   xfer += oprot->writeFieldStop();
@@ -745,7 +255,7 @@ uint32_t RafdbService_MGet_result::write(::apache::thrift::protocol::TProtocol* 
   return xfer;
 }
 
-uint32_t RafdbService_MGet_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientEnumAllDbs_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -766,20 +276,8 @@ uint32_t RafdbService_MGet_presult::read(::apache::thrift::protocol::TProtocol* 
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_LIST) {
-          {
-            (*(this->success)).clear();
-            uint32_t _size20;
-            ::apache::thrift::protocol::TType _etype23;
-            iprot->readListBegin(_etype23, _size20);
-            (*(this->success)).resize(_size20);
-            uint32_t _i24;
-            for (_i24 = 0; _i24 < _size20; ++_i24)
-            {
-              xfer += iprot->readString((*(this->success))[_i24]);
-            }
-            iprot->readListEnd();
-          }
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += (*(this->success)).read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -797,7 +295,7 @@ uint32_t RafdbService_MGet_presult::read(::apache::thrift::protocol::TProtocol* 
   return xfer;
 }
 
-uint32_t RafdbService_Delete_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientCreateDbV2_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -827,8 +325,8 @@ uint32_t RafdbService_Delete_args::read(::apache::thrift::protocol::TProtocol* i
         break;
       case 2:
         if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->key);
-          this->__isset.key = true;
+          xfer += iprot->readString(this->fields);
+          this->__isset.fields = true;
         } else {
           xfer += iprot->skip(ftype);
         }
@@ -845,35 +343,35 @@ uint32_t RafdbService_Delete_args::read(::apache::thrift::protocol::TProtocol* i
   return xfer;
 }
 
-uint32_t RafdbService_Delete_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientCreateDbV2_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_Delete_args");
+  xfer += oprot->writeStructBegin("RafdbService_ClientCreateDbV2_args");
   xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
   xfer += oprot->writeString(this->dbname);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("key", ::apache::thrift::protocol::T_STRING, 2);
-  xfer += oprot->writeString(this->key);
+  xfer += oprot->writeFieldBegin("fields", ::apache::thrift::protocol::T_STRING, 2);
+  xfer += oprot->writeString(this->fields);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
 }
 
-uint32_t RafdbService_Delete_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientCreateDbV2_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_Delete_pargs");
+  xfer += oprot->writeStructBegin("RafdbService_ClientCreateDbV2_pargs");
   xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
   xfer += oprot->writeString((*(this->dbname)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("key", ::apache::thrift::protocol::T_STRING, 2);
-  xfer += oprot->writeString((*(this->key)));
+  xfer += oprot->writeFieldBegin("fields", ::apache::thrift::protocol::T_STRING, 2);
+  xfer += oprot->writeString((*(this->fields)));
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
 }
 
-uint32_t RafdbService_Delete_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientCreateDbV2_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -894,8 +392,8 @@ uint32_t RafdbService_Delete_result::read(::apache::thrift::protocol::TProtocol*
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->success);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->success.read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -913,15 +411,15 @@ uint32_t RafdbService_Delete_result::read(::apache::thrift::protocol::TProtocol*
   return xfer;
 }
 
-uint32_t RafdbService_Delete_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientCreateDbV2_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("RafdbService_Delete_result");
+  xfer += oprot->writeStructBegin("RafdbService_ClientCreateDbV2_result");
 
   if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
-    xfer += oprot->writeBool(this->success);
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
+    xfer += this->success.write(oprot);
     xfer += oprot->writeFieldEnd();
   }
   xfer += oprot->writeFieldStop();
@@ -929,7 +427,7 @@ uint32_t RafdbService_Delete_result::write(::apache::thrift::protocol::TProtocol
   return xfer;
 }
 
-uint32_t RafdbService_Delete_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientCreateDbV2_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -950,8 +448,8 @@ uint32_t RafdbService_Delete_presult::read(::apache::thrift::protocol::TProtocol
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool((*(this->success)));
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += (*(this->success)).read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -969,207 +467,7 @@ uint32_t RafdbService_Delete_presult::read(::apache::thrift::protocol::TProtocol
   return xfer;
 }
 
-uint32_t RafdbService_MDelete_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->dbname);
-          this->__isset.dbname = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_LIST) {
-          {
-            this->keys.clear();
-            uint32_t _size25;
-            ::apache::thrift::protocol::TType _etype28;
-            iprot->readListBegin(_etype28, _size25);
-            this->keys.resize(_size25);
-            uint32_t _i29;
-            for (_i29 = 0; _i29 < _size25; ++_i29)
-            {
-              xfer += iprot->readString(this->keys[_i29]);
-            }
-            iprot->readListEnd();
-          }
-          this->__isset.keys = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_MDelete_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_MDelete_args");
-  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString(this->dbname);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("keys", ::apache::thrift::protocol::T_LIST, 2);
-  {
-    xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, this->keys.size());
-    std::vector<std::string> ::const_iterator _iter30;
-    for (_iter30 = this->keys.begin(); _iter30 != this->keys.end(); ++_iter30)
-    {
-      xfer += oprot->writeString((*_iter30));
-    }
-    xfer += oprot->writeListEnd();
-  }
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_MDelete_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_MDelete_pargs");
-  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
-  xfer += oprot->writeString((*(this->dbname)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("keys", ::apache::thrift::protocol::T_LIST, 2);
-  {
-    xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, (*(this->keys)).size());
-    std::vector<std::string> ::const_iterator _iter31;
-    for (_iter31 = (*(this->keys)).begin(); _iter31 != (*(this->keys)).end(); ++_iter31)
-    {
-      xfer += oprot->writeString((*_iter31));
-    }
-    xfer += oprot->writeListEnd();
-  }
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_MDelete_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_MDelete_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RafdbService_MDelete_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
-    xfer += oprot->writeBool(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_MDelete_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_OpenIterator_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientDeleteDb_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -1209,9 +507,9 @@ uint32_t RafdbService_OpenIterator_args::read(::apache::thrift::protocol::TProto
   return xfer;
 }
 
-uint32_t RafdbService_OpenIterator_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientDeleteDb_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_OpenIterator_args");
+  xfer += oprot->writeStructBegin("RafdbService_ClientDeleteDb_args");
   xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
   xfer += oprot->writeString(this->dbname);
   xfer += oprot->writeFieldEnd();
@@ -1220,9 +518,9 @@ uint32_t RafdbService_OpenIterator_args::write(::apache::thrift::protocol::TProt
   return xfer;
 }
 
-uint32_t RafdbService_OpenIterator_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientDeleteDb_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_OpenIterator_pargs");
+  xfer += oprot->writeStructBegin("RafdbService_ClientDeleteDb_pargs");
   xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
   xfer += oprot->writeString((*(this->dbname)));
   xfer += oprot->writeFieldEnd();
@@ -1231,7 +529,7 @@ uint32_t RafdbService_OpenIterator_pargs::write(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t RafdbService_OpenIterator_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientDeleteDb_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -1252,8 +550,8 @@ uint32_t RafdbService_OpenIterator_result::read(::apache::thrift::protocol::TPro
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->success);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->success.read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -1271,15 +569,15 @@ uint32_t RafdbService_OpenIterator_result::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t RafdbService_OpenIterator_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientDeleteDb_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("RafdbService_OpenIterator_result");
+  xfer += oprot->writeStructBegin("RafdbService_ClientDeleteDb_result");
 
   if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_I32, 0);
-    xfer += oprot->writeI32(this->success);
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
+    xfer += this->success.write(oprot);
     xfer += oprot->writeFieldEnd();
   }
   xfer += oprot->writeFieldStop();
@@ -1287,7 +585,7 @@ uint32_t RafdbService_OpenIterator_result::write(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-uint32_t RafdbService_OpenIterator_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientDeleteDb_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -1308,8 +606,8 @@ uint32_t RafdbService_OpenIterator_presult::read(::apache::thrift::protocol::TPr
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32((*(this->success)));
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += (*(this->success)).read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -1327,1423 +625,7 @@ uint32_t RafdbService_OpenIterator_presult::read(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-uint32_t RafdbService_CloseIterator_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->itID);
-          this->__isset.itID = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_CloseIterator_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_CloseIterator_args");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32(this->itID);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_CloseIterator_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_CloseIterator_pargs");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32((*(this->itID)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_CloseIterator_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_CloseIterator_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RafdbService_CloseIterator_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
-    xfer += oprot->writeBool(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_CloseIterator_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToFirst_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->itID);
-          this->__isset.itID = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToFirst_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_SeekToFirst_args");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32(this->itID);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToFirst_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_SeekToFirst_pargs");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32((*(this->itID)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToFirst_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToFirst_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RafdbService_SeekToFirst_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
-    xfer += oprot->writeBool(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToFirst_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToLast_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->itID);
-          this->__isset.itID = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToLast_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_SeekToLast_args");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32(this->itID);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToLast_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_SeekToLast_pargs");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32((*(this->itID)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToLast_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToLast_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RafdbService_SeekToLast_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
-    xfer += oprot->writeBool(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_SeekToLast_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_Valid_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->itID);
-          this->__isset.itID = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_Valid_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_Valid_args");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32(this->itID);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_Valid_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_Valid_pargs");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32((*(this->itID)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_Valid_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_Valid_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RafdbService_Valid_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
-    xfer += oprot->writeBool(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_Valid_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_Seek_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->itID);
-          this->__isset.itID = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->target);
-          this->__isset.target = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_Seek_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_Seek_args");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32(this->itID);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("target", ::apache::thrift::protocol::T_STRING, 2);
-  xfer += oprot->writeString(this->target);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_Seek_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_Seek_pargs");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32((*(this->itID)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("target", ::apache::thrift::protocol::T_STRING, 2);
-  xfer += oprot->writeString((*(this->target)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_Seek_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_Seek_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RafdbService_Seek_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
-    xfer += oprot->writeBool(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_Seek_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_NextKeys_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->itID);
-          this->__isset.itID = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->number);
-          this->__isset.number = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_NextKeys_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_NextKeys_args");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32(this->itID);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("number", ::apache::thrift::protocol::T_I32, 2);
-  xfer += oprot->writeI32(this->number);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_NextKeys_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_NextKeys_pargs");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32((*(this->itID)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("number", ::apache::thrift::protocol::T_I32, 2);
-  xfer += oprot->writeI32((*(this->number)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_NextKeys_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_LIST) {
-          {
-            this->success.clear();
-            uint32_t _size32;
-            ::apache::thrift::protocol::TType _etype35;
-            iprot->readListBegin(_etype35, _size32);
-            this->success.resize(_size32);
-            uint32_t _i36;
-            for (_i36 = 0; _i36 < _size32; ++_i36)
-            {
-              xfer += iprot->readString(this->success[_i36]);
-            }
-            iprot->readListEnd();
-          }
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_NextKeys_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RafdbService_NextKeys_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_LIST, 0);
-    {
-      xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, this->success.size());
-      std::vector<std::string> ::const_iterator _iter37;
-      for (_iter37 = this->success.begin(); _iter37 != this->success.end(); ++_iter37)
-      {
-        xfer += oprot->writeString((*_iter37));
-      }
-      xfer += oprot->writeListEnd();
-    }
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_NextKeys_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_LIST) {
-          {
-            (*(this->success)).clear();
-            uint32_t _size38;
-            ::apache::thrift::protocol::TType _etype41;
-            iprot->readListBegin(_etype41, _size38);
-            (*(this->success)).resize(_size38);
-            uint32_t _i42;
-            for (_i42 = 0; _i42 < _size38; ++_i42)
-            {
-              xfer += iprot->readString((*(this->success))[_i42]);
-            }
-            iprot->readListEnd();
-          }
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_NextValues_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->itID);
-          this->__isset.itID = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->number);
-          this->__isset.number = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_NextValues_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_NextValues_args");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32(this->itID);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("number", ::apache::thrift::protocol::T_I32, 2);
-  xfer += oprot->writeI32(this->number);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_NextValues_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_NextValues_pargs");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32((*(this->itID)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("number", ::apache::thrift::protocol::T_I32, 2);
-  xfer += oprot->writeI32((*(this->number)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_NextValues_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_LIST) {
-          {
-            this->success.clear();
-            uint32_t _size43;
-            ::apache::thrift::protocol::TType _etype46;
-            iprot->readListBegin(_etype46, _size43);
-            this->success.resize(_size43);
-            uint32_t _i47;
-            for (_i47 = 0; _i47 < _size43; ++_i47)
-            {
-              xfer += iprot->readString(this->success[_i47]);
-            }
-            iprot->readListEnd();
-          }
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_NextValues_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RafdbService_NextValues_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_LIST, 0);
-    {
-      xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, this->success.size());
-      std::vector<std::string> ::const_iterator _iter48;
-      for (_iter48 = this->success.begin(); _iter48 != this->success.end(); ++_iter48)
-      {
-        xfer += oprot->writeString((*_iter48));
-      }
-      xfer += oprot->writeListEnd();
-    }
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_NextValues_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_LIST) {
-          {
-            (*(this->success)).clear();
-            uint32_t _size49;
-            ::apache::thrift::protocol::TType _etype52;
-            iprot->readListBegin(_etype52, _size49);
-            (*(this->success)).resize(_size49);
-            uint32_t _i53;
-            for (_i53 = 0; _i53 < _size49; ++_i53)
-            {
-              xfer += iprot->readString((*(this->success))[_i53]);
-            }
-            iprot->readListEnd();
-          }
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_NextPairs_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->itID);
-          this->__isset.itID = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->number);
-          this->__isset.number = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_NextPairs_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_NextPairs_args");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32(this->itID);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("number", ::apache::thrift::protocol::T_I32, 2);
-  xfer += oprot->writeI32(this->number);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_NextPairs_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_NextPairs_pargs");
-  xfer += oprot->writeFieldBegin("itID", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32((*(this->itID)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("number", ::apache::thrift::protocol::T_I32, 2);
-  xfer += oprot->writeI32((*(this->number)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_NextPairs_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_LIST) {
-          {
-            this->success.clear();
-            uint32_t _size54;
-            ::apache::thrift::protocol::TType _etype57;
-            iprot->readListBegin(_etype57, _size54);
-            this->success.resize(_size54);
-            uint32_t _i58;
-            for (_i58 = 0; _i58 < _size54; ++_i58)
-            {
-              xfer += this->success[_i58].read(iprot);
-            }
-            iprot->readListEnd();
-          }
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_NextPairs_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RafdbService_NextPairs_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_LIST, 0);
-    {
-      xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, this->success.size());
-      std::vector<Pair> ::const_iterator _iter59;
-      for (_iter59 = this->success.begin(); _iter59 != this->success.end(); ++_iter59)
-      {
-        xfer += (*_iter59).write(oprot);
-      }
-      xfer += oprot->writeListEnd();
-    }
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RafdbService_NextPairs_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_LIST) {
-          {
-            (*(this->success)).clear();
-            uint32_t _size60;
-            ::apache::thrift::protocol::TType _etype63;
-            iprot->readListBegin(_etype63, _size60);
-            (*(this->success)).resize(_size60);
-            uint32_t _i64;
-            for (_i64 = 0; _i64 < _size60; ++_i64)
-            {
-              xfer += (*(this->success))[_i64].read(iprot);
-            }
-            iprot->readListEnd();
-          }
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RafdbService_DeleteDatabase_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientGetDbRecordCount_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -2783,9 +665,9 @@ uint32_t RafdbService_DeleteDatabase_args::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
-uint32_t RafdbService_DeleteDatabase_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientGetDbRecordCount_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_DeleteDatabase_args");
+  xfer += oprot->writeStructBegin("RafdbService_ClientGetDbRecordCount_args");
   xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
   xfer += oprot->writeString(this->dbname);
   xfer += oprot->writeFieldEnd();
@@ -2794,9 +676,9 @@ uint32_t RafdbService_DeleteDatabase_args::write(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-uint32_t RafdbService_DeleteDatabase_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientGetDbRecordCount_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_DeleteDatabase_pargs");
+  xfer += oprot->writeStructBegin("RafdbService_ClientGetDbRecordCount_pargs");
   xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
   xfer += oprot->writeString((*(this->dbname)));
   xfer += oprot->writeFieldEnd();
@@ -2805,7 +687,7 @@ uint32_t RafdbService_DeleteDatabase_pargs::write(::apache::thrift::protocol::TP
   return xfer;
 }
 
-uint32_t RafdbService_DeleteDatabase_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientGetDbRecordCount_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -2826,8 +708,8 @@ uint32_t RafdbService_DeleteDatabase_result::read(::apache::thrift::protocol::TP
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->success);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->success.read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -2845,15 +727,15 @@ uint32_t RafdbService_DeleteDatabase_result::read(::apache::thrift::protocol::TP
   return xfer;
 }
 
-uint32_t RafdbService_DeleteDatabase_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientGetDbRecordCount_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("RafdbService_DeleteDatabase_result");
+  xfer += oprot->writeStructBegin("RafdbService_ClientGetDbRecordCount_result");
 
   if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
-    xfer += oprot->writeBool(this->success);
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
+    xfer += this->success.write(oprot);
     xfer += oprot->writeFieldEnd();
   }
   xfer += oprot->writeFieldStop();
@@ -2861,7 +743,7 @@ uint32_t RafdbService_DeleteDatabase_result::write(::apache::thrift::protocol::T
   return xfer;
 }
 
-uint32_t RafdbService_DeleteDatabase_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientGetDbRecordCount_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -2882,8 +764,8 @@ uint32_t RafdbService_DeleteDatabase_presult::read(::apache::thrift::protocol::T
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool((*(this->success)));
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += (*(this->success)).read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -2901,7 +783,7 @@ uint32_t RafdbService_DeleteDatabase_presult::read(::apache::thrift::protocol::T
   return xfer;
 }
 
-uint32_t RafdbService_LSet_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientPushRecordV2_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -2931,16 +813,16 @@ uint32_t RafdbService_LSet_args::read(::apache::thrift::protocol::TProtocol* ipr
         break;
       case 2:
         if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->key);
-          this->__isset.key = true;
+          xfer += iprot->readString(this->fields);
+          this->__isset.fields = true;
         } else {
           xfer += iprot->skip(ftype);
         }
         break;
       case 3:
         if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->value);
-          this->__isset.value = true;
+          xfer += iprot->readString(this->values);
+          this->__isset.values = true;
         } else {
           xfer += iprot->skip(ftype);
         }
@@ -2957,41 +839,41 @@ uint32_t RafdbService_LSet_args::read(::apache::thrift::protocol::TProtocol* ipr
   return xfer;
 }
 
-uint32_t RafdbService_LSet_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientPushRecordV2_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_LSet_args");
+  xfer += oprot->writeStructBegin("RafdbService_ClientPushRecordV2_args");
   xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
   xfer += oprot->writeString(this->dbname);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("key", ::apache::thrift::protocol::T_STRING, 2);
-  xfer += oprot->writeString(this->key);
+  xfer += oprot->writeFieldBegin("fields", ::apache::thrift::protocol::T_STRING, 2);
+  xfer += oprot->writeString(this->fields);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("value", ::apache::thrift::protocol::T_STRING, 3);
-  xfer += oprot->writeString(this->value);
+  xfer += oprot->writeFieldBegin("values", ::apache::thrift::protocol::T_STRING, 3);
+  xfer += oprot->writeString(this->values);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
 }
 
-uint32_t RafdbService_LSet_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientPushRecordV2_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RafdbService_LSet_pargs");
+  xfer += oprot->writeStructBegin("RafdbService_ClientPushRecordV2_pargs");
   xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
   xfer += oprot->writeString((*(this->dbname)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("key", ::apache::thrift::protocol::T_STRING, 2);
-  xfer += oprot->writeString((*(this->key)));
+  xfer += oprot->writeFieldBegin("fields", ::apache::thrift::protocol::T_STRING, 2);
+  xfer += oprot->writeString((*(this->fields)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("value", ::apache::thrift::protocol::T_STRING, 3);
-  xfer += oprot->writeString((*(this->value)));
+  xfer += oprot->writeFieldBegin("values", ::apache::thrift::protocol::T_STRING, 3);
+  xfer += oprot->writeString((*(this->values)));
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
 }
 
-uint32_t RafdbService_LSet_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientPushRecordV2_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -3012,8 +894,8 @@ uint32_t RafdbService_LSet_result::read(::apache::thrift::protocol::TProtocol* i
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->success);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->success.read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -3031,15 +913,15 @@ uint32_t RafdbService_LSet_result::read(::apache::thrift::protocol::TProtocol* i
   return xfer;
 }
 
-uint32_t RafdbService_LSet_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t RafdbService_ClientPushRecordV2_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("RafdbService_LSet_result");
+  xfer += oprot->writeStructBegin("RafdbService_ClientPushRecordV2_result");
 
   if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
-    xfer += oprot->writeBool(this->success);
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
+    xfer += this->success.write(oprot);
     xfer += oprot->writeFieldEnd();
   }
   xfer += oprot->writeFieldStop();
@@ -3047,7 +929,7 @@ uint32_t RafdbService_LSet_result::write(::apache::thrift::protocol::TProtocol* 
   return xfer;
 }
 
-uint32_t RafdbService_LSet_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t RafdbService_ClientPushRecordV2_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -3068,8 +950,882 @@ uint32_t RafdbService_LSet_presult::read(::apache::thrift::protocol::TProtocol* 
     switch (fid)
     {
       case 0:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool((*(this->success)));
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += (*(this->success)).read(iprot);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientRetrieveRecordsV2_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->dbname);
+          this->__isset.dbname = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->fields);
+          this->__isset.fields = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 3:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->wherestmt);
+          this->__isset.wherestmt = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 4:
+        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
+          xfer += iprot->readDouble(this->min_sim);
+          this->__isset.min_sim = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 5:
+        if (ftype == ::apache::thrift::protocol::T_I64) {
+          xfer += iprot->readI64(this->max_rec);
+          this->__isset.max_rec = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientRetrieveRecordsV2_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_ClientRetrieveRecordsV2_args");
+  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString(this->dbname);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("fields", ::apache::thrift::protocol::T_STRING, 2);
+  xfer += oprot->writeString(this->fields);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("wherestmt", ::apache::thrift::protocol::T_STRING, 3);
+  xfer += oprot->writeString(this->wherestmt);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("min_sim", ::apache::thrift::protocol::T_DOUBLE, 4);
+  xfer += oprot->writeDouble(this->min_sim);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("max_rec", ::apache::thrift::protocol::T_I64, 5);
+  xfer += oprot->writeI64(this->max_rec);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientRetrieveRecordsV2_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_ClientRetrieveRecordsV2_pargs");
+  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString((*(this->dbname)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("fields", ::apache::thrift::protocol::T_STRING, 2);
+  xfer += oprot->writeString((*(this->fields)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("wherestmt", ::apache::thrift::protocol::T_STRING, 3);
+  xfer += oprot->writeString((*(this->wherestmt)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("min_sim", ::apache::thrift::protocol::T_DOUBLE, 4);
+  xfer += oprot->writeDouble((*(this->min_sim)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("max_rec", ::apache::thrift::protocol::T_I64, 5);
+  xfer += oprot->writeI64((*(this->max_rec)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientRetrieveRecordsV2_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->success.read(iprot);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientRetrieveRecordsV2_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RafdbService_ClientRetrieveRecordsV2_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
+    xfer += this->success.write(oprot);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientRetrieveRecordsV2_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += (*(this->success)).read(iprot);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecord_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->dbname);
+          this->__isset.dbname = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_I64) {
+          xfer += iprot->readI64(this->index);
+          this->__isset.index = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecord_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_ClientDeleteRecord_args");
+  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString(this->dbname);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("index", ::apache::thrift::protocol::T_I64, 2);
+  xfer += oprot->writeI64(this->index);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecord_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_ClientDeleteRecord_pargs");
+  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString((*(this->dbname)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("index", ::apache::thrift::protocol::T_I64, 2);
+  xfer += oprot->writeI64((*(this->index)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecord_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->success.read(iprot);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecord_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RafdbService_ClientDeleteRecord_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
+    xfer += this->success.write(oprot);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecord_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += (*(this->success)).read(iprot);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecordWs_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->dbname);
+          this->__isset.dbname = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->wherestmt);
+          this->__isset.wherestmt = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecordWs_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_ClientDeleteRecordWs_args");
+  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString(this->dbname);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("wherestmt", ::apache::thrift::protocol::T_STRING, 2);
+  xfer += oprot->writeString(this->wherestmt);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecordWs_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_ClientDeleteRecordWs_pargs");
+  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString((*(this->dbname)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("wherestmt", ::apache::thrift::protocol::T_STRING, 2);
+  xfer += oprot->writeString((*(this->wherestmt)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecordWs_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->success.read(iprot);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecordWs_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RafdbService_ClientDeleteRecordWs_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
+    xfer += this->success.write(oprot);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDeleteRecordWs_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += (*(this->success)).read(iprot);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDbScanRepair_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->dbname);
+          this->__isset.dbname = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDbScanRepair_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_ClientDbScanRepair_args");
+  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString(this->dbname);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDbScanRepair_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_ClientDbScanRepair_pargs");
+  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString((*(this->dbname)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDbScanRepair_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->success.read(iprot);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDbScanRepair_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RafdbService_ClientDbScanRepair_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
+    xfer += this->success.write(oprot);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientDbScanRepair_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += (*(this->success)).read(iprot);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientEnumDbColumns_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->dbname);
+          this->__isset.dbname = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientEnumDbColumns_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_ClientEnumDbColumns_args");
+  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString(this->dbname);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientEnumDbColumns_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_ClientEnumDbColumns_pargs");
+  xfer += oprot->writeFieldBegin("dbname", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString((*(this->dbname)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientEnumDbColumns_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->success.read(iprot);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_ClientEnumDbColumns_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RafdbService_ClientEnumDbColumns_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRUCT, 0);
+    xfer += this->success.write(oprot);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_ClientEnumDbColumns_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += (*(this->success)).read(iprot);
           this->__isset.success = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -3519,6 +2275,150 @@ uint32_t RafdbService_GetLeaderId_presult::read(::apache::thrift::protocol::TPro
   return xfer;
 }
 
+uint32_t RafdbService_GetCluserIPList_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_GetCluserIPList_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_GetCluserIPList_args");
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_GetCluserIPList_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RafdbService_GetCluserIPList_pargs");
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_GetCluserIPList_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->success);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RafdbService_GetCluserIPList_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RafdbService_GetCluserIPList_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_STRING, 0);
+    xfer += oprot->writeString(this->success);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RafdbService_GetCluserIPList_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString((*(this->success)));
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
 uint32_t RafdbService_SendVote_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
@@ -3891,21 +2791,18 @@ uint32_t RafdbService_ReplyLeaderId_pargs::write(::apache::thrift::protocol::TPr
   return xfer;
 }
 
-bool RafdbServiceClient::Set(const std::string& dbname, const std::string& key, const std::string& value)
+void RafdbServiceClient::VseClientVersion(std::string& _return)
 {
-  send_Set(dbname, key, value);
-  return recv_Set();
+  send_VseClientVersion();
+  recv_VseClientVersion(_return);
 }
 
-void RafdbServiceClient::send_Set(const std::string& dbname, const std::string& key, const std::string& value)
+void RafdbServiceClient::send_VseClientVersion()
 {
   int32_t cseqid = 0;
-  oprot_->writeMessageBegin("Set", ::apache::thrift::protocol::T_CALL, cseqid);
+  oprot_->writeMessageBegin("VseClientVersion", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  RafdbService_Set_pargs args;
-  args.dbname = &dbname;
-  args.key = &key;
-  args.value = &value;
+  RafdbService_VseClientVersion_pargs args;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -3913,7 +2810,7 @@ void RafdbServiceClient::send_Set(const std::string& dbname, const std::string& 
   oprot_->getTransport()->writeEnd();
 }
 
-bool RafdbServiceClient::recv_Set()
+void RafdbServiceClient::recv_VseClientVersion(std::string& _return)
 {
 
   int32_t rseqid = 0;
@@ -3934,135 +2831,13 @@ bool RafdbServiceClient::recv_Set()
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
   }
-  if (fname.compare("Set") != 0) {
+  if (fname.compare("VseClientVersion") != 0) {
     iprot_->skip(::apache::thrift::protocol::T_STRUCT);
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
   }
-  bool _return;
-  RafdbService_Set_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Set failed: unknown result");
-}
-
-bool RafdbServiceClient::MPSet(const std::string& dbname, const std::vector<Pair> & pairs)
-{
-  send_MPSet(dbname, pairs);
-  return recv_MPSet();
-}
-
-void RafdbServiceClient::send_MPSet(const std::string& dbname, const std::vector<Pair> & pairs)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("MPSet", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  RafdbService_MPSet_pargs args;
-  args.dbname = &dbname;
-  args.pairs = &pairs;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->flush();
-  oprot_->getTransport()->writeEnd();
-}
-
-bool RafdbServiceClient::recv_MPSet()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
-  }
-  if (fname.compare("MPSet") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
-  }
-  bool _return;
-  RafdbService_MPSet_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "MPSet failed: unknown result");
-}
-
-void RafdbServiceClient::Get(std::string& _return, const std::string& dbname, const std::string& key)
-{
-  send_Get(dbname, key);
-  recv_Get(_return);
-}
-
-void RafdbServiceClient::send_Get(const std::string& dbname, const std::string& key)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("Get", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  RafdbService_Get_pargs args;
-  args.dbname = &dbname;
-  args.key = &key;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->flush();
-  oprot_->getTransport()->writeEnd();
-}
-
-void RafdbServiceClient::recv_Get(std::string& _return)
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
-  }
-  if (fname.compare("Get") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
-  }
-  RafdbService_Get_presult result;
+  RafdbService_VseClientVersion_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -4072,23 +2847,21 @@ void RafdbServiceClient::recv_Get(std::string& _return)
     // _return pointer has now been filled
     return;
   }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Get failed: unknown result");
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "VseClientVersion failed: unknown result");
 }
 
-void RafdbServiceClient::MGet(std::vector<std::string> & _return, const std::string& dbname, const std::vector<std::string> & keys)
+void RafdbServiceClient::ClientEnumAllDbs(ResDbnameList& _return)
 {
-  send_MGet(dbname, keys);
-  recv_MGet(_return);
+  send_ClientEnumAllDbs();
+  recv_ClientEnumAllDbs(_return);
 }
 
-void RafdbServiceClient::send_MGet(const std::string& dbname, const std::vector<std::string> & keys)
+void RafdbServiceClient::send_ClientEnumAllDbs()
 {
   int32_t cseqid = 0;
-  oprot_->writeMessageBegin("MGet", ::apache::thrift::protocol::T_CALL, cseqid);
+  oprot_->writeMessageBegin("ClientEnumAllDbs", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  RafdbService_MGet_pargs args;
-  args.dbname = &dbname;
-  args.keys = &keys;
+  RafdbService_ClientEnumAllDbs_pargs args;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -4096,7 +2869,7 @@ void RafdbServiceClient::send_MGet(const std::string& dbname, const std::vector<
   oprot_->getTransport()->writeEnd();
 }
 
-void RafdbServiceClient::recv_MGet(std::vector<std::string> & _return)
+void RafdbServiceClient::recv_ClientEnumAllDbs(ResDbnameList& _return)
 {
 
   int32_t rseqid = 0;
@@ -4117,13 +2890,13 @@ void RafdbServiceClient::recv_MGet(std::vector<std::string> & _return)
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
   }
-  if (fname.compare("MGet") != 0) {
+  if (fname.compare("ClientEnumAllDbs") != 0) {
     iprot_->skip(::apache::thrift::protocol::T_STRUCT);
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
   }
-  RafdbService_MGet_presult result;
+  RafdbService_ClientEnumAllDbs_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -4133,23 +2906,23 @@ void RafdbServiceClient::recv_MGet(std::vector<std::string> & _return)
     // _return pointer has now been filled
     return;
   }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "MGet failed: unknown result");
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ClientEnumAllDbs failed: unknown result");
 }
 
-bool RafdbServiceClient::Delete(const std::string& dbname, const std::string& key)
+void RafdbServiceClient::ClientCreateDbV2(ErrInfoThr& _return, const std::string& dbname, const std::string& fields)
 {
-  send_Delete(dbname, key);
-  return recv_Delete();
+  send_ClientCreateDbV2(dbname, fields);
+  recv_ClientCreateDbV2(_return);
 }
 
-void RafdbServiceClient::send_Delete(const std::string& dbname, const std::string& key)
+void RafdbServiceClient::send_ClientCreateDbV2(const std::string& dbname, const std::string& fields)
 {
   int32_t cseqid = 0;
-  oprot_->writeMessageBegin("Delete", ::apache::thrift::protocol::T_CALL, cseqid);
+  oprot_->writeMessageBegin("ClientCreateDbV2", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  RafdbService_Delete_pargs args;
+  RafdbService_ClientCreateDbV2_pargs args;
   args.dbname = &dbname;
-  args.key = &key;
+  args.fields = &fields;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -4157,7 +2930,7 @@ void RafdbServiceClient::send_Delete(const std::string& dbname, const std::strin
   oprot_->getTransport()->writeEnd();
 }
 
-bool RafdbServiceClient::recv_Delete()
+void RafdbServiceClient::recv_ClientCreateDbV2(ErrInfoThr& _return)
 {
 
   int32_t rseqid = 0;
@@ -4178,496 +2951,13 @@ bool RafdbServiceClient::recv_Delete()
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
   }
-  if (fname.compare("Delete") != 0) {
+  if (fname.compare("ClientCreateDbV2") != 0) {
     iprot_->skip(::apache::thrift::protocol::T_STRUCT);
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
   }
-  bool _return;
-  RafdbService_Delete_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Delete failed: unknown result");
-}
-
-bool RafdbServiceClient::MDelete(const std::string& dbname, const std::vector<std::string> & keys)
-{
-  send_MDelete(dbname, keys);
-  return recv_MDelete();
-}
-
-void RafdbServiceClient::send_MDelete(const std::string& dbname, const std::vector<std::string> & keys)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("MDelete", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  RafdbService_MDelete_pargs args;
-  args.dbname = &dbname;
-  args.keys = &keys;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->flush();
-  oprot_->getTransport()->writeEnd();
-}
-
-bool RafdbServiceClient::recv_MDelete()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
-  }
-  if (fname.compare("MDelete") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
-  }
-  bool _return;
-  RafdbService_MDelete_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "MDelete failed: unknown result");
-}
-
-int32_t RafdbServiceClient::OpenIterator(const std::string& dbname)
-{
-  send_OpenIterator(dbname);
-  return recv_OpenIterator();
-}
-
-void RafdbServiceClient::send_OpenIterator(const std::string& dbname)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("OpenIterator", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  RafdbService_OpenIterator_pargs args;
-  args.dbname = &dbname;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->flush();
-  oprot_->getTransport()->writeEnd();
-}
-
-int32_t RafdbServiceClient::recv_OpenIterator()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
-  }
-  if (fname.compare("OpenIterator") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
-  }
-  int32_t _return;
-  RafdbService_OpenIterator_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "OpenIterator failed: unknown result");
-}
-
-bool RafdbServiceClient::CloseIterator(const int32_t itID)
-{
-  send_CloseIterator(itID);
-  return recv_CloseIterator();
-}
-
-void RafdbServiceClient::send_CloseIterator(const int32_t itID)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("CloseIterator", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  RafdbService_CloseIterator_pargs args;
-  args.itID = &itID;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->flush();
-  oprot_->getTransport()->writeEnd();
-}
-
-bool RafdbServiceClient::recv_CloseIterator()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
-  }
-  if (fname.compare("CloseIterator") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
-  }
-  bool _return;
-  RafdbService_CloseIterator_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "CloseIterator failed: unknown result");
-}
-
-bool RafdbServiceClient::SeekToFirst(const int32_t itID)
-{
-  send_SeekToFirst(itID);
-  return recv_SeekToFirst();
-}
-
-void RafdbServiceClient::send_SeekToFirst(const int32_t itID)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("SeekToFirst", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  RafdbService_SeekToFirst_pargs args;
-  args.itID = &itID;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->flush();
-  oprot_->getTransport()->writeEnd();
-}
-
-bool RafdbServiceClient::recv_SeekToFirst()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
-  }
-  if (fname.compare("SeekToFirst") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
-  }
-  bool _return;
-  RafdbService_SeekToFirst_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SeekToFirst failed: unknown result");
-}
-
-bool RafdbServiceClient::SeekToLast(const int32_t itID)
-{
-  send_SeekToLast(itID);
-  return recv_SeekToLast();
-}
-
-void RafdbServiceClient::send_SeekToLast(const int32_t itID)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("SeekToLast", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  RafdbService_SeekToLast_pargs args;
-  args.itID = &itID;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->flush();
-  oprot_->getTransport()->writeEnd();
-}
-
-bool RafdbServiceClient::recv_SeekToLast()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
-  }
-  if (fname.compare("SeekToLast") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
-  }
-  bool _return;
-  RafdbService_SeekToLast_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SeekToLast failed: unknown result");
-}
-
-bool RafdbServiceClient::Valid(const int32_t itID)
-{
-  send_Valid(itID);
-  return recv_Valid();
-}
-
-void RafdbServiceClient::send_Valid(const int32_t itID)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("Valid", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  RafdbService_Valid_pargs args;
-  args.itID = &itID;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->flush();
-  oprot_->getTransport()->writeEnd();
-}
-
-bool RafdbServiceClient::recv_Valid()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
-  }
-  if (fname.compare("Valid") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
-  }
-  bool _return;
-  RafdbService_Valid_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Valid failed: unknown result");
-}
-
-bool RafdbServiceClient::Seek(const int32_t itID, const std::string& target)
-{
-  send_Seek(itID, target);
-  return recv_Seek();
-}
-
-void RafdbServiceClient::send_Seek(const int32_t itID, const std::string& target)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("Seek", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  RafdbService_Seek_pargs args;
-  args.itID = &itID;
-  args.target = &target;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->flush();
-  oprot_->getTransport()->writeEnd();
-}
-
-bool RafdbServiceClient::recv_Seek()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
-  }
-  if (fname.compare("Seek") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
-  }
-  bool _return;
-  RafdbService_Seek_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "Seek failed: unknown result");
-}
-
-void RafdbServiceClient::NextKeys(std::vector<std::string> & _return, const int32_t itID, const int32_t number)
-{
-  send_NextKeys(itID, number);
-  recv_NextKeys(_return);
-}
-
-void RafdbServiceClient::send_NextKeys(const int32_t itID, const int32_t number)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("NextKeys", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  RafdbService_NextKeys_pargs args;
-  args.itID = &itID;
-  args.number = &number;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->flush();
-  oprot_->getTransport()->writeEnd();
-}
-
-void RafdbServiceClient::recv_NextKeys(std::vector<std::string> & _return)
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
-  }
-  if (fname.compare("NextKeys") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
-  }
-  RafdbService_NextKeys_presult result;
+  RafdbService_ClientCreateDbV2_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -4677,23 +2967,22 @@ void RafdbServiceClient::recv_NextKeys(std::vector<std::string> & _return)
     // _return pointer has now been filled
     return;
   }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "NextKeys failed: unknown result");
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ClientCreateDbV2 failed: unknown result");
 }
 
-void RafdbServiceClient::NextValues(std::vector<std::string> & _return, const int32_t itID, const int32_t number)
+void RafdbServiceClient::ClientDeleteDb(ErrInfoThr& _return, const std::string& dbname)
 {
-  send_NextValues(itID, number);
-  recv_NextValues(_return);
+  send_ClientDeleteDb(dbname);
+  recv_ClientDeleteDb(_return);
 }
 
-void RafdbServiceClient::send_NextValues(const int32_t itID, const int32_t number)
+void RafdbServiceClient::send_ClientDeleteDb(const std::string& dbname)
 {
   int32_t cseqid = 0;
-  oprot_->writeMessageBegin("NextValues", ::apache::thrift::protocol::T_CALL, cseqid);
+  oprot_->writeMessageBegin("ClientDeleteDb", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  RafdbService_NextValues_pargs args;
-  args.itID = &itID;
-  args.number = &number;
+  RafdbService_ClientDeleteDb_pargs args;
+  args.dbname = &dbname;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -4701,7 +2990,7 @@ void RafdbServiceClient::send_NextValues(const int32_t itID, const int32_t numbe
   oprot_->getTransport()->writeEnd();
 }
 
-void RafdbServiceClient::recv_NextValues(std::vector<std::string> & _return)
+void RafdbServiceClient::recv_ClientDeleteDb(ErrInfoThr& _return)
 {
 
   int32_t rseqid = 0;
@@ -4722,13 +3011,13 @@ void RafdbServiceClient::recv_NextValues(std::vector<std::string> & _return)
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
   }
-  if (fname.compare("NextValues") != 0) {
+  if (fname.compare("ClientDeleteDb") != 0) {
     iprot_->skip(::apache::thrift::protocol::T_STRUCT);
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
   }
-  RafdbService_NextValues_presult result;
+  RafdbService_ClientDeleteDb_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -4738,23 +3027,22 @@ void RafdbServiceClient::recv_NextValues(std::vector<std::string> & _return)
     // _return pointer has now been filled
     return;
   }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "NextValues failed: unknown result");
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ClientDeleteDb failed: unknown result");
 }
 
-void RafdbServiceClient::NextPairs(std::vector<Pair> & _return, const int32_t itID, const int32_t number)
+void RafdbServiceClient::ClientGetDbRecordCount(ResIntInfo& _return, const std::string& dbname)
 {
-  send_NextPairs(itID, number);
-  recv_NextPairs(_return);
+  send_ClientGetDbRecordCount(dbname);
+  recv_ClientGetDbRecordCount(_return);
 }
 
-void RafdbServiceClient::send_NextPairs(const int32_t itID, const int32_t number)
+void RafdbServiceClient::send_ClientGetDbRecordCount(const std::string& dbname)
 {
   int32_t cseqid = 0;
-  oprot_->writeMessageBegin("NextPairs", ::apache::thrift::protocol::T_CALL, cseqid);
+  oprot_->writeMessageBegin("ClientGetDbRecordCount", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  RafdbService_NextPairs_pargs args;
-  args.itID = &itID;
-  args.number = &number;
+  RafdbService_ClientGetDbRecordCount_pargs args;
+  args.dbname = &dbname;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -4762,7 +3050,7 @@ void RafdbServiceClient::send_NextPairs(const int32_t itID, const int32_t number
   oprot_->getTransport()->writeEnd();
 }
 
-void RafdbServiceClient::recv_NextPairs(std::vector<Pair> & _return)
+void RafdbServiceClient::recv_ClientGetDbRecordCount(ResIntInfo& _return)
 {
 
   int32_t rseqid = 0;
@@ -4783,13 +3071,13 @@ void RafdbServiceClient::recv_NextPairs(std::vector<Pair> & _return)
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
   }
-  if (fname.compare("NextPairs") != 0) {
+  if (fname.compare("ClientGetDbRecordCount") != 0) {
     iprot_->skip(::apache::thrift::protocol::T_STRUCT);
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
   }
-  RafdbService_NextPairs_presult result;
+  RafdbService_ClientGetDbRecordCount_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -4799,22 +3087,24 @@ void RafdbServiceClient::recv_NextPairs(std::vector<Pair> & _return)
     // _return pointer has now been filled
     return;
   }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "NextPairs failed: unknown result");
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ClientGetDbRecordCount failed: unknown result");
 }
 
-bool RafdbServiceClient::DeleteDatabase(const std::string& dbname)
+void RafdbServiceClient::ClientPushRecordV2(ResIntInfo& _return, const std::string& dbname, const std::string& fields, const std::string& values)
 {
-  send_DeleteDatabase(dbname);
-  return recv_DeleteDatabase();
+  send_ClientPushRecordV2(dbname, fields, values);
+  recv_ClientPushRecordV2(_return);
 }
 
-void RafdbServiceClient::send_DeleteDatabase(const std::string& dbname)
+void RafdbServiceClient::send_ClientPushRecordV2(const std::string& dbname, const std::string& fields, const std::string& values)
 {
   int32_t cseqid = 0;
-  oprot_->writeMessageBegin("DeleteDatabase", ::apache::thrift::protocol::T_CALL, cseqid);
+  oprot_->writeMessageBegin("ClientPushRecordV2", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  RafdbService_DeleteDatabase_pargs args;
+  RafdbService_ClientPushRecordV2_pargs args;
   args.dbname = &dbname;
+  args.fields = &fields;
+  args.values = &values;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -4822,7 +3112,7 @@ void RafdbServiceClient::send_DeleteDatabase(const std::string& dbname)
   oprot_->getTransport()->writeEnd();
 }
 
-bool RafdbServiceClient::recv_DeleteDatabase()
+void RafdbServiceClient::recv_ClientPushRecordV2(ResIntInfo& _return)
 {
 
   int32_t rseqid = 0;
@@ -4843,40 +3133,42 @@ bool RafdbServiceClient::recv_DeleteDatabase()
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
   }
-  if (fname.compare("DeleteDatabase") != 0) {
+  if (fname.compare("ClientPushRecordV2") != 0) {
     iprot_->skip(::apache::thrift::protocol::T_STRUCT);
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
   }
-  bool _return;
-  RafdbService_DeleteDatabase_presult result;
+  RafdbService_ClientPushRecordV2_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
   iprot_->getTransport()->readEnd();
 
   if (result.__isset.success) {
-    return _return;
+    // _return pointer has now been filled
+    return;
   }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "DeleteDatabase failed: unknown result");
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ClientPushRecordV2 failed: unknown result");
 }
 
-bool RafdbServiceClient::LSet(const std::string& dbname, const std::string& key, const std::string& value)
+void RafdbServiceClient::ClientRetrieveRecordsV2(RetriveRecords& _return, const std::string& dbname, const std::string& fields, const std::string& wherestmt, const double min_sim, const int64_t max_rec)
 {
-  send_LSet(dbname, key, value);
-  return recv_LSet();
+  send_ClientRetrieveRecordsV2(dbname, fields, wherestmt, min_sim, max_rec);
+  recv_ClientRetrieveRecordsV2(_return);
 }
 
-void RafdbServiceClient::send_LSet(const std::string& dbname, const std::string& key, const std::string& value)
+void RafdbServiceClient::send_ClientRetrieveRecordsV2(const std::string& dbname, const std::string& fields, const std::string& wherestmt, const double min_sim, const int64_t max_rec)
 {
   int32_t cseqid = 0;
-  oprot_->writeMessageBegin("LSet", ::apache::thrift::protocol::T_CALL, cseqid);
+  oprot_->writeMessageBegin("ClientRetrieveRecordsV2", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  RafdbService_LSet_pargs args;
+  RafdbService_ClientRetrieveRecordsV2_pargs args;
   args.dbname = &dbname;
-  args.key = &key;
-  args.value = &value;
+  args.fields = &fields;
+  args.wherestmt = &wherestmt;
+  args.min_sim = &min_sim;
+  args.max_rec = &max_rec;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -4884,7 +3176,7 @@ void RafdbServiceClient::send_LSet(const std::string& dbname, const std::string&
   oprot_->getTransport()->writeEnd();
 }
 
-bool RafdbServiceClient::recv_LSet()
+void RafdbServiceClient::recv_ClientRetrieveRecordsV2(RetriveRecords& _return)
 {
 
   int32_t rseqid = 0;
@@ -4905,23 +3197,265 @@ bool RafdbServiceClient::recv_LSet()
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
   }
-  if (fname.compare("LSet") != 0) {
+  if (fname.compare("ClientRetrieveRecordsV2") != 0) {
     iprot_->skip(::apache::thrift::protocol::T_STRUCT);
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
     throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
   }
-  bool _return;
-  RafdbService_LSet_presult result;
+  RafdbService_ClientRetrieveRecordsV2_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
   iprot_->getTransport()->readEnd();
 
   if (result.__isset.success) {
-    return _return;
+    // _return pointer has now been filled
+    return;
   }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "LSet failed: unknown result");
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ClientRetrieveRecordsV2 failed: unknown result");
+}
+
+void RafdbServiceClient::ClientDeleteRecord(ErrInfoThr& _return, const std::string& dbname, const int64_t index)
+{
+  send_ClientDeleteRecord(dbname, index);
+  recv_ClientDeleteRecord(_return);
+}
+
+void RafdbServiceClient::send_ClientDeleteRecord(const std::string& dbname, const int64_t index)
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("ClientDeleteRecord", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RafdbService_ClientDeleteRecord_pargs args;
+  args.dbname = &dbname;
+  args.index = &index;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->flush();
+  oprot_->getTransport()->writeEnd();
+}
+
+void RafdbServiceClient::recv_ClientDeleteRecord(ErrInfoThr& _return)
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
+  }
+  if (fname.compare("ClientDeleteRecord") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
+  }
+  RafdbService_ClientDeleteRecord_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    // _return pointer has now been filled
+    return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ClientDeleteRecord failed: unknown result");
+}
+
+void RafdbServiceClient::ClientDeleteRecordWs(ErrInfoThr& _return, const std::string& dbname, const std::string& wherestmt)
+{
+  send_ClientDeleteRecordWs(dbname, wherestmt);
+  recv_ClientDeleteRecordWs(_return);
+}
+
+void RafdbServiceClient::send_ClientDeleteRecordWs(const std::string& dbname, const std::string& wherestmt)
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("ClientDeleteRecordWs", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RafdbService_ClientDeleteRecordWs_pargs args;
+  args.dbname = &dbname;
+  args.wherestmt = &wherestmt;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->flush();
+  oprot_->getTransport()->writeEnd();
+}
+
+void RafdbServiceClient::recv_ClientDeleteRecordWs(ErrInfoThr& _return)
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
+  }
+  if (fname.compare("ClientDeleteRecordWs") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
+  }
+  RafdbService_ClientDeleteRecordWs_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    // _return pointer has now been filled
+    return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ClientDeleteRecordWs failed: unknown result");
+}
+
+void RafdbServiceClient::ClientDbScanRepair(ResIntInfo& _return, const std::string& dbname)
+{
+  send_ClientDbScanRepair(dbname);
+  recv_ClientDbScanRepair(_return);
+}
+
+void RafdbServiceClient::send_ClientDbScanRepair(const std::string& dbname)
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("ClientDbScanRepair", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RafdbService_ClientDbScanRepair_pargs args;
+  args.dbname = &dbname;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->flush();
+  oprot_->getTransport()->writeEnd();
+}
+
+void RafdbServiceClient::recv_ClientDbScanRepair(ResIntInfo& _return)
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
+  }
+  if (fname.compare("ClientDbScanRepair") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
+  }
+  RafdbService_ClientDbScanRepair_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    // _return pointer has now been filled
+    return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ClientDbScanRepair failed: unknown result");
+}
+
+void RafdbServiceClient::ClientEnumDbColumns(ResIntInfo& _return, const std::string& dbname)
+{
+  send_ClientEnumDbColumns(dbname);
+  recv_ClientEnumDbColumns(_return);
+}
+
+void RafdbServiceClient::send_ClientEnumDbColumns(const std::string& dbname)
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("ClientEnumDbColumns", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RafdbService_ClientEnumDbColumns_pargs args;
+  args.dbname = &dbname;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->flush();
+  oprot_->getTransport()->writeEnd();
+}
+
+void RafdbServiceClient::recv_ClientEnumDbColumns(ResIntInfo& _return)
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
+  }
+  if (fname.compare("ClientEnumDbColumns") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
+  }
+  RafdbService_ClientEnumDbColumns_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    // _return pointer has now been filled
+    return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ClientEnumDbColumns failed: unknown result");
 }
 
 bool RafdbServiceClient::IsHealthy()
@@ -5101,6 +3635,65 @@ int32_t RafdbServiceClient::recv_GetLeaderId()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetLeaderId failed: unknown result");
 }
 
+void RafdbServiceClient::GetCluserIPList(std::string& _return)
+{
+  send_GetCluserIPList();
+  recv_GetCluserIPList(_return);
+}
+
+void RafdbServiceClient::send_GetCluserIPList()
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("GetCluserIPList", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RafdbService_GetCluserIPList_pargs args;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->flush();
+  oprot_->getTransport()->writeEnd();
+}
+
+void RafdbServiceClient::recv_GetCluserIPList(std::string& _return)
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::INVALID_MESSAGE_TYPE);
+  }
+  if (fname.compare("GetCluserIPList") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::WRONG_METHOD_NAME);
+  }
+  RafdbService_GetCluserIPList_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    // _return pointer has now been filled
+    return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetCluserIPList failed: unknown result");
+}
+
 void RafdbServiceClient::SendVote(const rafdb::Message& message)
 {
   send_SendVote(message);
@@ -5260,20 +3853,20 @@ bool RafdbServiceProcessor::process_fn(::apache::thrift::protocol::TProtocol* ip
   return true;
 }
 
-void RafdbServiceProcessor::process_Set(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+void RafdbServiceProcessor::process_VseClientVersion(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
 {
-  RafdbService_Set_args args;
+  RafdbService_VseClientVersion_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   iprot->getTransport()->readEnd();
 
-  RafdbService_Set_result result;
+  RafdbService_VseClientVersion_result result;
   try {
-    result.success = iface_->Set(args.dbname, args.key, args.value);
+    iface_->VseClientVersion(result.success);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("Set", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("VseClientVersion", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->flush();
@@ -5281,27 +3874,27 @@ void RafdbServiceProcessor::process_Set(int32_t seqid, ::apache::thrift::protoco
     return;
   }
 
-  oprot->writeMessageBegin("Set", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("VseClientVersion", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();
   oprot->getTransport()->writeEnd();
 }
 
-void RafdbServiceProcessor::process_MPSet(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+void RafdbServiceProcessor::process_ClientEnumAllDbs(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
 {
-  RafdbService_MPSet_args args;
+  RafdbService_ClientEnumAllDbs_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   iprot->getTransport()->readEnd();
 
-  RafdbService_MPSet_result result;
+  RafdbService_ClientEnumAllDbs_result result;
   try {
-    result.success = iface_->MPSet(args.dbname, args.pairs);
+    iface_->ClientEnumAllDbs(result.success);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("MPSet", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("ClientEnumAllDbs", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->flush();
@@ -5309,27 +3902,27 @@ void RafdbServiceProcessor::process_MPSet(int32_t seqid, ::apache::thrift::proto
     return;
   }
 
-  oprot->writeMessageBegin("MPSet", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("ClientEnumAllDbs", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();
   oprot->getTransport()->writeEnd();
 }
 
-void RafdbServiceProcessor::process_Get(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+void RafdbServiceProcessor::process_ClientCreateDbV2(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
 {
-  RafdbService_Get_args args;
+  RafdbService_ClientCreateDbV2_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   iprot->getTransport()->readEnd();
 
-  RafdbService_Get_result result;
+  RafdbService_ClientCreateDbV2_result result;
   try {
-    iface_->Get(result.success, args.dbname, args.key);
+    iface_->ClientCreateDbV2(result.success, args.dbname, args.fields);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("Get", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("ClientCreateDbV2", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->flush();
@@ -5337,27 +3930,27 @@ void RafdbServiceProcessor::process_Get(int32_t seqid, ::apache::thrift::protoco
     return;
   }
 
-  oprot->writeMessageBegin("Get", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("ClientCreateDbV2", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();
   oprot->getTransport()->writeEnd();
 }
 
-void RafdbServiceProcessor::process_MGet(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+void RafdbServiceProcessor::process_ClientDeleteDb(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
 {
-  RafdbService_MGet_args args;
+  RafdbService_ClientDeleteDb_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   iprot->getTransport()->readEnd();
 
-  RafdbService_MGet_result result;
+  RafdbService_ClientDeleteDb_result result;
   try {
-    iface_->MGet(result.success, args.dbname, args.keys);
+    iface_->ClientDeleteDb(result.success, args.dbname);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("MGet", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("ClientDeleteDb", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->flush();
@@ -5365,27 +3958,27 @@ void RafdbServiceProcessor::process_MGet(int32_t seqid, ::apache::thrift::protoc
     return;
   }
 
-  oprot->writeMessageBegin("MGet", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("ClientDeleteDb", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();
   oprot->getTransport()->writeEnd();
 }
 
-void RafdbServiceProcessor::process_Delete(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+void RafdbServiceProcessor::process_ClientGetDbRecordCount(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
 {
-  RafdbService_Delete_args args;
+  RafdbService_ClientGetDbRecordCount_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   iprot->getTransport()->readEnd();
 
-  RafdbService_Delete_result result;
+  RafdbService_ClientGetDbRecordCount_result result;
   try {
-    result.success = iface_->Delete(args.dbname, args.key);
+    iface_->ClientGetDbRecordCount(result.success, args.dbname);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("Delete", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("ClientGetDbRecordCount", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->flush();
@@ -5393,27 +3986,27 @@ void RafdbServiceProcessor::process_Delete(int32_t seqid, ::apache::thrift::prot
     return;
   }
 
-  oprot->writeMessageBegin("Delete", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("ClientGetDbRecordCount", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();
   oprot->getTransport()->writeEnd();
 }
 
-void RafdbServiceProcessor::process_MDelete(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+void RafdbServiceProcessor::process_ClientPushRecordV2(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
 {
-  RafdbService_MDelete_args args;
+  RafdbService_ClientPushRecordV2_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   iprot->getTransport()->readEnd();
 
-  RafdbService_MDelete_result result;
+  RafdbService_ClientPushRecordV2_result result;
   try {
-    result.success = iface_->MDelete(args.dbname, args.keys);
+    iface_->ClientPushRecordV2(result.success, args.dbname, args.fields, args.values);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("MDelete", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("ClientPushRecordV2", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->flush();
@@ -5421,27 +4014,27 @@ void RafdbServiceProcessor::process_MDelete(int32_t seqid, ::apache::thrift::pro
     return;
   }
 
-  oprot->writeMessageBegin("MDelete", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("ClientPushRecordV2", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();
   oprot->getTransport()->writeEnd();
 }
 
-void RafdbServiceProcessor::process_OpenIterator(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+void RafdbServiceProcessor::process_ClientRetrieveRecordsV2(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
 {
-  RafdbService_OpenIterator_args args;
+  RafdbService_ClientRetrieveRecordsV2_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   iprot->getTransport()->readEnd();
 
-  RafdbService_OpenIterator_result result;
+  RafdbService_ClientRetrieveRecordsV2_result result;
   try {
-    result.success = iface_->OpenIterator(args.dbname);
+    iface_->ClientRetrieveRecordsV2(result.success, args.dbname, args.fields, args.wherestmt, args.min_sim, args.max_rec);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("OpenIterator", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("ClientRetrieveRecordsV2", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->flush();
@@ -5449,27 +4042,27 @@ void RafdbServiceProcessor::process_OpenIterator(int32_t seqid, ::apache::thrift
     return;
   }
 
-  oprot->writeMessageBegin("OpenIterator", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("ClientRetrieveRecordsV2", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();
   oprot->getTransport()->writeEnd();
 }
 
-void RafdbServiceProcessor::process_CloseIterator(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+void RafdbServiceProcessor::process_ClientDeleteRecord(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
 {
-  RafdbService_CloseIterator_args args;
+  RafdbService_ClientDeleteRecord_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   iprot->getTransport()->readEnd();
 
-  RafdbService_CloseIterator_result result;
+  RafdbService_ClientDeleteRecord_result result;
   try {
-    result.success = iface_->CloseIterator(args.itID);
+    iface_->ClientDeleteRecord(result.success, args.dbname, args.index);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("CloseIterator", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("ClientDeleteRecord", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->flush();
@@ -5477,27 +4070,27 @@ void RafdbServiceProcessor::process_CloseIterator(int32_t seqid, ::apache::thrif
     return;
   }
 
-  oprot->writeMessageBegin("CloseIterator", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("ClientDeleteRecord", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();
   oprot->getTransport()->writeEnd();
 }
 
-void RafdbServiceProcessor::process_SeekToFirst(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+void RafdbServiceProcessor::process_ClientDeleteRecordWs(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
 {
-  RafdbService_SeekToFirst_args args;
+  RafdbService_ClientDeleteRecordWs_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   iprot->getTransport()->readEnd();
 
-  RafdbService_SeekToFirst_result result;
+  RafdbService_ClientDeleteRecordWs_result result;
   try {
-    result.success = iface_->SeekToFirst(args.itID);
+    iface_->ClientDeleteRecordWs(result.success, args.dbname, args.wherestmt);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("SeekToFirst", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("ClientDeleteRecordWs", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->flush();
@@ -5505,27 +4098,27 @@ void RafdbServiceProcessor::process_SeekToFirst(int32_t seqid, ::apache::thrift:
     return;
   }
 
-  oprot->writeMessageBegin("SeekToFirst", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("ClientDeleteRecordWs", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();
   oprot->getTransport()->writeEnd();
 }
 
-void RafdbServiceProcessor::process_SeekToLast(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+void RafdbServiceProcessor::process_ClientDbScanRepair(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
 {
-  RafdbService_SeekToLast_args args;
+  RafdbService_ClientDbScanRepair_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   iprot->getTransport()->readEnd();
 
-  RafdbService_SeekToLast_result result;
+  RafdbService_ClientDbScanRepair_result result;
   try {
-    result.success = iface_->SeekToLast(args.itID);
+    iface_->ClientDbScanRepair(result.success, args.dbname);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("SeekToLast", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("ClientDbScanRepair", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->flush();
@@ -5533,27 +4126,27 @@ void RafdbServiceProcessor::process_SeekToLast(int32_t seqid, ::apache::thrift::
     return;
   }
 
-  oprot->writeMessageBegin("SeekToLast", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("ClientDbScanRepair", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();
   oprot->getTransport()->writeEnd();
 }
 
-void RafdbServiceProcessor::process_Valid(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+void RafdbServiceProcessor::process_ClientEnumDbColumns(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
 {
-  RafdbService_Valid_args args;
+  RafdbService_ClientEnumDbColumns_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   iprot->getTransport()->readEnd();
 
-  RafdbService_Valid_result result;
+  RafdbService_ClientEnumDbColumns_result result;
   try {
-    result.success = iface_->Valid(args.itID);
+    iface_->ClientEnumDbColumns(result.success, args.dbname);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("Valid", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("ClientEnumDbColumns", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->flush();
@@ -5561,175 +4154,7 @@ void RafdbServiceProcessor::process_Valid(int32_t seqid, ::apache::thrift::proto
     return;
   }
 
-  oprot->writeMessageBegin("Valid", ::apache::thrift::protocol::T_REPLY, seqid);
-  result.write(oprot);
-  oprot->writeMessageEnd();
-  oprot->getTransport()->flush();
-  oprot->getTransport()->writeEnd();
-}
-
-void RafdbServiceProcessor::process_Seek(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
-{
-  RafdbService_Seek_args args;
-  args.read(iprot);
-  iprot->readMessageEnd();
-  iprot->getTransport()->readEnd();
-
-  RafdbService_Seek_result result;
-  try {
-    result.success = iface_->Seek(args.itID, args.target);
-    result.__isset.success = true;
-  } catch (const std::exception& e) {
-    ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("Seek", ::apache::thrift::protocol::T_EXCEPTION, seqid);
-    x.write(oprot);
-    oprot->writeMessageEnd();
-    oprot->getTransport()->flush();
-    oprot->getTransport()->writeEnd();
-    return;
-  }
-
-  oprot->writeMessageBegin("Seek", ::apache::thrift::protocol::T_REPLY, seqid);
-  result.write(oprot);
-  oprot->writeMessageEnd();
-  oprot->getTransport()->flush();
-  oprot->getTransport()->writeEnd();
-}
-
-void RafdbServiceProcessor::process_NextKeys(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
-{
-  RafdbService_NextKeys_args args;
-  args.read(iprot);
-  iprot->readMessageEnd();
-  iprot->getTransport()->readEnd();
-
-  RafdbService_NextKeys_result result;
-  try {
-    iface_->NextKeys(result.success, args.itID, args.number);
-    result.__isset.success = true;
-  } catch (const std::exception& e) {
-    ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("NextKeys", ::apache::thrift::protocol::T_EXCEPTION, seqid);
-    x.write(oprot);
-    oprot->writeMessageEnd();
-    oprot->getTransport()->flush();
-    oprot->getTransport()->writeEnd();
-    return;
-  }
-
-  oprot->writeMessageBegin("NextKeys", ::apache::thrift::protocol::T_REPLY, seqid);
-  result.write(oprot);
-  oprot->writeMessageEnd();
-  oprot->getTransport()->flush();
-  oprot->getTransport()->writeEnd();
-}
-
-void RafdbServiceProcessor::process_NextValues(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
-{
-  RafdbService_NextValues_args args;
-  args.read(iprot);
-  iprot->readMessageEnd();
-  iprot->getTransport()->readEnd();
-
-  RafdbService_NextValues_result result;
-  try {
-    iface_->NextValues(result.success, args.itID, args.number);
-    result.__isset.success = true;
-  } catch (const std::exception& e) {
-    ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("NextValues", ::apache::thrift::protocol::T_EXCEPTION, seqid);
-    x.write(oprot);
-    oprot->writeMessageEnd();
-    oprot->getTransport()->flush();
-    oprot->getTransport()->writeEnd();
-    return;
-  }
-
-  oprot->writeMessageBegin("NextValues", ::apache::thrift::protocol::T_REPLY, seqid);
-  result.write(oprot);
-  oprot->writeMessageEnd();
-  oprot->getTransport()->flush();
-  oprot->getTransport()->writeEnd();
-}
-
-void RafdbServiceProcessor::process_NextPairs(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
-{
-  RafdbService_NextPairs_args args;
-  args.read(iprot);
-  iprot->readMessageEnd();
-  iprot->getTransport()->readEnd();
-
-  RafdbService_NextPairs_result result;
-  try {
-    iface_->NextPairs(result.success, args.itID, args.number);
-    result.__isset.success = true;
-  } catch (const std::exception& e) {
-    ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("NextPairs", ::apache::thrift::protocol::T_EXCEPTION, seqid);
-    x.write(oprot);
-    oprot->writeMessageEnd();
-    oprot->getTransport()->flush();
-    oprot->getTransport()->writeEnd();
-    return;
-  }
-
-  oprot->writeMessageBegin("NextPairs", ::apache::thrift::protocol::T_REPLY, seqid);
-  result.write(oprot);
-  oprot->writeMessageEnd();
-  oprot->getTransport()->flush();
-  oprot->getTransport()->writeEnd();
-}
-
-void RafdbServiceProcessor::process_DeleteDatabase(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
-{
-  RafdbService_DeleteDatabase_args args;
-  args.read(iprot);
-  iprot->readMessageEnd();
-  iprot->getTransport()->readEnd();
-
-  RafdbService_DeleteDatabase_result result;
-  try {
-    result.success = iface_->DeleteDatabase(args.dbname);
-    result.__isset.success = true;
-  } catch (const std::exception& e) {
-    ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("DeleteDatabase", ::apache::thrift::protocol::T_EXCEPTION, seqid);
-    x.write(oprot);
-    oprot->writeMessageEnd();
-    oprot->getTransport()->flush();
-    oprot->getTransport()->writeEnd();
-    return;
-  }
-
-  oprot->writeMessageBegin("DeleteDatabase", ::apache::thrift::protocol::T_REPLY, seqid);
-  result.write(oprot);
-  oprot->writeMessageEnd();
-  oprot->getTransport()->flush();
-  oprot->getTransport()->writeEnd();
-}
-
-void RafdbServiceProcessor::process_LSet(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
-{
-  RafdbService_LSet_args args;
-  args.read(iprot);
-  iprot->readMessageEnd();
-  iprot->getTransport()->readEnd();
-
-  RafdbService_LSet_result result;
-  try {
-    result.success = iface_->LSet(args.dbname, args.key, args.value);
-    result.__isset.success = true;
-  } catch (const std::exception& e) {
-    ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("LSet", ::apache::thrift::protocol::T_EXCEPTION, seqid);
-    x.write(oprot);
-    oprot->writeMessageEnd();
-    oprot->getTransport()->flush();
-    oprot->getTransport()->writeEnd();
-    return;
-  }
-
-  oprot->writeMessageBegin("LSet", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("ClientEnumDbColumns", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();
@@ -5814,6 +4239,34 @@ void RafdbServiceProcessor::process_GetLeaderId(int32_t seqid, ::apache::thrift:
   }
 
   oprot->writeMessageBegin("GetLeaderId", ::apache::thrift::protocol::T_REPLY, seqid);
+  result.write(oprot);
+  oprot->writeMessageEnd();
+  oprot->getTransport()->flush();
+  oprot->getTransport()->writeEnd();
+}
+
+void RafdbServiceProcessor::process_GetCluserIPList(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot)
+{
+  RafdbService_GetCluserIPList_args args;
+  args.read(iprot);
+  iprot->readMessageEnd();
+  iprot->getTransport()->readEnd();
+
+  RafdbService_GetCluserIPList_result result;
+  try {
+    iface_->GetCluserIPList(result.success);
+    result.__isset.success = true;
+  } catch (const std::exception& e) {
+    ::apache::thrift::TApplicationException x(e.what());
+    oprot->writeMessageBegin("GetCluserIPList", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    x.write(oprot);
+    oprot->writeMessageEnd();
+    oprot->getTransport()->flush();
+    oprot->getTransport()->writeEnd();
+    return;
+  }
+
+  oprot->writeMessageBegin("GetCluserIPList", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   oprot->getTransport()->flush();

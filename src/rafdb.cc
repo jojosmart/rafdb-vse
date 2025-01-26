@@ -48,6 +48,7 @@ namespace rafdb {
         StringToInt(tmp_v[2], &self_id_);
         std::vector<std::string> tmp_v2;
         if (FLAGS_rafdb_list != "") {
+            cluster_ip_list_ = FLAGS_rafdb_list;
             SplitString(FLAGS_rafdb_list, ',', &tmp_v2);
             for(int i=0;i<tmp_v2.size();i++) {
                 std::string ip_tmp;
@@ -55,6 +56,7 @@ namespace rafdb {
                 int id_tmp;
                 GetIpPortId(ip_tmp,port_tmp,id_tmp,tmp_v2[i]);
                 if (id_tmp != self_id_) {
+                    //node_list except self
                     NodeInfo tmp;
                     tmp.ip = ip_tmp;
                     tmp.port = port_tmp;

@@ -16,41 +16,295 @@
 
 namespace rafdb {
 
-typedef struct _Pair__isset {
-  _Pair__isset() : key(false), value(false) {}
-  bool key;
-  bool value;
-} _Pair__isset;
+typedef struct _VseBufferThr__isset {
+  _VseBufferThr__isset() : data(false), size(false) {}
+  bool data;
+  bool size;
+} _VseBufferThr__isset;
 
-class Pair {
+class VseBufferThr {
  public:
 
-  static const char* ascii_fingerprint; // = "07A9615F837F7D0A952B595DD3020972";
-  static const uint8_t binary_fingerprint[16]; // = {0x07,0xA9,0x61,0x5F,0x83,0x7F,0x7D,0x0A,0x95,0x2B,0x59,0x5D,0xD3,0x02,0x09,0x72};
+  static const char* ascii_fingerprint; // = "1CCCF6FC31CFD1D61BBBB1BAF3590620";
+  static const uint8_t binary_fingerprint[16]; // = {0x1C,0xCC,0xF6,0xFC,0x31,0xCF,0xD1,0xD6,0x1B,0xBB,0xB1,0xBA,0xF3,0x59,0x06,0x20};
 
-  Pair() : key(""), value("") {
+  VseBufferThr() : data(""), size(0) {
   }
 
-  virtual ~Pair() throw() {}
+  virtual ~VseBufferThr() throw() {}
 
-  std::string key;
-  std::string value;
+  std::string data;
+  int64_t size;
 
-  _Pair__isset __isset;
+  _VseBufferThr__isset __isset;
 
-  bool operator == (const Pair & rhs) const
+  bool operator == (const VseBufferThr & rhs) const
   {
-    if (!(key == rhs.key))
+    if (!(data == rhs.data))
       return false;
-    if (!(value == rhs.value))
+    if (!(size == rhs.size))
       return false;
     return true;
   }
-  bool operator != (const Pair &rhs) const {
+  bool operator != (const VseBufferThr &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const Pair & ) const;
+  bool operator < (const VseBufferThr & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _ErrInfoThr__isset {
+  _ErrInfoThr__isset() : code(false), errmsg(false) {}
+  bool code;
+  bool errmsg;
+} _ErrInfoThr__isset;
+
+class ErrInfoThr {
+ public:
+
+  static const char* ascii_fingerprint; // = "3F5FC93B338687BC7235B1AB103F47B3";
+  static const uint8_t binary_fingerprint[16]; // = {0x3F,0x5F,0xC9,0x3B,0x33,0x86,0x87,0xBC,0x72,0x35,0xB1,0xAB,0x10,0x3F,0x47,0xB3};
+
+  ErrInfoThr() : code(0), errmsg("") {
+  }
+
+  virtual ~ErrInfoThr() throw() {}
+
+  int32_t code;
+  std::string errmsg;
+
+  _ErrInfoThr__isset __isset;
+
+  bool operator == (const ErrInfoThr & rhs) const
+  {
+    if (!(code == rhs.code))
+      return false;
+    if (!(errmsg == rhs.errmsg))
+      return false;
+    return true;
+  }
+  bool operator != (const ErrInfoThr &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const ErrInfoThr & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _BufferArrayThr__isset {
+  _BufferArrayThr__isset() : nct(false), buffers(false) {}
+  bool nct;
+  bool buffers;
+} _BufferArrayThr__isset;
+
+class BufferArrayThr {
+ public:
+
+  static const char* ascii_fingerprint; // = "B5C7BD0A4B7E882A7ACBFEF65CD1A5F1";
+  static const uint8_t binary_fingerprint[16]; // = {0xB5,0xC7,0xBD,0x0A,0x4B,0x7E,0x88,0x2A,0x7A,0xCB,0xFE,0xF6,0x5C,0xD1,0xA5,0xF1};
+
+  BufferArrayThr() : nct(0) {
+  }
+
+  virtual ~BufferArrayThr() throw() {}
+
+  int32_t nct;
+  std::vector<VseBufferThr>  buffers;
+
+  _BufferArrayThr__isset __isset;
+
+  bool operator == (const BufferArrayThr & rhs) const
+  {
+    if (!(nct == rhs.nct))
+      return false;
+    if (!(buffers == rhs.buffers))
+      return false;
+    return true;
+  }
+  bool operator != (const BufferArrayThr &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const BufferArrayThr & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _DataRecordThr__isset {
+  _DataRecordThr__isset() : idx(false), sim(false), p_params(false) {}
+  bool idx;
+  bool sim;
+  bool p_params;
+} _DataRecordThr__isset;
+
+class DataRecordThr {
+ public:
+
+  static const char* ascii_fingerprint; // = "A69C7D935D8D1C64F758E0D2CB604289";
+  static const uint8_t binary_fingerprint[16]; // = {0xA6,0x9C,0x7D,0x93,0x5D,0x8D,0x1C,0x64,0xF7,0x58,0xE0,0xD2,0xCB,0x60,0x42,0x89};
+
+  DataRecordThr() : idx(0), sim(0) {
+  }
+
+  virtual ~DataRecordThr() throw() {}
+
+  int64_t idx;
+  double sim;
+  std::vector<BufferArrayThr>  p_params;
+
+  _DataRecordThr__isset __isset;
+
+  bool operator == (const DataRecordThr & rhs) const
+  {
+    if (!(idx == rhs.idx))
+      return false;
+    if (!(sim == rhs.sim))
+      return false;
+    if (!(p_params == rhs.p_params))
+      return false;
+    return true;
+  }
+  bool operator != (const DataRecordThr &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const DataRecordThr & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _ResDbnameList__isset {
+  _ResDbnameList__isset() : result(false), error_info(false) {}
+  bool result;
+  bool error_info;
+} _ResDbnameList__isset;
+
+class ResDbnameList {
+ public:
+
+  static const char* ascii_fingerprint; // = "3978EE9ED2CCEE065602DC46971B0ED5";
+  static const uint8_t binary_fingerprint[16]; // = {0x39,0x78,0xEE,0x9E,0xD2,0xCC,0xEE,0x06,0x56,0x02,0xDC,0x46,0x97,0x1B,0x0E,0xD5};
+
+  ResDbnameList() {
+  }
+
+  virtual ~ResDbnameList() throw() {}
+
+  std::vector<BufferArrayThr>  result;
+  ErrInfoThr error_info;
+
+  _ResDbnameList__isset __isset;
+
+  bool operator == (const ResDbnameList & rhs) const
+  {
+    if (!(result == rhs.result))
+      return false;
+    if (!(error_info == rhs.error_info))
+      return false;
+    return true;
+  }
+  bool operator != (const ResDbnameList &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const ResDbnameList & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _ResIntInfo__isset {
+  _ResIntInfo__isset() : result(false), error_info(false) {}
+  bool result;
+  bool error_info;
+} _ResIntInfo__isset;
+
+class ResIntInfo {
+ public:
+
+  static const char* ascii_fingerprint; // = "E5C8DBD52F4386F1B09D254CC44CEBA1";
+  static const uint8_t binary_fingerprint[16]; // = {0xE5,0xC8,0xDB,0xD5,0x2F,0x43,0x86,0xF1,0xB0,0x9D,0x25,0x4C,0xC4,0x4C,0xEB,0xA1};
+
+  ResIntInfo() : result(0) {
+  }
+
+  virtual ~ResIntInfo() throw() {}
+
+  int64_t result;
+  ErrInfoThr error_info;
+
+  _ResIntInfo__isset __isset;
+
+  bool operator == (const ResIntInfo & rhs) const
+  {
+    if (!(result == rhs.result))
+      return false;
+    if (!(error_info == rhs.error_info))
+      return false;
+    return true;
+  }
+  bool operator != (const ResIntInfo &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const ResIntInfo & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RetriveRecords__isset {
+  _RetriveRecords__isset() : count(false), data_records(false), error_info(false) {}
+  bool count;
+  bool data_records;
+  bool error_info;
+} _RetriveRecords__isset;
+
+class RetriveRecords {
+ public:
+
+  static const char* ascii_fingerprint; // = "E6C4817F50FCF0AD1B7F541F73862AA9";
+  static const uint8_t binary_fingerprint[16]; // = {0xE6,0xC4,0x81,0x7F,0x50,0xFC,0xF0,0xAD,0x1B,0x7F,0x54,0x1F,0x73,0x86,0x2A,0xA9};
+
+  RetriveRecords() : count(0) {
+  }
+
+  virtual ~RetriveRecords() throw() {}
+
+  int64_t count;
+  std::vector<DataRecordThr>  data_records;
+  ErrInfoThr error_info;
+
+  _RetriveRecords__isset __isset;
+
+  bool operator == (const RetriveRecords & rhs) const
+  {
+    if (!(count == rhs.count))
+      return false;
+    if (!(data_records == rhs.data_records))
+      return false;
+    if (!(error_info == rhs.error_info))
+      return false;
+    return true;
+  }
+  bool operator != (const RetriveRecords &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RetriveRecords & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
