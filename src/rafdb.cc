@@ -1,17 +1,17 @@
 
-#include "storage/rafdb/rafdb.h"
+#include "include/rafdb.h"
 
-#include "ts/base/util.h"
+//#include "ts/base/util.h"
 #include "base/logging.h"
 #include "file/file.h"
-#include "third_party/leveldb/write_batch.h"
-#include "third_party/leveldb/cache.h"
+//#include "third_party/leveldb/write_batch.h"
+//#include "third_party/leveldb/cache.h"
 #include "base/hash.h"
 #include "base/string_util.h"
-DEFINE_string(db_dir, "/data/leveldb/", "");
-DEFINE_int32(leveldb_block_cache, 1073741824, "1G");
-DEFINE_int32(check_interval, 3600, "");
-DEFINE_int32(write_buffer_size, 4194304, "leveldb buffer");
+//DEFINE_string(db_dir, "/data/leveldb/", "");
+//DEFINE_int32(leveldb_block_cache, 1073741824, "1G");
+//DEFINE_int32(check_interval, 3600, "");
+//DEFINE_int32(write_buffer_size, 4194304, "leveldb buffer");
 DEFINE_string(rafdb_self, "", "rafdb self,192.168.11.12:1111:1");
 
 namespace rafdb {
@@ -116,39 +116,6 @@ namespace rafdb {
         return true;
     }
 
-    bool RafDb::MPSet(const std::string &dbname,
-            const std::vector<rafdb::Pair> &pairs) {
-        //DLOG(INFO) << "MPSet start";
-        //leveldb::DB *db = NULL;
-        //{
-        //    base::MutexLock lock(&db_map_mutex_);
-        //    base::hash_map<std::string, leveldb::DB*>::iterator it =
-        //        db_map_.find(dbname);
-
-        //    if (it == db_map_.end()) {
-        //        db = Open(dbname);
-        //        if (db == NULL) {
-        //            LOG(ERROR) << "MPSet, db:" << dbname;
-        //            return false;
-        //        }
-        //    } else {
-        //        db = it->second;
-        //    }
-        //}
-
-        //leveldb::WriteBatch wBatch;
-        //for (int i = 0; i < pairs.size(); i++) {
-        //    wBatch.Put(pairs[i].key, pairs[i].value);
-        //}
-        //leveldb::Status status = db->Write(woptions_, &wBatch);
-        //if (!status.ok()) {
-        //    LOG(ERROR) << "MPSet, db:" << dbname;
-        //    return false;
-        //}
-        //DLOG(INFO) << "MPSet end";
-
-        return true;
-    }
 
     void RafDb::Get(std::string &result, const std::string &dbname,
             const std::string &key) {

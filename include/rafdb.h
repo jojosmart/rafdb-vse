@@ -59,6 +59,24 @@ namespace rafdb {
                 //TODO
                 return true;
             }
+
+            void GetCluserIPList(std::string& _return) {
+                _return = cluster_ip_list_;
+            }
+
+           void VseClientVersion(std::string& _return);
+           void ClientEnumAllDbs(ResDbnameList& _return);
+           void ClientCreateDbV2(ErrInfoThr& _return, const std::string& dbname, const std::string& fields);
+           void ClientDeleteDb(ErrInfoThr& _return, const std::string& dbname);
+           void ClientGetDbRecordCount(ResIntInfo& _return, const std::string& dbname);
+           void ClientPushRecordV2(ResIntInfo& _return, const std::string& dbname, const std::string& fields, const std::string& values);
+           void ClientRetrieveRecordsV2(RetriveRecords& _return, const std::string& dbname, const std::string& fields, const std::string& wherestmt, const double min_sim, const int64_t max_rec);
+           void ClientDeleteRecord(ErrInfoThr& _return, const std::string& dbname, const int64_t index);
+           void ClientDeleteRecordWs(ErrInfoThr& _return, const std::string& dbname, const std::string& wherestmt);
+           void ClientDbScanRepair(ResIntInfo& _return, const std::string& dbname);
+           void ClientEnumDbColumns(ResIntInfo& _return, const std::string& dbname);
+
+
             void SendVote(const rafdb::Message& message);
             void ReplyVote(const rafdb::Message& message);
             void SendHeartBeat(const rafdb::Message& message);
@@ -67,7 +85,7 @@ namespace rafdb {
             void ReplyLeaderId(const rafdb::Message& message);
             std::vector<NodeInfo> NodeList; 
         private:
-            friend class IteratorChecker;
+            //friend class IteratorChecker;
             friend class Manager;
             friend class Accord;
             friend class Peer;
@@ -80,10 +98,7 @@ namespace rafdb {
             }
             void Init();
 
-            // friend class ImageSet;
-            //friend class ImageGet;
-
-            int32_t                                     it_id_;
+            int32_t it_id_;
             base::Mutex leader_mutex_;
             base::Mutex mutex_;
             base::Mutex leader_data_sync_;
@@ -97,21 +112,21 @@ namespace rafdb {
 
             DISALLOW_COPY_AND_ASSIGN(RafDb);
     };
-    class IteratorChecker : public base::Thread {
-        public:
-            explicit IteratorChecker(RafDb* rafdb) : rafdb_(rafdb) { }
-            virtual ~IteratorChecker() { }
-
-        protected:
-            virtual void Run();
-
-        private:
-            RafDb* rafdb_;
-
-            DISALLOW_COPY_AND_ASSIGN(IteratorChecker);
-    };
-
-
-}  // namespace rafdb
+//    class IteratorChecker : public base::Thread {
+//        public:
+//            explicit IteratorChecker(RafDb* rafdb) : rafdb_(rafdb) { }
+//            virtual ~IteratorChecker() { }
+//
+//        protected:
+//            virtual void Run();
+//
+//        private:
+//            RafDb* rafdb_;
+//
+//            DISALLOW_COPY_AND_ASSIGN(IteratorChecker);
+//    };
+//
+//
+//}  // namespace rafdb
 
 #endif 
