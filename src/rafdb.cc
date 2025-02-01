@@ -27,7 +27,7 @@ namespace rafdb {
                 GetIpPortId(ip_tmp,port_tmp,id_tmp,tmp_v2[i]);
                 if (id_tmp != self_id_) {
                     //node_list except self
-                    NodeInfo tmp;
+                    rafdb::NodeInfo tmp;
                     tmp.ip = ip_tmp;
                     tmp.port = port_tmp;
                     NodeList.push_back(tmp);

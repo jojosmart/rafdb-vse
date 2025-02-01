@@ -37,21 +37,21 @@ class Sync
         void comsume_fail_queue_thread();
         void fail_queue_consumer();
     private:
-        enum alive_status{alive=0,dead=1};
+        enum alive_status{ALIVE=0,DEAD=1};
         void sync_process(LKV_SYNC *lkv);
         void for_fail_process(LKV_SYNC *lkv);        
-        bool get_node_status(const NodeInfo &info);
-        void update_node_status(const NodeInfo &info,int status);
+        bool get_node_status(const rafdb::NodeInfo &info);
+        void update_node_status(const rafdb::NodeInfo &info,int status);
         LKV_SYNC *create_lkv(const std::string &ip_port,const std::string &dbname,const std::string &key,const std::string &value);
 
         base::Mutex mutex_;
         base::Mutex flag_mutex_;
-        //base::hash_map<NodeInfo,int> node_status_map;
-        std::map< std::string,int > node_status_map;
-        std::map< std::string,SyncClient*> node_set_map;
-        std::map< std::string,int > fail_time_map;
+        //base::hash_map<rafdb::NodeInfo,int> node_status_map;
+        std::map< std::string, int > node_status_map;
+        std::map< std::string, SyncClient*> node_set_map;
+        std::map< std::string, int > fail_time_map;
         //std::map< std::>
-        std::string toIpPort(const NodeInfo &info);
+        std::string toIpPort(const rafdb::NodeInfo &info);
         
         //static Sync *m_pInstance;
         //std::string cache_dir;

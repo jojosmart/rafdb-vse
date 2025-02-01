@@ -78,7 +78,7 @@ namespace rafdb {
             void ReplyHeartBeat(const rafdb::Message& message);
             void QueryLeaderId(const rafdb::Message& message);
             void ReplyLeaderId(const rafdb::Message& message);
-            std::vector<NodeInfo> NodeList; 
+            std::vector<rafdb::NodeInfo> NodeList; 
         private:
             //friend class IteratorChecker;
             friend class Manager;

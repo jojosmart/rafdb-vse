@@ -21,7 +21,7 @@ namespace rafdb {
         if (tmp == NULL) {
           continue;
         }
-        for(std::vector<NodeInfo>::iterator iter=rafdb_->NodeList.begin(); iter != rafdb_->NodeList.end();iter++)
+        for(std::vector<rafdb::NodeInfo>::iterator iter=rafdb_->NodeList.begin(); iter != rafdb_->NodeList.end();iter++)
         {
           LKV_SYNC *lkv=new LKV_SYNC(tmp->dbname,tmp->key,tmp->value,iter->ip,iter->port);
           sync_->push(lkv);

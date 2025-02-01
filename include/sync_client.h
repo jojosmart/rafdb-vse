@@ -17,7 +17,7 @@ namespace rafdb {
 
 class SyncClient {
  public:
-  SyncClient(NodeInfo node_info):connected_(false) {
+  SyncClient(rafdb::NodeInfo node_info):connected_(false) {
     host_ = node_info.ip;
     port_= node_info.port;
     SStringPrintf(&server_, "%s:%d", node_info.ip.c_str(), node_info.port);
