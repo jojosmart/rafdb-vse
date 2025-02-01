@@ -1,7 +1,5 @@
-
 #include "include/accord.h"
 namespace {
-  //const int kFlushInterval = 5;
   static const int kElectionTimeout = 3000;// ms
 }
 

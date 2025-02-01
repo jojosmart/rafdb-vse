@@ -5,17 +5,15 @@
 #include <time.h>
 #include <stdexcept>
 #include <fstream>
-
 #include <vector>
-#include <map>
 #include <string>
-#include <set>
+
 #include "third_party/jsoncpp/include/json.h"
 #include "manager.h"
 #include "accord.h"
 #include "peer.h"
-//#include "ts/base/crawl_config.h"
-
+#include "peer.h"
+#include "vse_client_c_api.h"
 #include "base/logging.h"
 #include "base/thrift.h"
 #include "base/thread.h"
@@ -25,7 +23,6 @@
 #include "base/scoped_ptr.h"
 #include "base/hash_tables.h"
 #include "base/basictypes.h"
-//#include "third_party/leveldb/db.h"
 #include "proto/gen-cpp/RafdbService.h"
 #include "global.h"
 
@@ -93,15 +90,28 @@ namespace rafdb {
             scoped_ptr<Accord> accord_;
             void SetLeaderId(int leader_id) {
                 base::MutexLock lock(&leader_mutex_);
-                VLOG(3) << "leveldb server leader_id is set " << leader_id;
+                VLOG(3) << "leader_id is set " << leader_id;
                 leader_id_ = leader_id;
             }
+            
+            VseClient* dbExist(const std::string dbname) {
+                base::MutexLock lock(&db_map_mutex_);
+                VseClient* db = NULL;
+                base::hash_map<std::string, VseClient* >::iterator it;
+                it = db_map_.find(dbname);
+                if (it == db_map_.end()) {
+                    return NULL;
+                }
+                db = it->second;
+                return db;
+            }
+
             void Init();
 
-            int32_t it_id_;
             base::Mutex leader_mutex_;
             base::Mutex mutex_;
             base::Mutex leader_data_sync_;
+            base::hash_map<std::string, VseClient*> db_map_;
             base::ConcurrentQueue<Message> message_queue_;
             base::ConcurrentQueue<LKV*> lkv_queue_;
             int leader_id_;
@@ -112,21 +122,5 @@ namespace rafdb {
 
             DISALLOW_COPY_AND_ASSIGN(RafDb);
     };
-//    class IteratorChecker : public base::Thread {
-//        public:
-//            explicit IteratorChecker(RafDb* rafdb) : rafdb_(rafdb) { }
-//            virtual ~IteratorChecker() { }
-//
-//        protected:
-//            virtual void Run();
-//
-//        private:
-//            RafDb* rafdb_;
-//
-//            DISALLOW_COPY_AND_ASSIGN(IteratorChecker);
-//    };
-//
-//
-//}  // namespace rafdb
 
 #endif 

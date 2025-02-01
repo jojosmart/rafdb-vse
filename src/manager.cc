@@ -2,8 +2,9 @@
 #include "include/manager.h"
 namespace {
   //2ms
-  const int kFlushInterval = 2000;
+  const int kFlushInterval = 2000; //us
 }
+
 
 namespace rafdb {
 

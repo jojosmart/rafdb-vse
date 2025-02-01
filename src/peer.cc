@@ -5,6 +5,8 @@ const int kHeartBeatInterval = 1000000;//us
 }
 
 
+//leader 心跳
+
 namespace rafdb {
 
 void Peer::Run() {
