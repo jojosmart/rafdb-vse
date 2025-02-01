@@ -4,19 +4,18 @@
 #include "base/yr.h"
 #include "base/flags.h"
 #include "base/logging.h"
-//#include "util/gtl/stl_util-inl.h"
 
 
 namespace {
 const int kFrameSize = 128 * 1024;
 const std::string kInvalidID = "NULL";
-const int kMaxRafdbSyncSize = 65535;
+const int kMaxSyncSize = 65535;
 const int kFlushInterval = 10;
 }
 
 namespace rafdb {
 
-bool RafdbSync::Connect() {
+bool SyncClient::Connect() {
   if (!connected_) {
     socket_.reset(new TSocket(host_, port_));
     socket_->setConnTimeout(30);

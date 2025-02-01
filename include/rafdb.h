@@ -35,8 +35,8 @@ namespace rafdb {
         public:
             RafDb();
             virtual ~RafDb();
-            void GetIpPortId(std::string& ip_out,int& port_out,int& id_out,
-                    const std::string& ip_port_id);
+            //void GetIpPortId(std::string& ip_out,int& port_out,int& id_out,
+            //        const std::string& ip_port_id);
             bool IsHealthy();
             bool IsLeader() {
                 base::MutexLock lock(&leader_mutex_);

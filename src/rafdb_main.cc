@@ -5,9 +5,9 @@
 #include "base/flags.h"
 #include "base/thrift.h"
 #include "base/logging.h"
+#include "base/util.h"
 #include "file/file.h"
-#include "ts/base/util.h"
-#include "storage/rafdb/rafdb.h"
+#include "include/rafdb.h"
 #include "third_party/thrift/include/server/TThreadedServer.h"
 #include "third_party/thrift/include/server/TServer.h"
 #include "third_party/thrift/include/server/TSimpleServer.h"
@@ -25,14 +25,9 @@ using apache::thrift::transport::TBufferedTransportFactory;
 using apache::thrift::TProcessor;
 
 
-DEFINE_int32(leveldbd_port, 10001, "Which port leveldbd will Listen to");
-DEFINE_string(leveldbd_ip, "127.0.0.1", "");
-DEFINE_string(logfile, "/data/leveldb/tracelogs/leveldbd.log", "");
-DEFINE_string(pidfile, "/data/leveldb/leveldbd.pid", "");
-DEFINE_int32(thread_num, 500, "num of thrift server threads");
+DEFINE_int32(thread_num, 1000, "num of thrift server threads");
+DEFINE_int32(logfile, "./log/rafdb.log", "num of thrift server threads");
 
-//DEFINE_string(zk_path, "leveldbd", "");
-//DEFINE_int32(replica_id, 0, "");
 
 int main(int argc, char **argv) {
   base::AtExitManager exit_manager;
@@ -41,9 +36,9 @@ int main(int argc, char **argv) {
   logging::InitLogging(FLAGS_logfile.c_str(), logging::LOG_ONLY_TO_FILE,
       logging::DONT_LOCK_LOG_FILE, logging::DELETE_OLD_LOG_FILE);
 
-  int pid = getpid();
-  LOG(INFO) << "pid:" << pid;
-  file::File::WriteStringToFile(IntToString(pid), FLAGS_pidfile);
+  //int pid = getpid();
+  //LOG(INFO) << "pid:" << pid;
+  //file::File::WriteStringToFile(IntToString(pid), FLAGS_pidfile);
   boost::shared_ptr<rafdb::RafDb> handler(new rafdb::RafDb());
   boost::shared_ptr<TProcessor> processor(
       new rafdb::RafdbServiceProcessor(handler));
@@ -61,7 +56,7 @@ int main(int argc, char **argv) {
   std::string ip;
   int port;
   int id;
-  crawl::GetIpPortId(ip,port,id,FLAGS_rafdb_self);
+  rafdb::GetIpPortId(ip,port,id,FLAGS_rafdb_self);
   base::ThriftNonBlockingServerMutiThread<rafdb::RafDb,
     rafdb::RafdbServiceProcessor>
     server(true, port, handler.get(), FLAGS_thread_num);

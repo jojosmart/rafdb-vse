@@ -15,14 +15,14 @@
 namespace rafdb {
 
 
-class RafdbSync {
+class SyncClient {
  public:
-  RafdbSync(NodeInfo node_info):connected_(false) {
+  SyncClient(NodeInfo node_info):connected_(false) {
     host_ = node_info.ip;
     port_= node_info.port;
     SStringPrintf(&server_, "%s:%d", node_info.ip.c_str(), node_info.port);
   }
-  ~RafdbSync() {
+  ~SyncClient() {
   }
   bool IsConnected() {
     return Connect();
@@ -72,7 +72,7 @@ class RafdbSync {
 
 
 
-  DISALLOW_COPY_AND_ASSIGN(RafdbSync);
+  DISALLOW_COPY_AND_ASSIGN(SyncClient);
 };
 
 }  // namespace rafdb
