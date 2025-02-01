@@ -8,7 +8,6 @@
 #include <vector>
 #include <string>
 
-#include "third_party/jsoncpp/include/json.h"
 #include "manager.h"
 #include "accord.h"
 #include "peer.h"
@@ -29,7 +28,6 @@
 DECLARE_string(rafdb_self);
 namespace rafdb {
 
-    class IteratorChecker;
     class Manager;
     class Accord;
 
@@ -104,6 +102,12 @@ namespace rafdb {
                 }
                 db = it->second;
                 return db;
+            }
+
+            void _setMsg(const rafdb::Message& message, MessageType::type type) {
+                Message tmp_m = message;
+                tmp_m.message_type = type;
+                message_queue_.Push(tmp_m);
             }
 
             void Init();

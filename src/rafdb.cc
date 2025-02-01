@@ -1,6 +1,5 @@
 #include "include/rafdb.h"
 #include "base/logging.h"
-#include "file/file.h"
 #include "base/hash.h"
 #include "base/string_util.h"
 
@@ -81,42 +80,29 @@ namespace rafdb {
 
     
     void RafDb::SendVote(const rafdb::Message& message) {
-        Message tmp_m = message;
-        tmp_m.message_type = MessageType::VOTEREQ;
-        message_queue_.Push(tmp_m);
+        _setMsg(message, MessageType::VOTEREQ)
     }
+
     void RafDb::ReplyVote(const rafdb::Message& message) {
-        Message tmp_m = message;
-        tmp_m.message_type = MessageType::VOTEREP;
-        message_queue_.Push(tmp_m);
-
-
+        _setMsg(message, MessageType::VOTEREP)
     }
+
     void RafDb::SendHeartBeat(const rafdb::Message& message) {
-        Message tmp_m = message;
-        tmp_m.message_type = MessageType::HEARTREQ;
-        message_queue_.Push(tmp_m);
-
+        _setMsg(message, MessageType::HEARTREQ)
     }
+
     void RafDb::ReplyHeartBeat(const rafdb::Message& message) {
-        Message tmp_m = message;
-        tmp_m.message_type = MessageType::HEARTREP;
-        message_queue_.Push(tmp_m);
-
+        _setMsg(message, MessageType::HEARTREP)
     }
+
     void RafDb::QueryLeaderId(const rafdb::Message& message) {
-        Message tmp_m = message;
-        tmp_m.message_type = MessageType::LEADERREQ;
-        message_queue_.Push(tmp_m);
-
-
+        _setMsg(message, MessageType::LEADERREQ)
     }
+
     void RafDb::ReplyLeaderId(const rafdb::Message& message) {
-        Message tmp_m = message;
-        tmp_m.message_type = MessageType::LEADERREP;
-        message_queue_.Push(tmp_m);
-
+        _setMsg(message, MessageType::LEADERREP)
     }
+
     bool RafDb::IsHealthy() {
         return true;
     }
