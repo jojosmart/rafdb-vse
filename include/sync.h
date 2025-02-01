@@ -12,7 +12,7 @@
 #include "base/thread_pool.h"
 #include "base/concurrent_queue.h"
 #include "manager.h"
-#include "rafdb_sync.h"
+#include "sync_client.h"
 
 
 
@@ -49,7 +49,7 @@ class Sync
         base::Mutex flag_mutex_;
         //base::hash_map<NodeInfo,int> node_status_map;
         std::map< std::string,int > node_status_map;
-        std::map< std::string,RafdbSync *> node_set_map;
+        std::map< std::string,SyncClient*> node_set_map;
         std::map< std::string,int > fail_time_map;
         //std::map< std::>
         std::string toIpPort(const NodeInfo &info);

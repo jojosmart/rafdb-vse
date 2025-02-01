@@ -25,7 +25,7 @@ Sync::Sync(RafDb *rafdb)
     {
         std::string ip_port=toIpPort(*iter);
         node_status_map[ip_port]=alive;
-        rafdb::RafdbSync *dbSync=new RafdbSync(*iter);
+        rafdb::SyncClient *dbSync=new SyncClient(*iter);
         node_set_map[ip_port]=dbSync;
         fail_time_map[ip_port]=0;
         VLOG(3)<<"put in map : "<<ip_port;
@@ -112,7 +112,7 @@ Sync::~Sync()
         delete for_fail_pool;
         for_fail_pool=NULL;
     }
-    for (std::map< std::string,RafdbSync * >::iterator iter=node_set_map.begin();iter!=node_set_map.end();iter++)
+    for (std::map< std::string,SyncClient * >::iterator iter=node_set_map.begin();iter!=node_set_map.end();iter++)
     {
         if (NULL!=iter->second)
         {    
