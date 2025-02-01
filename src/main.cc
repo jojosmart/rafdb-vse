@@ -27,6 +27,7 @@ using apache::thrift::TProcessor;
 
 DEFINE_int32(thread_num, 1000, "num of thrift server threads");
 DEFINE_int32(logfile, "./log/rafdb.log", "num of thrift server threads");
+DEFINE_int32(v, 3, "log default level");
 
 
 int main(int argc, char **argv) {
@@ -60,7 +61,7 @@ int main(int argc, char **argv) {
   base::ThriftNonBlockingServerMutiThread<rafdb::RafDb,
     rafdb::RafdbServiceProcessor>
     server(true, port, handler.get(), FLAGS_thread_num);
-  LOG(INFO) << "start listening on port:" << port;
+  VLOG(3) << "start listening on port:" << port;
   server.Start();
   server.Join();
 

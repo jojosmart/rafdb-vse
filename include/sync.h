@@ -42,7 +42,6 @@ class Sync
         void for_fail_process(LKV_SYNC *lkv);        
         bool get_node_status(const NodeInfo &info);
         void update_node_status(const NodeInfo &info,int status);
-        void load_cache();
         LKV_SYNC *create_lkv(const std::string &ip_port,const std::string &dbname,const std::string &key,const std::string &value);
 
         base::Mutex mutex_;
