@@ -18,7 +18,7 @@ namespace rafdb{
         for(std::vector<rafdb::NodeInfo>::iterator iter=rafdb_->NodeList.begin(); iter != rafdb_->NodeList.end();iter++)
         {
             std::string ip_port=toIpPort(*iter);
-            node_status_map[ip_port] = ALIVE;
+            //node_status_map[ip_port] = ALIVE;
             rafdb::SyncClient *dbSync=new SyncClient(*iter);
             node_set_map[ip_port]=dbSync;
             VLOG(3)<<"put in map : "<<ip_port;
@@ -26,18 +26,18 @@ namespace rafdb{
         }
     }
 
-    LKV_SYNC *Sync::create_lkv(const std::string &ip_port,const std::string &dbname,const std::string &key,const std::string &value) {
-        size_t end_key_pos = ip_port.find_first_of(":");
-        if (end_key_pos == std::string::npos)
-        {   
-            VLOG(3)<<"can't parser the key : "<<ip_port;
-        }
-        std::string ip(ip_port, 0, end_key_pos);
-        std::string port(ip_port, end_key_pos+1, ip_port.size() - end_key_pos);
-        LKV_SYNC *lkv=new LKV_SYNC(dbname,key,value,ip,atoi(port.c_str()));    
-        return lkv;
+    //LKV_SYNC *Sync::create_lkv(const std::string &ip_port,const std::string &dbname,const std::string &key,const std::string &value) {
+    //    size_t end_key_pos = ip_port.find_first_of(":");
+    //    if (end_key_pos == std::string::npos)
+    //    {   
+    //        VLOG(3)<<"can't parser the key : "<<ip_port;
+    //    }
+    //    std::string ip(ip_port, 0, end_key_pos);
+    //    std::string port(ip_port, end_key_pos+1, ip_port.size() - end_key_pos);
+    //    LKV_SYNC *lkv=new LKV_SYNC(dbname,key,value,ip,atoi(port.c_str()));    
+    //    return lkv;
 
-    }
+    //}
     Sync::~Sync() {
         if (NULL!=sync_pool)
         {    
@@ -55,78 +55,25 @@ namespace rafdb{
         }
     }
 
-    void Sync::sync_process(LKV_SYNC *lkv) {
-        std::string ip_port=toIpPort(lkv->node_info);
-        if (node_set_map.find(ip_port)!=node_set_map.end())
-        {
-            if(node_set_map[ip_port]->Set(lkv->dbname,lkv->key,lkv->value))
-            {
-                VLOG(6)<<"sync success key : "<<lkv->key;
-                delete lkv;
-                return;
+    void Sync::sync_process(SyncDataWithConn* sync_data_conn) {
+        std::string ip_port=toIpPort(sync_data_conn->node_info);
+        if (node_set_map.find(ip_port)!=node_set_map.end()) {
+            if(node_set_map[ip_port]->Exec(sync_data_conn->sync_data)) {
+                VLOG(6)<<"sync success,ip_port"<<ip_port;
             }
-            else
-            {    
-                //for_fail_pool->Add(base::NewOneTimeCallback(this,&Sync::for_fail_process,lkv));
-                std::string new_key=toIpPort(lkv->node_info)+"|"+lkv->dbname+"|"+lkv->key;
-                if (!rafdb_->Set(cache_dir,new_key,lkv->value))
-                    VLOG(3)<<"set to leveldb failed key : "<<new_key;
-                fail_queue.Push(new_key);
-                VLOG(6)<<"set : "<<ip_port<<"fail,put it in fail queue";
+            else {    
+                VLOG(6)<<"sync fail,ip_port"<<ip_port;
             }
         }
-
+        delete sync_data_conn;
     }
 
 
-
-    void Sync::sync_process(LKV_SYNC *lkv) {
-        std::string ip_port=toIpPort(lkv->node_info);
-        if (node_status_map.find(ip_port)!=node_status_map.end())
-        {
-            if (ALIVE == node_status_map[ip_port])
-            {
-                if (node_set_map.find(ip_port)!=node_set_map.end())
-                {
-                    if(node_set_map[ip_port]->Set(lkv->dbname,lkv->key,lkv->value))
-                    {
-                        VLOG(6)<<"sync success key : "<<lkv->key;
-                        delete lkv;
-                        return;
-                    }
-                    else
-                    {    
-                        //for_fail_pool->Add(base::NewOneTimeCallback(this,&Sync::for_fail_process,lkv));
-                        std::string new_key=toIpPort(lkv->node_info)+"|"+lkv->dbname+"|"+lkv->key;
-                        if (!rafdb_->Set(cache_dir,new_key,lkv->value))
-                            VLOG(3)<<"set to leveldb failed key : "<<new_key;
-                        fail_queue.Push(new_key);
-                        VLOG(6)<<"set : "<<ip_port<<"fail,put it in fail queue";
-                    }
-                }
-                else
-                    VLOG(3)<<"the ip_port "<<ip_port<<"in node_status_map but not in node_set_map";
-            }
-            else
-            {
-                //for_fail_pool->Add(base::NewOneTimeCallback(this,&Sync::for_fail_process,lkv));
-                std::string new_key=toIpPort(lkv->node_info)+"|"+lkv->dbname+"|"+lkv->key;
-                if (!rafdb_->Set(cache_dir,new_key,lkv->value))
-                    VLOG(3)<<"set to leveldb failed key : "<<new_key;
-                fail_queue.Push(new_key);            
-                VLOG(3)<<"the ip_port : "<<ip_port<<" is not alive put it in fail queue";
-            }
-        }
-        else
-        {
-            VLOG(3)<<"the ip_port :"<<ip_port<< " is not in node_status_map";
-            delete lkv;
-        }
-    }
-    void Sync::push(LKV_SYNC *lkv)
+    
+    void Sync::push(SyncDataWithConn* sync_data_conn)
     {
-        VLOG(6)<<"push in sync_pool data : "<<lkv->key;
-        sync_pool->Add(base::NewOneTimeCallback(this,&Sync::sync_process,lkv));
+        VLOG(6)<<"push in sync_pool data : "<<sync_data_conn->sync_data.op;
+        sync_pool->Add(base::NewOneTimeCallback(this,&Sync::sync_process,sync_data_conn));
         VLOG(6)<<"push in sync_pool complete";
     }
 

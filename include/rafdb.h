@@ -92,17 +92,28 @@ namespace rafdb {
                 leader_id_ = leader_id;
             }
             
-            VseClient* dbExist(const std::string dbname) {
-                base::MutexLock lock(&db_map_mutex_);
-                VseClient* db = NULL;
-                base::hash_map<std::string, VseClient* >::iterator it;
-                it = db_map_.find(dbname);
-                if (it == db_map_.end()) {
-                    return NULL;
+            //VseClient* dbExist(const std::string dbname) {
+            //    base::MutexLock lock(&db_mutex_);
+            //    VseClient* db = NULL;
+            //    base::hash_map<std::string, VseClient* >::iterator it;
+            //    it = db_map_.find(dbname);
+            //    if (it == db_map_.end()) {
+            //        return NULL;
+            //    }
+            //    db = it->second;
+            //    return db;
+            //}
+            
+            bool dbExist(const std::string dbname) {
+                base::MutexLock lock(&db_mutex_);
+                base::hash_set<std::string>::iterator it;
+                it = db_set_.find(dbname);
+                if (it == db_set_.end()) {
+                    return false;
                 }
-                db = it->second;
-                return db;
+                return true;
             }
+
 
             void _setMsg(const rafdb::Message& message, MessageType::type type) {
                 Message tmp_m = message;
@@ -115,7 +126,9 @@ namespace rafdb {
             base::Mutex leader_mutex_;
             base::Mutex mutex_;
             base::Mutex leader_data_sync_;
-            base::hash_map<std::string, VseClient*> db_map_;
+            base::Mutex db_mutex_;
+            //base::hash_map<std::string, VseClient*> db_map_;
+            base::hash_set<std::string> db_set_;
             base::ConcurrentQueue<Message> message_queue_;
             base::ConcurrentQueue<LKV*> lkv_queue_;
             int leader_id_;
@@ -123,6 +136,7 @@ namespace rafdb {
             std::string ip_;
             int port_;
             std::string cluster_ip_list_;
+            VseClient* vsec_ptr_;
 
             DISALLOW_COPY_AND_ASSIGN(RafDb);
     };

@@ -27,31 +27,30 @@ namespace rafdb {
         }
     }NodeInfo;
 
-    typedef struct SyncDataStructure{
+    typedef struct SyncData{
         std::vector<Variant> param_vec;
         int param_ct;
         DB_WRITE_OPERATION op;
-        SyncDataStructure() {
+        SyncData() {
             param_ct = 0;
         }
-    }SyncDataStructure;
-
-    typedef struct LKV_SYNC{
-        std::string dbname;
-        std::string key;
-        std::string value;
-        NodeInfo node_info;
-        LKV_SYNC(const std::string dbname_p,
-                const std::string key_p,
-                const std::string value_p,
-                const std::string ip_p,
-                const int port_p):node_info(ip_p,port_p) {
-            dbname = dbname_p;
-            key = key_p;
-            value = value_p;
+        SyncData(const SyncData& sync_data) {
+            param_vec = sync_data.param_vec;
+            op = sync_data.op;
+            param_ct = sync_data.param_ct;
         }
-    }LKV_SYNC;
 
+    }SyncData;
+
+    typedef struct SyncDataWithConn{
+        SyncData sync_data;
+        NodeInfo node_info;
+        SyncDataWithConn(
+                const SyncData& sync_data_param,
+                const std::string ip_p,
+                const int port_p):node_info(ip_p,port_p), sync_data(sync_data_param) {
+        }
+    }SyncDataWithConn;
     
 }
 

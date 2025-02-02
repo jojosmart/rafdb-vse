@@ -18,7 +18,7 @@ namespace rafdb {
 bool SyncClient::Connect() {
   if (!connected_) {
     socket_.reset(new TSocket(host_, port_));
-    socket_->setConnTimeout(30);
+    socket_->setConnTimeout(15);
     socket_->setRecvTimeout(200);
     socket_->setSendTimeout(200);
 

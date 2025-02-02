@@ -1,5 +1,6 @@
 
 #include <string>
+#include <stdexcept>
 
 #include "base/at_exit.h"
 #include "base/flags.h"
@@ -31,40 +32,40 @@ DEFINE_int32(v, 3, "log default level");
 
 
 int main(int argc, char **argv) {
-  base::AtExitManager exit_manager;
-  base::ParseCommandLineFlags(&argc, &argv, true);
+    base::AtExitManager exit_manager;
+    base::ParseCommandLineFlags(&argc, &argv, true);
 
-  logging::InitLogging(FLAGS_logfile.c_str(), logging::LOG_ONLY_TO_FILE,
-      logging::DONT_LOCK_LOG_FILE, logging::DELETE_OLD_LOG_FILE);
+    logging::InitLogging(FLAGS_logfile.c_str(), logging::LOG_ONLY_TO_FILE,
+            logging::DONT_LOCK_LOG_FILE, logging::DELETE_OLD_LOG_FILE);
 
-  //int pid = getpid();
-  //LOG(INFO) << "pid:" << pid;
-  //file::File::WriteStringToFile(IntToString(pid), FLAGS_pidfile);
-  boost::shared_ptr<rafdb::RafDb> handler(new rafdb::RafDb());
-  boost::shared_ptr<TProcessor> processor(
-      new rafdb::RafdbServiceProcessor(handler));
-//  boost::shared_ptr<TServerTransport> serverTransport(
-//      new TServerSocket(FLAGS_leveldbd_port));
-//  boost::shared_ptr<TTransportFactory> transportFactory(
-//      new TFramedTransportFactory());
-//  boost::shared_ptr<TProtocolFactory> protocolFactory(
-//      new TBinaryProtocolFactory());
-//  TThreadedServer server(processor, serverTransport,
-//      transportFactory, protocolFactory);
-//  LOG(INFO) << "start listening on port:" << FLAGS_leveldbd_port;
-//  server.serve();
-//
-  std::string ip;
-  int port;
-  int id;
-  rafdb::GetIpPortId(ip,port,id,FLAGS_rafdb_self);
-  base::ThriftNonBlockingServerMutiThread<rafdb::RafDb,
-    rafdb::RafdbServiceProcessor>
-    server(true, port, handler.get(), FLAGS_thread_num);
-  VLOG(3) << "start listening on port:" << port;
-  server.Start();
-  server.Join();
+   
+    try {
+        boost::shared_ptr<rafdb::RafDb> handler(new rafdb::RafDb());
+        boost::shared_ptr<TProcessor> processor(
+                new rafdb::RafdbServiceProcessor(handler));
+        //  boost::shared_ptr<TServerTransport> serverTransport(
+        //      new TServerSocket(FLAGS_leveldbd_port));
+        //  boost::shared_ptr<TTransportFactory> transportFactory(
+        //      new TFramedTransportFactory());
+        //  boost::shared_ptr<TProtocolFactory> protocolFactory(
+        //      new TBinaryProtocolFactory());
+        //  TThreadedServer server(processor, serverTransport,
+        //      transportFactory, protocolFactory);
+        //  LOG(INFO) << "start listening on port:" << FLAGS_leveldbd_port;
+        //  server.serve();
+        //
+        std::string ip;
+        int port;
+        int id;
+        rafdb::GetIpPortId(ip,port,id,FLAGS_rafdb_self);
+        base::ThriftNonBlockingServerMutiThread<rafdb::RafDb,
+            rafdb::RafdbServiceProcessor>
+                server(true, port, handler.get(), FLAGS_thread_num);
+        VLOG(3) << "start listening on port:" << port;
+        server.Start();
+        server.Join();
+    } catch (const std::exception)
 
-  
-  return 0;
+
+    return 0;
 }

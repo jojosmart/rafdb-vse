@@ -36,19 +36,40 @@ class SyncClient {
   const std::string& server() const {
     return server_;
   }
- bool Set(const std::string dbname,
-          const std::string &key,
-          const std::string &value) {
+ bool Exec(const SyncData& sync_data) {
     base::MutexLock lock(&mutex_);
     try {
       if(Connect()) {
-        return service_->Set(dbname,key,value); 
+          //TODO 根据op类型,rpc
+          switch(sync_data->op) {
+              case CREATE_DB:
+                VLOG(3)<<"CREATE_DB SYNC";
+                return true;
+              case DELETE_DB:
+                VLOG(3)<<"DELETE_DB SYNC";
+                return true;
+              case PUSH_RECORD:
+                VLOG(3)<<"PUSH_RECORD SYNC";
+                return true;
+              case DEL_RECORD:
+                VLOG(3)<<"DEL_RECORD SYNC";
+                return true;
+              case DEL_RECORD_WS:
+                VLOG(3)<<"DEL_RECORD_WS SYNC";
+                return true;
+              case DB_SCAN_REPAIR:
+                VLOG(3)<<"DB_SCAN_REPAIR SYNC";
+                return true;
+              default:
+                VLOG(3)<<"UNKNOWN OPERATION";
+                return false;
+          }
+         
+        //return service_->Set(dbname,key,value); 
       }
-      VLOG(3)<<"set ldb fail";
       connected_ = false;
       return false;
     } catch(...) {
-      VLOG(3)<<"set ldb fail";
       connected_ = false;
       return false;
     }

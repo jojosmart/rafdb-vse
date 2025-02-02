@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "include/rafdb.h"
 #include "base/logging.h"
 #include "base/hash.h"
@@ -5,12 +6,15 @@
 #include "base/util.h"
 
 DEFINE_string(rafdb_self, "", "rafdb self,192.168.11.12:1111:1");
+DEFINE_string(vse_ip, "127.0.0.1", "vse ip");
+DEFINE_string(vse_port, 10086, "vse port");
 
 namespace rafdb {
 
     RafDb::RafDb() {
         db_map_.clear();
         leader_id_ = 0;//no leader
+        vsec_ptr_ = NULL;
         std::vector<std::string> tmp_v;
         SplitString(FLAGS_rafdb_self, ':', &tmp_v);
         ip_ = tmp_v[0];
@@ -43,41 +47,50 @@ namespace rafdb {
     }
 
     void RafDb::Init() {
+        ErrInfo* err_info = new ErrInfo();
+        vsec_ptr_ = client_init(FLAGS_vse_ip.c_str(), FLAGS_vse_port, err_info);
+        if(err_info->code != 0) {
+            vsec_ptr_ = NULL;
+            throw std::runtime_error("vse client init fail !");
+        }
+        VLOG(3)<<"vse client init success, ip:"<<FLAGS_vse_ip<<",port:"<<FLAGS_vse_port;
+        delete err_info;
+        
         accord_.reset(new Accord(this,ip_,port_));
         accord_->Start();//start accord thread
         manager_.reset(new Manager(this));
         manager_->Start();
-
+        
     }
 
 
-    void RafDb::Get(std::string &result, const std::string &dbname,
-            const std::string &key) {
-        result = "test";
-        //result.clear();
-        //leveldb::DB *db = NULL;
-        //{
-        //    base::hash_map<std::string, leveldb::DB*>::iterator it;
-        //    base::MutexLock lock(&db_map_mutex_);
-        //    it = db_map_.find(dbname);
-        //    if (it == db_map_.end()) {
-        //        return;
-        //    }
-        //    db = it->second;
-        //}
+    //void RafDb::Get(std::string &result, const std::string &dbname,
+    //        const std::string &key) {
+    //    result = "test";
+    //    //result.clear();
+    //    //leveldb::DB *db = NULL;
+    //    //{
+    //    //    base::hash_map<std::string, leveldb::DB*>::iterator it;
+    //    //    base::MutexLock lock(&db_map_mutex_);
+    //    //    it = db_map_.find(dbname);
+    //    //    if (it == db_map_.end()) {
+    //    //        return;
+    //    //    }
+    //    //    db = it->second;
+    //    //}
 
-        //leveldb::Status status = db->Get(roptions_, key, &result);
-        //if (status.IsNotFound()) {
-        //    result.clear();
-        //    return;
-        //}
-        //if (!status.ok()) {
-        //    LOG(ERROR) << "Get, dbname:" << dbname << " key:" << key;
-        //    result.clear();
-        //    return;
-        //}
-        return;
-    }
+    //    //leveldb::Status status = db->Get(roptions_, key, &result);
+    //    //if (status.IsNotFound()) {
+    //    //    result.clear();
+    //    //    return;
+    //    //}
+    //    //if (!status.ok()) {
+    //    //    LOG(ERROR) << "Get, dbname:" << dbname << " key:" << key;
+    //    //    result.clear();
+    //    //    return;
+    //    //}
+    //    return;
+    //}
 
     
     void RafDb::SendVote(const rafdb::Message& message) {
@@ -108,27 +121,59 @@ namespace rafdb {
         return true;
     }
 
-    bool RafDb::LSet(const std::string &dbname, const std::string &key,
-            const std::string &value) {
-        //if(Set(dbname,key,value)) {
-        //  LKV *tmp_lkv = new LKV();
-        //  tmp_lkv->dbname = dbname;
-        //  tmp_lkv->key = key;
-        //  tmp_lkv->value = value;
-        //  lkv_queue_.Push(tmp_lkv);
-        //  VLOG(5)<<"set success,push to queue";
-        //  return true;
-        //}  
-        return false;
-    }
+    //bool RafDb::LSet(const std::string &dbname, const std::string &key,
+    //        const std::string &value) {
+    //    //if(Set(dbname,key,value)) {
+    //    //  LKV *tmp_lkv = new LKV();
+    //    //  tmp_lkv->dbname = dbname;
+    //    //  tmp_lkv->key = key;
+    //    //  tmp_lkv->value = value;
+    //    //  lkv_queue_.Push(tmp_lkv);
+    //    //  VLOG(5)<<"set success,push to queue";
+    //    //  return true;
+    //    //}  
+    //    return false;
+    //}
 
 //TODO
     void RafDb::VseClientVersion(std::string& _return) {
     }
+
     void RafDb::ClientEnumAllDbs(ResDbnameList& _return) {
+        //simple example
+        if(vsec_ptr_ != NULL) {
+            BufferArray* buffer_arr = new BufferArray();
+            ErrInfo* tmp_err = new ErrInfo();
+            buffer_arr = client_enum_all_dbs(vsec_ptr_, tmp_err);
+            if(tmp_err->code == 0) {
+                for(int i = 0; i < buffer_arr->nct; i++) {
+                    VLOG(3)<<"dbname:"<<buffer_arr->buffers[i].data;
+                }
+            }
+        }
+
     }
+
     void RafDb::ClientCreateDbV2(ErrInfoThr& _return, const std::string& dbname, const std::string& fields) {
+        if(vsec_ptr_ == NULL) {
+            _return.code = 0;
+        }
+        if(dbExist(dbname)) {
+            _return.code = 0;
+        } else {
+            ErrInfo* tmp_err = new ErrInfo();
+            client_create_db_v2(vsec_ptr_, dbname.c_str(), fields.c_str(), tmp_err);
+            if(tmp_err->code != 0) {
+                _return.code = tmp_err->code;
+                _return.errmsg = tmp_err->errmsg;
+            } else {
+                _return.code = 0;
+                db_set_.insert(dbname);
+                VLOG(3)<<"create db "<<dbname<<" success";
+            }
+        }
     }
+
     void RafDb::ClientDeleteDb(ErrInfoThr& _return, const std::string& dbname) {
     }
     void RafDb::ClientGetDbRecordCount(ResIntInfo& _return, const std::string& dbname) {
