@@ -24,7 +24,6 @@ target_include_directories(rafdb PUBLIC ${PROJECT_SOURCE_DIR})
 # 链接 base 静态库和 libs 文件夹中的静态库
 target_link_libraries(rafdb 
     ${PROJECT_SOURCE_DIR}/libs/base/base 
-    ${PROJECT_SOURCE_DIR}/libs/lib2.a
     ${PROJECT_SOURCE_DIR}/libs/third_party/thrift/thrift
 )
 
