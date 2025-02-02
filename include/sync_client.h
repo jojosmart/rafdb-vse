@@ -41,7 +41,7 @@ class SyncClient {
     try {
       if(Connect()) {
           //TODO 根据op类型,rpc
-          switch(sync_data->op) {
+          switch (sync_data->op) {
               case CREATE_DB:
                 VLOG(3)<<"CREATE_DB SYNC";
                 return true;

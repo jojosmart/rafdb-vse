@@ -10,8 +10,7 @@
 #include "base/scoped_ptr.h"
 #include "base/thrift.h"
 #include "base/string_util.h"
-#include "storage/rafdb/client/conhash_selector.h"
-#include "storage/rafdb/proto/gen-cpp/RafdbService.h"
+#include "proto/gen-cpp/RafdbService.h"
 
 
 namespace rafdb {
