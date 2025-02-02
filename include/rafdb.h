@@ -130,7 +130,7 @@ namespace rafdb {
             //base::hash_map<std::string, VseClient*> db_map_;
             base::hash_set<std::string> db_set_;
             base::ConcurrentQueue<Message> message_queue_;
-            base::ConcurrentQueue<LKV*> lkv_queue_;
+            base::ConcurrentQueue<SyncData*> lkv_queue_;
             int leader_id_;
             int self_id_;
             std::string ip_;
@@ -140,5 +140,5 @@ namespace rafdb {
 
             DISALLOW_COPY_AND_ASSIGN(RafDb);
     };
-
+}
 #endif 

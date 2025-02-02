@@ -8,7 +8,7 @@ namespace rafdb{
         if (NULL == rafdb)
             VLOG(3)<<"*rafdb==NULL";
         rafdb_=rafdb;
-        node_status_map.clear();
+        //node_status_map.clear();
         sync_pool= new base::ThreadPool(sync_thread_num);
         sync_pool->StartWorkers();
         if (NULL == sync_pool)

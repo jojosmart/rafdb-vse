@@ -16,7 +16,7 @@ namespace rafdb {
         DEL_RECORD = 3,
         DEL_RECORD_WS = 4,
         DB_SCAN_REPAIR = 5
-    }
+    };
 
     typedef struct NodeInfo{
         std::string ip;

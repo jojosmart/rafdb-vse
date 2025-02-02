@@ -7,7 +7,7 @@
 #include "base/thrift.h"
 #include "base/logging.h"
 #include "base/util.h"
-#include "file/file.h"
+//#include "file/file.h"
 #include "include/rafdb.h"
 #include "third_party/thrift/include/server/TThreadedServer.h"
 #include "third_party/thrift/include/server/TServer.h"
@@ -27,8 +27,8 @@ using apache::thrift::TProcessor;
 
 
 DEFINE_int32(thread_num, 1000, "num of thrift server threads");
-DEFINE_int32(logfile, "./log/rafdb.log", "num of thrift server threads");
-DEFINE_int32(v, 3, "log default level");
+DEFINE_string(logfile, "./log/rafdb.log", "num of thrift server threads");
+//DEFINE_int32(v, 3, "log default level");
 
 
 int main(int argc, char **argv) {
@@ -64,7 +64,9 @@ int main(int argc, char **argv) {
         VLOG(3) << "start listening on port:" << port;
         server.Start();
         server.Join();
-    } catch (const std::exception)
+    } catch (const std::exception& e) {
+        std::cerr << "Server error: " << e.what() << std::endl;
+    }
 
 
     return 0;

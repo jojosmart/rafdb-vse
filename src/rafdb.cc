@@ -6,13 +6,14 @@
 #include "base/util.h"
 
 DEFINE_string(rafdb_self, "", "rafdb self,192.168.11.12:1111:1");
+DEFINE_string(rafdb_list, "", "192.168.14.146:10020:1,192.168.14.146:10021:2,192.168.14.146:10022:3");
 DEFINE_string(vse_ip, "127.0.0.1", "vse ip");
-DEFINE_string(vse_port, 10086, "vse port");
+DEFINE_int32(vse_port, 10086, "vse port");
 
 namespace rafdb {
 
     RafDb::RafDb() {
-        db_map_.clear();
+        //db_map_.clear();
         leader_id_ = 0;//no leader
         vsec_ptr_ = NULL;
         std::vector<std::string> tmp_v;
@@ -94,27 +95,27 @@ namespace rafdb {
 
     
     void RafDb::SendVote(const rafdb::Message& message) {
-        _setMsg(message, MessageType::VOTEREQ)
+        _setMsg(message, MessageType::VOTEREQ);
     }
 
     void RafDb::ReplyVote(const rafdb::Message& message) {
-        _setMsg(message, MessageType::VOTEREP)
+        _setMsg(message, MessageType::VOTEREP);
     }
 
     void RafDb::SendHeartBeat(const rafdb::Message& message) {
-        _setMsg(message, MessageType::HEARTREQ)
+        _setMsg(message, MessageType::HEARTREQ);
     }
 
     void RafDb::ReplyHeartBeat(const rafdb::Message& message) {
-        _setMsg(message, MessageType::HEARTREP)
+        _setMsg(message, MessageType::HEARTREP);
     }
 
     void RafDb::QueryLeaderId(const rafdb::Message& message) {
-        _setMsg(message, MessageType::LEADERREQ)
+        _setMsg(message, MessageType::LEADERREQ);
     }
 
     void RafDb::ReplyLeaderId(const rafdb::Message& message) {
-        _setMsg(message, MessageType::LEADERREP)
+        _setMsg(message, MessageType::LEADERREP);
     }
 
     bool RafDb::IsHealthy() {

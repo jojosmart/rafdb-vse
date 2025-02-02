@@ -1,7 +1,7 @@
 // Author:Zhouxiaoliang
 //
 #include "base/affinity.h"
-
+#include <unistd.h>
 #include <sys/sysinfo.h>
 #include <sched.h>
 #include <string>
